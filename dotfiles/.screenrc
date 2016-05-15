@@ -1,0 +1,3 @@
+hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
+shelltitle "$ |bash"
+
