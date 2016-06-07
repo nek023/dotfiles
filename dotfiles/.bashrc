@@ -7,6 +7,12 @@ fi
 
 # User specific aliases and functions
 
+# Editor
+export EDITOR=vim
+
+# bin
+export PATH=$PATH:$HOME/bin
+
 # Ghostscript
 export PATH=$PATH:/usr/local/Cellar/ghostscript/9.15/share/ghostscript/Resource/Init
 
@@ -18,7 +24,7 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/adt-bundle-mac/sdk/platform-tools
 
 # Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH=$PATH:/usr/local/heroku/bin
 
 # Aliases
 alias ls='CLICOLOR_FORCE=1 ls -G'
@@ -45,17 +51,10 @@ GIT_PS1_SHOWUPSTREAM=auto
 export PS1='\033k\033\\\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
 
 # anyenv
-if [ -d ${HOME}/.anyenv ] ; then
-  export PATH="$HOME/.anyenv/bin:$PATH"
-  eval "$(anyenv init -)"
-  for D in `\ls $HOME/.anyenv/envs`
-  do
-    export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
-  done
-fi
+export PATH=$PATH:$HOME/.anyenv/bin
+eval "$(anyenv init -)"
 
 # direnv
-export EDITOR=vim
 eval "$(direnv hook bash)"
 
 # Go to top-level directory of the current git repository
