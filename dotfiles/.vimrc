@@ -111,6 +111,9 @@ set cursorline
 " 行を跨いでカーソル移動できるようにする
 "set whichwrap=b,s,h,l,<,>,[,],~
 
+" マクロなどの途中経過を描写しない
+set lazyredraw
+
 " シンタックスハイライト
 syntax on
 
