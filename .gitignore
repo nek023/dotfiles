@@ -81,6 +81,11 @@ build-iPhoneSimulator/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+
+### Vagrant ###
+.vagrant/
+
+
 ### Dotfiles ###
 dotfiles/.atom/*
 !dotfiles/.atom/init.coffee
@@ -89,3 +94,4 @@ dotfiles/.vim/.netrwhist
 dotfiles/.vim/plugged
 dotfiles/.config/*
 !dotfiles/.config/nvim
+
