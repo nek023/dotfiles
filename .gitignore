@@ -82,9 +82,10 @@ build-iPhoneSimulator/
 .rvmrc
 
 ### Dotfiles ###
-dotfiles/.atom
+dotfiles/.atom/*
+!dotfiles/.atom/init.coffee
+!dotfiles/.atom/*.cson
 dotfiles/.vim/.netrwhist
 dotfiles/.vim/plugged
 dotfiles/.config/*
 !dotfiles/.config/nvim
-

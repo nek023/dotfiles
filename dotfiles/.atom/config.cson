@@ -1,0 +1,23 @@
+"*":
+  core:
+    disabledPackages: [
+      "exception-reporting"
+    ]
+    themes: [
+      "atom-dark-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    fontFamily: "Source Code Pro"
+    fontSize: 12
+    invisibles: {}
+    showIndentGuide: true
+    softWrap: true
+  welcome:
+    showOnStartup: false
+".c.source":
+  editor:
+    tabLength: 4
+".cpp.source":
+  editor:
+    tabLength: 4
