@@ -94,4 +94,3 @@ dotfiles/.vim/.netrwhist
 dotfiles/.vim/plugged
 dotfiles/.config/*
 !dotfiles/.config/nvim
-
