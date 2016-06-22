@@ -17,6 +17,7 @@ brew 'imagemagick'
 brew 'hub'
 brew 'jq'
 brew 'macvim', args: ['with-lua']
+brew 'mas'
 brew 'mysql'
 brew 'nginx'
 brew 'peco'
@@ -39,4 +40,3 @@ brew 'xctool'
 brew 'zsh'
 brew 'homebrew/science/opencv3'
 brew 'neovim/neovim/neovim'
-
