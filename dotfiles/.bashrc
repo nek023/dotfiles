@@ -30,25 +30,25 @@ export PATH=$PATH:/usr/local/heroku/bin
 alias ls='CLICOLOR_FORCE=1 ls -G'
 alias ll='ls -l'
 alias la='ls -la'
-alias vi='vim'
 alias less='less -R'
 alias gl='git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%d%Creset'"'"''
+alias vi='vim'
 
 # Colors
 export CLICOLOR=1
 export LSCOLORS=ExGxcxdxBxegedabagacad
 
 # git-completion
-source ~/dotfiles/dotfiles/.git-completion.bash
+source ~/.git-completion.bash
 
 # git-prompt
-source ~/dotfiles/dotfiles/.git-prompt.sh
+source ~/.git-prompt.sh
 
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWUPSTREAM=auto
-export PS1='\033k\033\\\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+export PS1='\[\e[32m\]\u@\h\[\e[00m\]:\[\e[34m\]\w\[\e[31m\]$(__git_ps1)\[\e[00m\]\$ '
 
 # anyenv
 export PATH=$PATH:$HOME/.anyenv/bin
@@ -64,4 +64,3 @@ function u() {
         cd $1
     fi
 }
-
