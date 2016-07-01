@@ -2,6 +2,7 @@
   core:
     disabledPackages: [
       "exception-reporting"
+      "vim-mode"
     ]
     themes: [
       "atom-dark-ui"

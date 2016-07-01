@@ -24,3 +24,11 @@
   'J': 'vim-mode:move-to-next-paragraph'
   'K': 'vim-mode:move-to-previous-paragraph'
   'L': 'vim-mode:move-to-next-word'
+
+'.editor.vim-mode-plus:not(.insert-mode)':
+  '9': 'vim-mode-plus:move-to-first-character-of-line'
+  '0': 'vim-mode-plus:move-to-last-character-of-line'
+  'H': 'vim-mode-plus:move-to-previous-word'
+  'J': 'vim-mode-plus:move-to-next-paragraph'
+  'K': 'vim-mode-plus:move-to-previous-paragraph'
+  'L': 'vim-mode-plus:move-to-next-word'
