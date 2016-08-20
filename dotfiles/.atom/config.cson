@@ -3,6 +3,8 @@
     disabledPackages: [
       "exception-reporting"
       "vim-mode"
+      "minimap-cursorline"
+      "minimap"
     ]
     themes: [
       "atom-dark-ui"
@@ -14,6 +16,13 @@
     invisibles: {}
     showIndentGuide: true
     softWrap: true
+  linter:
+    showErrorPanel: false
+  "linter-eslint": {}
+  minimap:
+    plugins:
+      "split-diff": true
+      "split-diffDecorationsZIndex": 0
   welcome:
     showOnStartup: false
 ".c.source":

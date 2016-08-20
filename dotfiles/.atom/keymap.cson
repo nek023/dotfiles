@@ -32,3 +32,11 @@
   'J': 'vim-mode-plus:move-to-next-paragraph'
   'K': 'vim-mode-plus:move-to-previous-paragraph'
   'L': 'vim-mode-plus:move-to-next-word'
+
+'.workspace':
+  'ctrl-alt-s': 'split-diff:toggle'
+  'ctrl-alt-l': 'linter:toggle'
+  'ctrl-alt-p': 'linter:togglePanel'
+'.editor':
+  'ctrl-alt-[': 'linter:previous-error'
+  'ctrl-alt-]': 'linter:next-error'
