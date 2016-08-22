@@ -1,0 +1,28 @@
+function expand_global_alias
+  commandline    | read -l buffer_entire
+  commandline -t | read -l alias_name
+  echo "$buffer_entire" | string replace -r " $alias_name" '' | string trim | read -l command
+
+  switch $alias_name
+  case 'GST'
+    select_git_status | read -l files
+    commandline "$command $files"
+    commandline -f execute
+  case 'RET'
+    commandline "env RAILS_ENV=test $command"
+  case 'TH'
+    select_target_host | read -l host
+    commandline "$command $host"
+    commandline -f execute
+  case 'VH'
+    select_vagrant_host | read -l host
+    commandline "$command $host"
+    commandline -f execute
+  case 'GH'
+    git fzf | read -l git_hash
+    commandline "$command $git_hash"
+  case '*'
+    commandline -f execute
+  end
+  commandline -f repaint
+end

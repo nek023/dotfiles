@@ -1,5 +1,4 @@
-
-# Created by https://www.gitignore.io/api/osx,ruby
+# Created by https://www.gitignore.io/api/osx,ruby,vagrant
 
 ### OSX ###
 *.DS_Store
@@ -8,7 +7,6 @@
 
 # Icon must end with two \r
 Icon
-
 # Thumbnails
 ._*
 
@@ -94,3 +92,5 @@ dotfiles/.vim/.netrwhist
 dotfiles/.vim/plugged
 dotfiles/.config/*
 !dotfiles/.config/nvim
+!dotfiles/.config/fish
+dotfiles/.config/fish/fishd.*

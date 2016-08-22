@@ -11,4 +11,3 @@ set guifont=Monaco:h12
 " カラースキーム
 set background=dark
 colorscheme hybrid
-

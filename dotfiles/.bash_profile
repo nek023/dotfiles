@@ -5,5 +5,8 @@ if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
-# User specific environment and startup programs
-
+# Run fish if startup command is not specified
+if [ -z "$BASH_EXECUTION_STRING" ]; then
+  SHELL=`which fish`
+  test -x "$SHELL" && exec -l "$SHELL"
+fi

@@ -57,4 +57,3 @@ mas install 409201541  # Pages
 mas install 409183694  # Keynote
 mas install 408981434  # iMovie
 mas install 497799835  # Xcode
-

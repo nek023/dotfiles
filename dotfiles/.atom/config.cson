@@ -12,7 +12,7 @@
     ]
   editor:
     fontFamily: "Source Code Pro"
-    fontSize: 12
+    fontSize: 13
     invisibles: {}
     showIndentGuide: true
     softWrap: true
