@@ -11,7 +11,7 @@ function fish_prompt --description 'Write out the prompt'
 		set minifish '<・))><'
 		set minifish_color blue
 	else
-		set minifish '<＋))><'
+		set minifish '<ｘ))><'
 		set minifish_color red
 	end
 
