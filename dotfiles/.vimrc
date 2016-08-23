@@ -251,6 +251,7 @@ Plug 'cohama/lexima.vim'
 Plug 'osyo-manga/shabadou.vim' " for vim-watchdogs
 Plug 'osyo-manga/vim-watchdogs'
 Plug 'othree/yajs.vim'
+Plug 'dag/vim-fish'
 
 Plug 'tomasr/molokai'
 Plug 'altercation/solarized'
