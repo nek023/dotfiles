@@ -3,11 +3,10 @@
     disabledPackages: [
       "exception-reporting"
       "vim-mode"
-      "minimap-cursorline"
-      "minimap"
+      "symbols-view"
     ]
     themes: [
-      "atom-dark-ui"
+      "atom-dark-ui-slim"
       "base16-tomorrow-dark-theme"
     ]
   editor:
