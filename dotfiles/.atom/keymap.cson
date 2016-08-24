@@ -17,6 +17,15 @@
 #   'ctrl-p': 'core:move-down'
 #
 
+'.workspace':
+  'ctrl-alt-s': 'split-diff:toggle'
+  'ctrl-alt-l': 'linter:toggle'
+  'ctrl-alt-p': 'linter:togglePanel'
+
+'.editor':
+  'ctrl-alt-[': 'linter:previous-error'
+  'ctrl-alt-]': 'linter:next-error'
+
 '.editor.vim-mode:not(.insert-mode)':
   '9': 'vim-mode:move-to-first-character-of-line'
   '0': 'vim-mode:move-to-last-character-of-line'
@@ -33,10 +42,10 @@
   'K': 'vim-mode-plus:move-to-previous-paragraph'
   'L': 'vim-mode-plus:move-to-next-word'
 
-'.workspace':
-  'ctrl-alt-s': 'split-diff:toggle'
-  'ctrl-alt-l': 'linter:toggle'
-  'ctrl-alt-p': 'linter:togglePanel'
-'.editor':
-  'ctrl-alt-[': 'linter:previous-error'
-  'ctrl-alt-]': 'linter:next-error'
+'.editor.vim-mode-plus.normal-mode':
+  'S':     'vim-mode-plus:surround-smart-word'
+  'd s':   'vim-mode-plus:delete-surround-any-pair'
+  'c s':   'vim-mode-plus:change-surround-any-pair'
+  'y s':   'vim-mode-plus:surround'
+  'y s w': 'vim-mode-plus:surround-word'
+  'y s m': 'vim-mode-plus:map-surround'
