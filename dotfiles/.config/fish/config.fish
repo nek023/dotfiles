@@ -89,6 +89,7 @@ alias ff    'fzf'
 alias gg    'ghq get'
 alias a     'atom .'
 alias v     'vagrant'
+alias cop   'rubocop'
 alias watch 'watch -n 0.5'
 alias clone 'git clone --recursive'
 alias rt    'cd ./(git rev-parse --show-cdup)'
@@ -121,11 +122,13 @@ alias gco    'git checkout'
 alias gcb    'git checkout -b'
 alias gcm    'git checkout master'
 
+alias gd     'git diff'
+alias gds    'git diff --staged'
+
 alias gm     'git merge --no-ff'
 alias gmff   'git merge'
 
 alias gs     'git status'
-alias gd     'git diff'
 alias gl     'git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%d%Creset'"'"''
 alias gf     'git fetch'
 alias gcp    'git cherry-pick'
@@ -134,6 +137,7 @@ alias gbl    'blame -b -w'
 alias gclean 'git clean -fd'
 alias gpush  'git push origin (git_current_branch)'
 alias gpush! 'git push --force-with-lease origin (git_current_branch)'
+alias gpull  'git pull origin (git_current_branch)'
 alias gi     'git ignore'
 alias gre    'git review'
 alias gff    'git fzf'
@@ -151,6 +155,7 @@ alias kook    'knife solo cook'
 # ------------------------------------------------------------------------------
 # Load external files
 # ------------------------------------------------------------------------------
+load_file $HOME/.private/fish/config.fish
 load_file $HOME/.proxy
 
 # ------------------------------------------------------------------------------
