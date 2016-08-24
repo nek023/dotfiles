@@ -91,6 +91,7 @@ dotfiles/.atom/*
 dotfiles/.vim/.netrwhist
 dotfiles/.vim/plugged
 dotfiles/.config/*
+!dotfiles/.config/git
 !dotfiles/.config/nvim
 !dotfiles/.config/fish
 dotfiles/.config/fish/fishd.*

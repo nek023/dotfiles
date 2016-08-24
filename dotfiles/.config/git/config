@@ -4,7 +4,7 @@
 [color]
     ui = auto
 [core]
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.config/git/ignore
     precomposeunicode = true
     editor = vim
 [push]
@@ -34,3 +34,5 @@
     clean    = git-lfs clean %f
     smudge   = git-lfs smudge %f
     required = true
+[include]
+    path = ~/.private-config/git/config
