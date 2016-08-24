@@ -1,38 +1,35 @@
-[user]
-    name  = questbeat
-    email = questbeat@gmail.com
 [color]
-    ui = auto
+  ui = auto
 [core]
-    excludesfile = ~/.config/git/ignore
-    precomposeunicode = true
-    editor = vim
+  excludesfile = ~/.config/git/ignore
+  precomposeunicode = true
+  editor = vim
 [push]
-    default = current
+  default = current
 [pager]
-    log  = diff-highlight | less
-    show = diff-highlight | less
-    diff = diff-highlight | less
+  log  = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
 [alias]
-    st = status
-    ci = commit
-    co = checkout
-    br = branch
-    pop  = stash pop
-    drop = stash drop
-    unstage = reset HEAD --
-    ignore  = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+  pop  = stash pop
+  drop = stash drop
+  unstage = reset HEAD --
+  ignore  = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 [filter "media"]
-    required = true
-    clean    = git media clean %f
-    smudge   = git media smudge %f
+  required = true
+  clean    = git media clean %f
+  smudge   = git media smudge %f
 [ghq]
-    root = ~/.ghq
-    root = ~/.go/src
-    root = ~/work
+  root = ~/.ghq
+  root = ~/.go/src
+  root = ~/work
 [filter "lfs"]
-    clean    = git-lfs clean %f
-    smudge   = git-lfs smudge %f
-    required = true
+  clean    = git-lfs clean %f
+  smudge   = git-lfs smudge %f
+  required = true
 [include]
-    path = ~/.private-config/git/config
+  path = ~/.private-config/git/config
