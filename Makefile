@@ -4,7 +4,6 @@ DOTFILES_EXCLUDES := .DS_Store
 DOTFILES_FILES    := $(filter-out $(DOTFILES_EXCLUDES), $(DOTFILES_TARGET))
 
 all: update link install
-	@exec $$SHELL
 
 help:
 	@echo "make all          Update repo, link dotfiles and run provisioning"
