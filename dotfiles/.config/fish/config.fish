@@ -161,4 +161,19 @@ load_file $HOME/.proxy
 # ------------------------------------------------------------------------------
 # tmux
 # ------------------------------------------------------------------------------
+function tmux_rename_window --on-event fish_prompt
+  if tmux_is_running
+    set -l git_dir (git_dir_path)
+    set -l window_name
+
+    if test -n "$git_dir"
+      set window_name (basename (dirname $PWD))/(basename $PWD)
+    else
+      set window_name "dev"
+    end
+
+    tmux rename-window "$window_name"
+  end
+end
+
 tmux_create_new_session
