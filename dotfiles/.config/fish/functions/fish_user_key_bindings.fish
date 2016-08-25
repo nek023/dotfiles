@@ -6,7 +6,7 @@ function fish_user_key_bindings
   bind \cs\cs select_ssh
   bind \co\co select_mkr_ip
 
-  bind \cg\cg\cb git_recent_all_branches
+  bind \cg\cg\cb git_all_recent_branches
   bind \cgb   git_recent_branches
   bind \cg\cb git_recent_branches
 
