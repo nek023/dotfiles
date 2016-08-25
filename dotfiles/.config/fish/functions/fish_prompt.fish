@@ -23,6 +23,6 @@ function fish_prompt --description 'Write out the prompt'
 		set suffix '$'
 	end
 
-	echo -s (set_color green) "$USER" @ "$__fish_prompt_hostname" (set_color normal) : (set_color blue) (prompt_pwd) (set_color red) (__fish_git_prompt)
+	echo -s (set_color green) "$USER" @ "$__fish_prompt_hostname" (set_color normal) : (set_color blue) (prompt_pwd) (set_color red) (__fish_git_prompt) (set_color 555) " [" (date '+%H:%M:%S') "]"
 	echo -n -s (set_color $minifish_color) "$minifish " (set_color normal) "$suffix "
 end
