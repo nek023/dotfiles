@@ -1,9 +1,10 @@
-[color]
-  ui = auto
 [core]
   excludesfile = ~/.config/git/ignore
+  hooksPath = ~/.config/git/hooks
   precomposeunicode = true
   editor = vim
+[color]
+  ui = auto
 [push]
   default = current
 [pager]
