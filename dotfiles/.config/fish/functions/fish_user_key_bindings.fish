@@ -4,6 +4,7 @@ function fish_user_key_bindings
 	bind \cgc   select_ghq_cd
 	bind \cr    select_history
   bind \cs\cs select_ssh
+  bind \co\co select_mkr_ip
 
   bind \cg\cg\cb git_recent_all_branches
   bind \cgb   git_recent_branches
