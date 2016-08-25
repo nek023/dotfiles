@@ -133,7 +133,7 @@ alias gl     'git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%
 alias gf     'git fetch'
 alias gcp    'git cherry-pick'
 alias gr     'git rebase'
-alias gbl    'blame -b -w'
+alias gbl    'git blame -b -w'
 alias gclean 'git clean -fd'
 alias gpush  'git push origin (git_current_branch)'
 alias gpush! 'git push --force-with-lease origin (git_current_branch)'
