@@ -19,7 +19,6 @@
   pop  = stash pop
   drop = stash drop
   unstage = reset HEAD --
-  ignore  = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 [filter "media"]
   required = true
   clean    = git media clean %f

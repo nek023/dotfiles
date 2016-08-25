@@ -138,7 +138,6 @@ alias gclean 'git clean -fd'
 alias gpush  'git push origin (git_current_branch)'
 alias gpush! 'git push --force-with-lease origin (git_current_branch)'
 alias gpull  'git pull origin (git_current_branch)'
-alias gi     'git ignore'
 alias gre    'git review'
 alias gff    'git fzf'
 
