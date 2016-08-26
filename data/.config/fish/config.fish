@@ -154,8 +154,8 @@ alias kook    'knife solo cook'
 # ------------------------------------------------------------------------------
 # Load external files
 # ------------------------------------------------------------------------------
-load_file $HOME/.local-config/fish/config.fish
 load_file $HOME/.proxy
+load_file $HOME/.local-config/fish/config.fish
 
 # ------------------------------------------------------------------------------
 # tmux
