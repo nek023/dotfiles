@@ -26,10 +26,9 @@
 [ghq]
   root = ~/.ghq
   root = ~/.go/src
-  root = ~/work
 [filter "lfs"]
   clean    = git-lfs clean %f
   smudge   = git-lfs smudge %f
   required = true
 [include]
-  path = ~/.private-config/git/config
+  path = ~/.local-config/git/config
