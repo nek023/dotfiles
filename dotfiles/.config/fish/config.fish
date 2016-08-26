@@ -168,7 +168,7 @@ function tmux_rename_window --on-event fish_prompt
     if test -n "$git_dir"
       set window_name (basename (dirname $PWD))/(basename $PWD)
     else
-      set window_name "dev"
+      set window_name (basename $PWD)
     end
 
     tmux rename-window "$window_name"
