@@ -1,29 +1,20 @@
-DOTFILES_DIR      := $(PWD)/dotfiles
-DOTFILES_TARGET   := $(notdir $(wildcard $(DOTFILES_DIR)/.??*)) bin
-DOTFILES_EXCLUDES := .DS_Store
-DOTFILES_FILES    := $(filter-out $(DOTFILES_EXCLUDES), $(DOTFILES_TARGET))
+DATA_DIR := $(PWD)/data
+TARGETS  := $(notdir $(wildcard $(DATA_DIR)/.??*)) bin
+EXCLUDES := .DS_Store
+DOTFILES := $(filter-out $(EXCLUDES), $(TARGETS))
 
-all: update link install
+all: link
 
 help:
-	@echo "make all          Update repo, link dotfiles and run provisioning"
-	@echo "make update       Update this repo"
 	@echo "make list         List dotfiles"
 	@echo "make link         Link dotfiles"
 	@echo "make unlink       Unlink dotfiles"
-	@echo "make install      Run provisioning"
-
-update:
-	git pull origin master
 
 list:
-	@$(foreach val, $(DOTFILES_FILES), ls -dF $(DOTFILES_DIR)/$(val);)
+	@$(foreach file, $(DOTFILES), ls -dF $(DATA_DIR)/$(file);)
 
 link:
-	@$(foreach val, $(DOTFILES_FILES), ln -sfnv $(DOTFILES_DIR)/$(val) $(HOME)/$(val);)
+	@$(foreach file, $(DOTFILES), ln -sfnv $(DATA_DIR)/$(file) $(HOME)/$(file);)
 
 unlink:
-	@-$(foreach val, $(DOTFILES_FILES), rm -vrf $(HOME)/$(val);)
-
-install:
-	bash install.sh
+	@-$(foreach file, $(DOTFILES), rm -vrf $(HOME)/$(file);)

@@ -85,13 +85,13 @@ build-iPhoneSimulator/
 
 
 ### Dotfiles ###
-dotfiles/.atom/*
-!dotfiles/.atom/init.coffee
-!dotfiles/.atom/*.cson
-dotfiles/.vim/.netrwhist
-dotfiles/.vim/plugged
-dotfiles/.config/*
-!dotfiles/.config/git
-!dotfiles/.config/nvim
-!dotfiles/.config/fish
-dotfiles/.config/fish/fishd.*
+data/.atom/*
+!data/.atom/init.coffee
+!data/.atom/*.cson
+data/.vim/.netrwhist
+data/.vim/plugged
+data/.config/*
+!data/.config/git
+!data/.config/nvim
+!data/.config/fish
+data/.config/fish/fishd.*
