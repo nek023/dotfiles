@@ -6,6 +6,7 @@ DOTFILES := $(filter-out $(EXCLUDES), $(TARGETS))
 all: link
 
 help:
+	@echo "Usage:"
 	@echo "make list         List dotfiles"
 	@echo "make link         Link dotfiles"
 	@echo "make unlink       Unlink dotfiles"
