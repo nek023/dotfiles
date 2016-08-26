@@ -135,9 +135,9 @@ alias gcp    'git cherry-pick'
 alias gr     'git rebase'
 alias gbl    'git blame -b -w'
 alias gclean 'git clean -fd'
-alias gpush  'git push origin (git_current_branch)'
-alias gpush! 'git push --force-with-lease origin (git_current_branch)'
-alias gpull  'git pull origin (git_current_branch)'
+alias gpush  'git push origin (__git_current_branch)'
+alias gpush! 'git push --force-with-lease origin (__git_current_branch)'
+alias gpull  'git pull origin (__git_current_branch)'
 alias gre    'git review'
 alias gff    'git fzf'
 
@@ -154,15 +154,15 @@ alias kook    'knife solo cook'
 # ------------------------------------------------------------------------------
 # Load external files
 # ------------------------------------------------------------------------------
-load_file $HOME/.proxy
-load_file $HOME/.local-config/fish/config.fish
+__load_file $HOME/.proxy
+__load_file $HOME/.local-config/fish/config.fish
 
 # ------------------------------------------------------------------------------
 # tmux
 # ------------------------------------------------------------------------------
-function tmux_rename_window --on-event fish_prompt
-  if tmux_is_running
-    set -l git_dir (git_dir_path)
+function __tmux_rename_window --on-event fish_prompt
+  if __tmux_is_running
+    set -l git_dir (__git_dir_path)
     set -l window_name
 
     if test -n "$git_dir"
@@ -175,4 +175,4 @@ function tmux_rename_window --on-event fish_prompt
   end
 end
 
-tmux_create_new_session
+__tmux_create_new_session

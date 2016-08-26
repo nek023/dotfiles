@@ -1,4 +1,4 @@
-function expand_global_alias
+function __expand_global_alias
   commandline    | read -l entire_buffer
   commandline -t | read -l alias_name
   echo "$entire_buffer" | string replace -r " $alias_name" '' | string trim | read -l command
@@ -8,7 +8,7 @@ function expand_global_alias
     git fzf | read -l git_hash
     commandline "$command $git_hash"
   case 'GST'
-    select_git_status | read -l files
+    __select_git_status | read -l files
     commandline "$command $files"
     commandline -f execute
   case 'RET'
@@ -18,11 +18,11 @@ function expand_global_alias
     commandline "$command $spec"
     commandline -f execute
   case 'TH'
-    select_target_host | read -l host
+    __select_target_host | read -l host
     commandline "$command $host"
     commandline -f execute
   case 'VH'
-    select_vagrant_host | read -l host
+    __select_vagrant_host | read -l host
     commandline "$command $host"
     commandline -f execute
   case '*'

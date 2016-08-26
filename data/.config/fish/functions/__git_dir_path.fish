@@ -1,4 +1,4 @@
-function git_dir_path
+function __git_dir_path
   if test -d .git
     echo $PWD/.git;
   else
