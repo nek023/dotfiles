@@ -145,6 +145,7 @@ alias s  'rails s'
 alias c  'rails c'
 alias db 'rails db'
 alias t  'rspec'
+alias b  'bundle'
 alias be 'bundle exec'
 alias bi 'bundle install --path=vendor/bundle --binstubs=vendor/bin --jobs=4'
 
