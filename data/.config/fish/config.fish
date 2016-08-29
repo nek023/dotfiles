@@ -57,6 +57,7 @@ set -x FZF_DEFAULT_OPTS '
 --ansi
 --multi
 --cycle
+--no-sort
 --color fg:-1,bg:-1,hl:229,fg+:3,bg+:233,hl+:103
 --color info:150,prompt:110,spinner:150,pointer:167,marker:174
 '
