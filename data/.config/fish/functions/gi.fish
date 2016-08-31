@@ -1,0 +1,1 @@
+/Users/questbeat/.config/fisherman/gi/functions/gi.fish
