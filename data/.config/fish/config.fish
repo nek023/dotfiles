@@ -88,7 +88,6 @@ abbr -a grep  'command grep -v grep | command grep --color=auto'
 
 abbr -a ff    'fzf'
 abbr -a gg    'ghq get'
-abbr -a a     'atom .'
 abbr -a v     'vagrant'
 abbr -a cop   'rubocop'
 abbr -a copa  'rubocop -a'
