@@ -95,6 +95,7 @@ abbr -a watch 'watch -n 0.5'
 abbr -a clone 'git clone --recursive'
 abbr -a rt    'cd ./(git rev-parse --show-cdup)'
 
+abbr -a brewup      'brew update; brew upgrade --outdated'
 abbr -a ssh-config  'vim ~/.ssh/config'
 abbr -a direnv-init 'echo \'export PATH=$PWD/bin:$PWD/vendor/bin:$PATH\' > .envrc; and direnv allow'
 
