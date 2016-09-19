@@ -146,6 +146,7 @@ abbr -a gre    'git review'
 abbr -a gff    'git fzf'
 
 abbr -a s  'rails s'
+abbr -a sb 'rails s -b 0.0.0.0'
 abbr -a c  'rails c'
 abbr -a db 'rails db'
 abbr -a t  'rspec'
