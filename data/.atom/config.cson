@@ -4,6 +4,7 @@
       "exception-reporting"
       "vim-mode"
       "symbols-view"
+      "linter-foodcritic"
     ]
     themes: [
       "atom-dark-ui-slim"
@@ -11,7 +12,7 @@
     ]
   editor:
     fontFamily: "Source Code Pro"
-    fontSize: 11
+    fontSize: 13
     invisibles: {}
     showIndentGuide: true
     softWrap: true
