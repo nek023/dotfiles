@@ -1,32 +1,59 @@
 function __expand_global_alias
-  commandline    | read -l entire_buffer
-  commandline -t | read -l alias_name
-  echo "$entire_buffer" | string replace -r " $alias_name" '' | string trim | read -l command
+  commandline | read -l buffer
 
-  switch $alias_name
-  case 'GH'
-    git fzf | read -l git_hash
-    commandline "$command $git_hash"
-  case 'GST'
-    __select_git_status | read -l files
-    commandline "$command $files"
-    commandline -f execute
-  case 'RET'
-    commandline "env RAILS_ENV=test $command"
-  case 'SPEC'
-    find ./spec -follow | fzf | read -l spec
-    commandline "$command $spec"
-    commandline -f execute
-  case 'TH'
-    __select_target_host | read -l host
-    commandline "$command $host"
-    commandline -f execute
-  case 'VH'
-    __select_vagrant_host | read -l host
-    commandline "$command $host"
-    commandline -f execute
-  case '*'
-    commandline -f execute
+  string replace -a -r '(;|\|)' ' $1' $buffer | read buffer
+
+  for word in (string split ' ' $buffer)
+    for keyword in F G H L N N1 N2 P T GST TH VH GH
+      if string match -q $keyword -- $word
+        switch $word
+          case F
+            set replacement '| fzf'
+          case G
+            set replacement '| grep'
+          case H
+            set replacement '| head'
+          case L
+            set replacement '| less'
+          case N
+            set replacement ' >/dev/null ^/dev/null'
+          case N1
+            set replacement ' >/dev/null'
+          case N2
+            set replacement ' ^/dev/null'
+          case P
+            set replacement '| peco'
+          case T
+            set replacement '| tail'
+          case GST
+            __select_git_status | string trim | read replacement
+          case TH
+            __select_target_host | read replacement
+          case VH
+            __select_vagrant_host | read replacement
+          case GH
+            git fzf | read replacement
+          case SPEC
+            find ./spec -follow | fzf | read replacement
+        end
+        string replace $keyword $replacement $buffer | read buffer
+      end
+    end
   end
+
+  for word in (string split ' ' $buffer)
+    set -l keyword 'RET'
+    if string match -q $keyword -- $word
+      string replace $keyword '' $buffer | read buffer
+      string replace 'env'    '' $buffer | read buffer
+      echo "env RAILS_ENV=test $buffer" | read buffer
+    end
+  end
+
+  string replace -a -r '\s+' ' ' $buffer | read buffer
+  string replace -a ' ;' ';' $buffer | read buffer
+
+  commandline $buffer
+  commandline -f execute
   commandline -f repaint
 end
