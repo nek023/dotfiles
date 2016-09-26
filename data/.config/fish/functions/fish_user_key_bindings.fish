@@ -3,8 +3,6 @@ function fish_user_key_bindings
   bind \cga   __select_git_add
 	bind \cgc   __select_ghq_cd
 	bind \cr    __select_history
-  bind \cs\cs __select_ssh
-  bind \co\co __select_mkr_ip
 
   bind \cg\cg\cb __git_all_recent_branches
   bind \cg\cb    __git_recent_branches
