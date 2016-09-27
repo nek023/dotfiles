@@ -131,7 +131,11 @@ abbr -a gm     'git merge --no-ff'
 abbr -a gmff   'git merge'
 
 abbr -a gr     'git rebase'
+abbr -a gri    'git rebase -i'
 abbr -a grm    'git rebase master'
+
+abbr -a gre    'git reset'
+abbr -a greh   'git reset HEAD'
 
 abbr -a gs     'git status'
 abbr -a gl     'git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%d%Creset'"'"''
