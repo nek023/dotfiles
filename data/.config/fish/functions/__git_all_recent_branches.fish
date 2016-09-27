@@ -1,5 +1,5 @@
 ## ref: http://shibayu36.hatenablog.com/entry/2014/07/26/151106
-function __git_recent_all_branches
+function __git_all_recent_branches
   commandline | read -l buffer
   git for-each-ref --format='%(refname)' --sort=-committerdate | \
         fzf | read -l selected_branch
