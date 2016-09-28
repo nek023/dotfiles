@@ -186,3 +186,10 @@ function __tmux_rename_window --on-event fish_prompt
 end
 
 __tmux_create_new_session
+
+# ------------------------------------------------------------------------------
+# Merge history
+# ------------------------------------------------------------------------------
+function __merge_history --on-event fish_preexec
+  history --merge
+end
