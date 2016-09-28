@@ -1,4 +1,4 @@
-function a
+function __atom
     if count $argv > /dev/null
         atom $argv
     else

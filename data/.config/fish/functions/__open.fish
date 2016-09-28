@@ -1,4 +1,4 @@
-function o
+function __open
     if count $argv > /dev/null
         open $argv
     else

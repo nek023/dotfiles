@@ -94,6 +94,8 @@ abbr -a copa  'rubocop -a'
 abbr -a watch 'watch -n 0.5'
 abbr -a clone 'git clone --recursive'
 abbr -a rt    'cd ./(git rev-parse --show-cdup)'
+abbr -a a     '__atom'
+abbr -a o     '__open'
 
 abbr -a brewup      'brew update; brew upgrade --outdated'
 abbr -a ssh-config  'vim ~/.ssh/config'
