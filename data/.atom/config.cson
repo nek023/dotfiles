@@ -6,6 +6,7 @@
       "symbols-view"
       "linter-foodcritic"
     ]
+    telemetryConsent: "no"
     themes: [
       "atom-dark-ui-slim"
       "base16-tomorrow-dark-theme"
