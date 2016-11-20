@@ -2,9 +2,9 @@
   core:
     disabledPackages: [
       "exception-reporting"
-      "vim-mode"
-      "symbols-view"
       "linter-foodcritic"
+      "symbols-view"
+      "vim-mode"
     ]
     telemetryConsent: "no"
     themes: [
@@ -13,17 +13,12 @@
     ]
   editor:
     fontFamily: "Source Code Pro"
-    fontSize: 13
+    fontSize: 12
     invisibles: {}
     showIndentGuide: true
     softWrap: true
   linter:
     showErrorPanel: false
-  "linter-eslint": {}
-  minimap:
-    plugins:
-      "split-diff": true
-      "split-diffDecorationsZIndex": 0
   welcome:
     showOnStartup: false
 ".c.source":
