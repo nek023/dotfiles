@@ -159,6 +159,7 @@ abbr -a t  'rspec'
 abbr -a b  'bundle'
 abbr -a be 'bundle exec'
 abbr -a bi 'bundle install --path=vendor/bundle --binstubs=vendor/bin --jobs=4'
+abbr -a ss 'spring stop'
 
 abbr -a krepare 'knife solo prepare'
 abbr -a kook    'knife solo cook'
