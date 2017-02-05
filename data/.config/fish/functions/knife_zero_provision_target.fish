@@ -3,6 +3,6 @@ function knife_solo_provision_target
   test -z $target_host; and return
   echo Provisioning $target_host...
 
-  knife solo prepare $target_host $argv; \
-    and knife solo cook $target_host $argv
+  knife zero bootstrap $target_host --node-name $target_host --no-converge $argv; \
+    and knife zero converge name:$target_host $argv
 end

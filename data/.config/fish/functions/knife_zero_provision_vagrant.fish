@@ -1,4 +1,4 @@
-function knife_solo_provision_vagrant
+function knife_zero_provision_vagrant
   __select_vagrant_host | read -l vagrant_host
   test -z $vagrant_host; and return
   echo Provisioning $vagrant_host...
@@ -6,8 +6,8 @@ function knife_solo_provision_vagrant
   vagrant destroy -f; \
     and vagrant up; \
     and vagrant snapshot save init; \
-    and knife solo prepare $vagrant_host $argv; \
+    and knife zero bootstrap $vagrant_host --node-name $vagrant_host --no-converge $argv; \
     and vagrant snapshot save prepared; \
-    and knife solo cook $vagrant_host $argv; \
+    and knife zero converge name:$vagrant_host $argv; \
     and vagrant snapshot save cooked
 end
