@@ -5,14 +5,15 @@ if [ "$1" = 'show' ]; then
   # ref: https://github.com/junegunn/fzf/wiki/Examples
   shift
   git log --graph --color=always \
-        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" | emojify |
-        fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+        --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr" "$@" |
+        sed -e 's/\$/\\$/g' |
+        fzf --ansi --no-sort --tiebreak=index \
               --bind "ctrl-m:execute:
-                    sh -c \"echo {} | grep -o '[a-f0-9]\{7\}' | xargs -I _ git show --color=always _ | diff-highlight | emojify | less -RX\""
+                    sh -c \"echo {} | grep -o '[a-f0-9]\{7\}' | xargs -I _ git show --color=always _ | diff-highlight | less -RIXc\""
 else
   # fetch git commit hash
   git log --graph --color=always \
-        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" | emojify |
-        fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort |
+        --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr" "$@" |
+        fzf --ansi --no-sort --tiebreak=index |
         head -1 | grep -o '[a-f0-9]\{7\}'
 fi

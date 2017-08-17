@@ -17,8 +17,9 @@
     invisibles: {}
     showIndentGuide: true
     softWrap: true
-  linter:
-    showErrorPanel: false
+  linter: {}
+  "linter-ui-default":
+    panelHeight: 81
   welcome:
     showOnStartup: false
 ".c.source":

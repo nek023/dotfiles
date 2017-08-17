@@ -1,47 +1,44 @@
 # config.fish
 
 # ------------------------------------------------------------------------------
-# Fish
+# Suppress greeting message
 # ------------------------------------------------------------------------------
 set fish_greeting
 set fish_prompt_pwd_dir_length 0
 
 # ------------------------------------------------------------------------------
-# Variables
+# Environment variables
 # ------------------------------------------------------------------------------
-# PATH
-set -x PATH /usr/local/bin /bin /usr/bin /sbin /usr/sbin
-if test -d /usr/local/sbin
-  set PATH $PATH /usr/local/sbin
-end
+# SHELL
+set -gx SHELL (which fish)
 
 # $HOME/bin
-set PATH $PATH $HOME/bin
+set -gx fish_user_paths $fish_user_paths $HOME/bin
 
 # LANG
-set -x LANG ja_jp.UTF-8
+set -gx LANG ja_jp.UTF-8
 
 # EDITOR
 if type -qa nvim
-  set -x EDITOR nvim
+  set -gx EDITOR nvim
 else if type -qa vim
-  set -x EDITOR vim
+  set -gx EDITOR vim
 end
 
 # PAGER
 if type -qa less
-  set -x PAGER less
+  set -gx PAGER less
 end
 
-# go
-set -x GOPATH $HOME/.go
+# Go
+set -gx GOPATH $HOME/.go
 if test -d $GOPATH/bin
-  set -x PATH $PATH $GOPATH/bin
+  set -gx fish_user_paths $fish_user_paths $GOPATH/bin
 end
 
 # anyenv
 if test -d $HOME/.anyenv/bin
-  set PATH $HOME/.anyenv/bin $PATH
+  set -gx fish_user_paths $fish_user_paths $HOME/.anyenv/bin
   status --is-interactive; and source (anyenv init - | psub)
 end
 
@@ -51,7 +48,7 @@ if type -qa direnv
 end
 
 # fzf
-set -x FZF_DEFAULT_OPTS '
+set -gx FZF_DEFAULT_OPTS '
 --reverse
 --extended
 --ansi
@@ -64,7 +61,7 @@ set -x FZF_DEFAULT_OPTS '
 
 # heroku
 if test -d /usr/local/heroku/bin
-  set -x PATH $PATH /usr/local/heroku/bin
+  set -gx fish_user_paths $fish_user_paths /usr/local/heroku/bin
 end
 
 # __fish_git_prompt
@@ -72,6 +69,9 @@ set __fish_git_prompt_showdirtystate     'yes'
 set __fish_git_prompt_showstashstate     'yes'
 set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_showupstream       'yes'
+
+# fish-global-abbreviation
+set -gx gabbr_config $HOME/.config/fish/gabbr.conf
 
 # ------------------------------------------------------------------------------
 # Aliases
@@ -99,17 +99,12 @@ abbr -a o     '__open'
 
 abbr -a brewup      'brew update; brew upgrade --outdated'
 abbr -a ssh-config  'vim ~/.ssh/config'
-abbr -a direnv-init 'echo \'export PATH=$PWD/bin:$PWD/vendor/bin:$PATH\' > .envrc; and direnv allow'
-
-abbr -a ...    'cd ../..'
-abbr -a ....   'cd ../../..'
-abbr -a .....  'cd ../../../..'
-abbr -a ...... 'cd ../../../../..'
 
 abbr -a g      'git'
 
 abbr -a ga     'git add'
 abbr -a gaa    'git add --all'
+abbr -a gap    'git add -p'
 
 abbr -a gc     'git commit'
 abbr -a gc!    'git commit --amend'
@@ -133,6 +128,7 @@ abbr -a gm     'git merge --no-ff'
 abbr -a gmff   'git merge'
 
 abbr -a gr     'git rebase'
+abbr -a grc    'git rebase --continue'
 abbr -a gri    'git rebase -i'
 abbr -a grm    'git rebase master'
 
@@ -154,7 +150,6 @@ abbr -a gff    'git fzf'
 abbr -a s  'rails s'
 abbr -a sb 'rails s -b 0.0.0.0'
 abbr -a c  'rails c'
-abbr -a db 'rails db'
 abbr -a t  'rspec'
 abbr -a b  'bundle'
 abbr -a be 'bundle exec'
@@ -166,7 +161,7 @@ abbr -a kzb 'knife zero bootstrap'
 abbr -a kzc 'knife zero converge'
 
 # ------------------------------------------------------------------------------
-# Load external files
+# Load local config
 # ------------------------------------------------------------------------------
 __load_file $HOME/.proxy
 __load_file $HOME/.local-config/fish/config.fish

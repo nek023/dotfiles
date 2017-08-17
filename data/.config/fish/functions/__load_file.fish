@@ -1,3 +1,4 @@
 function __load_file
-  test -e $argv; and source $argv
+    test -r $argv
+    and source $argv
 end
