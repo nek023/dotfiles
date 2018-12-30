@@ -1,9 +1,11 @@
-DATA_DIR := $(PWD)/data
-TARGETS  := $(notdir $(wildcard $(DATA_DIR)/.??*)) bin
-EXCLUDES := .DS_Store
-DOTFILES := $(filter-out $(EXCLUDES), $(TARGETS))
+DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
+CANDIDATES := $(wildcard .??*) bin
+EXCLUSIONS := .DS_Store .git .gitignore
+DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
-all: link
+.DEFAULT_GOAL := help
+
+all:
 
 help:
 	@echo "Usage:"
@@ -12,10 +14,10 @@ help:
 	@echo "make unlink       Unlink dotfiles"
 
 list:
-	@$(foreach file, $(DOTFILES), ls -dF $(DATA_DIR)/$(file);)
+	@$(foreach val, $(DOTFILES), ls -dF $(val);)
 
 link:
-	@$(foreach file, $(DOTFILES), ln -sfnv $(DATA_DIR)/$(file) $(HOME)/$(file);)
+	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
 unlink:
-	@-$(foreach file, $(DOTFILES), rm -vrf $(HOME)/$(file);)
+	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
