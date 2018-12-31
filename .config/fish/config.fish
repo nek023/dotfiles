@@ -172,8 +172,8 @@ end
 # ------------------------------------------------------------------------------
 # Load local config
 # ------------------------------------------------------------------------------
-__load_file $HOME/.proxy
-__load_file $HOME/.local-config/fish/config.fish
+__source_if_exists $HOME/.proxy
+__source_if_exists $HOME/.local-config/fish/config.fish
 
 # ------------------------------------------------------------------------------
 # tmux
