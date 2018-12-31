@@ -156,6 +156,20 @@ abbr -a brewup     'brew update; brew upgrade --outdated; brew cleanup'
 abbr -a ssh-config 'vim ~/.ssh/config'
 
 # ------------------------------------------------------------------------------
+# Key bindings
+# ------------------------------------------------------------------------------
+bind \c{ backward-word
+bind \c} forward-word
+
+if functions -q __gabbr_expand
+    bind ' ' '__gabbr_expand; commandline -i " "'
+    bind ';' '__gabbr_expand; commandline -i "; "'
+    bind \cj '__gabbr_expand; commandline -f execute'
+    bind \cm '__gabbr_expand; commandline -f execute'
+    bind \r  '__gabbr_expand; commandline -f execute'
+end
+
+# ------------------------------------------------------------------------------
 # Load local config
 # ------------------------------------------------------------------------------
 __load_file $HOME/.proxy
