@@ -62,7 +62,7 @@ set -gx gabbr_config $HOME/.config/fish/gabbr.conf
 # anyenv
 if test -d $HOME/.anyenv
     set -gx fish_user_paths $HOME/.anyenv/bin $fish_user_paths
-    status --is-interactive; and source (anyenv init - | psub)
+    status --is-interactive && source (anyenv init - | psub)
 end
 
 # go
@@ -120,8 +120,8 @@ abbr -a copa  'rubocop -a'
 abbr -a g      'git'
 abbr -a ga     'git add'
 abbr -a gaa    'git add -A'
-abbr -a gac    'git add -A; and git commit'
-abbr -a gac!   'git add -A; and git commit --amend'
+abbr -a gac    'git add -A && git commit'
+abbr -a gac!   'git add -A && git commit --amend'
 abbr -a gap    'git add -p'
 abbr -a gb     'git branch'
 abbr -a gco    'git checkout'
