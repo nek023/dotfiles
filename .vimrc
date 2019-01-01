@@ -1,7 +1,6 @@
 " ------------------------------------------------------------------------------
 " 基本
 " ------------------------------------------------------------------------------
-
 " vi互換
 set nocompatible
 
@@ -130,11 +129,9 @@ augroup disable_comment_completion
     autocmd BufEnter * setlocal formatoptions-=o
 augroup END
 
-
 " ------------------------------------------------------------------------------
 " ファイルタイプ
 " ------------------------------------------------------------------------------
-
 " 拡張子mのファイルをObjective-Cのファイルとして認識
 let g:filetype_m = 'objc'
 
@@ -144,11 +141,9 @@ au BufRead, BufNewFile, BufReadPre *.coffee set filetype=coffee
 " CoffeeScriptのインデントを設定
 autocmd FileType coffee setlocal sw=2 sts=2 ts=2 et
 
-
 " ------------------------------------------------------------------------------
 " キーマッピング
 " ------------------------------------------------------------------------------
-
 " <Leader> の設定
 let mapleader = '\'
 
@@ -224,11 +219,9 @@ inoremap <S-Tab> <C-o><<
 vnoremap < <gv
 vnoremap > >gv
 
-
 " ------------------------------------------------------------------------------
 " プラグイン
 " ------------------------------------------------------------------------------
-
 call plug#begin()
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -253,16 +246,9 @@ Plug 'osyo-manga/vim-watchdogs'
 Plug 'othree/yajs.vim'
 Plug 'dag/vim-fish'
 
-Plug 'tomasr/molokai'
-Plug 'altercation/solarized'
-Plug 'w0ng/vim-hybrid'
-Plug 'nanotech/jellybeans.vim'
-Plug 'jpo/vim-railscasts-theme'
-Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'cocopon/iceberg.vim'
 
 call plug#end()
-
 
 " ------------------------------------------------------------------------------
 " neocomplete.vim
@@ -320,15 +306,14 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 endif
 let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
-
 " ------------------------------------------------------------------------------
 " unite.vim
 " ------------------------------------------------------------------------------
 " 入力モードで開始する
 let g:unite_enable_start_insert=1
 
-" 大文字小文字を区別しない  
-let g:unite_enable_ignore_case = 1  
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 
 " 現在のバッファ一覧
@@ -344,7 +329,6 @@ noremap <C-u><C-r> :<C-u>Unite<Space>file_mru<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
-
 " ------------------------------------------------------------------------------
 " vim-quickrun
 " ------------------------------------------------------------------------------
@@ -359,7 +343,6 @@ let g:quickrun_config.markdown = {
     \ 'exec'      : '%c %o %a %s',
     \ }
 
-
 " ------------------------------------------------------------------------------
 " vim-indent-guides
 " ------------------------------------------------------------------------------
@@ -373,7 +356,6 @@ let g:indent_guides_space_guides=1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
 
-
 " ------------------------------------------------------------------------------
 " NERDTree
 " ------------------------------------------------------------------------------
@@ -383,7 +365,6 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " 隠しファイルを表示する
 let g:NERDTreeShowHidden=1
 
-
 " ------------------------------------------------------------------------------
 " caw.vim
 " ------------------------------------------------------------------------------
@@ -391,13 +372,11 @@ let g:NERDTreeShowHidden=1
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
-
 " ------------------------------------------------------------------------------
 " vim-over
 " ------------------------------------------------------------------------------
 "  vim-overを起動する
 nnoremap <silent> <Leader>m :OverCommandLine<CR>
-
 
 " ------------------------------------------------------------------------------
 " ctrlp.vim
@@ -426,7 +405,6 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " .gitignoreで指定されているファイルを無視する
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-
 " ------------------------------------------------------------------------------
 " clever-f.vim
 " ------------------------------------------------------------------------------
@@ -436,11 +414,9 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " 小文字を入力したときのみ大文字/小文字を無視する
  let g:clever_f_smart_case = 1
 
-
 " ------------------------------------------------------------------------------
 " lexima.vim
 " ------------------------------------------------------------------------------
-
 function! s:as_list(a)
     return type(a:a) == type([]) ? a:a : [a:a]
 endfunction
@@ -484,16 +460,9 @@ call s:add_rule({ 'char': '{', 'input_after': '}' }, [
 \   { 'syntax' : 'String' },
 \])
 
-
 " ------------------------------------------------------------------------------
-" Colorscheme
+" カラースキーム
 " ------------------------------------------------------------------------------
-" hybrid
-" let g:hybrid_custom_term_colors = 1
-" set background=dark
-" colorscheme hybrid
-
 " iceberg
 set background=dark
 colorscheme iceberg
-
