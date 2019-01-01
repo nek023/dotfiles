@@ -61,7 +61,6 @@ brew "openssl@1.1"
 brew "perl"
 brew "pkg-config"
 brew "postgresql"
-brew "reattach-to-user-namespace"
 brew "redis", restart_service: true
 brew "ruby-build"
 brew "sourcekitten"
