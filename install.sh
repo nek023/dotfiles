@@ -31,7 +31,7 @@ if [ "$(uname)" == 'Darwin' ]; then
 fi
 
 # Install anyenv
-git clone https://github.com/riywo/anyenv $HOME/.anyenv
+git clone https://github.com/anyenv/anyenv $HOME/.anyenv
 source $HOME/.bashrc
 
 # Install anyenv-update
