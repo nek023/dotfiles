@@ -61,7 +61,6 @@ set -gx gabbr_config $HOME/.config/fish/gabbr.conf
 
 # anyenv
 if test -d $HOME/.anyenv
-    set -gx fish_user_paths $HOME/.anyenv/bin $fish_user_paths
     status --is-interactive && source (anyenv init - | psub)
 end
 

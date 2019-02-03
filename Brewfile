@@ -10,6 +10,7 @@ tap "homebrew/versions"
 tap "homebrew/x11"
 tap "neovim/neovim"
 
+brew "anyenv"
 brew "autoconf"
 brew "automake"
 brew "boost"
