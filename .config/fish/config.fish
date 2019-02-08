@@ -151,7 +151,7 @@ abbr -a b  'bundle'
 abbr -a be 'bundle exec'
 abbr -a bi 'bundle install --path=vendor/bundle --binstubs=vendor/bin --jobs=4'
 
-abbr -a brewup     'brew update; brew upgrade --outdated; brew cleanup'
+abbr -a brewup     'brew update; brew upgrade'
 abbr -a ssh-config 'vim ~/.ssh/config'
 
 # ------------------------------------------------------------------------------
