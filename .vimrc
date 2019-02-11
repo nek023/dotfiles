@@ -1,6 +1,11 @@
 " ------------------------------------------------------------------------------
 " 基本
 " ------------------------------------------------------------------------------
+" fishだと外部プロセスの呼び出しでエラーになる場合があるので、POSIX互換のbashを設定する
+if $SHELL =~ '/fish$'
+  set shell=/bin/bash
+endif
+
 " vi互換
 set nocompatible
 
@@ -124,9 +129,9 @@ let g:vim_indent_cont = 0
 
 " 改行時のコメント補完を無効にする
 augroup disable_comment_completion
-    autocmd!
-    autocmd BufEnter * setlocal formatoptions-=r
-    autocmd BufEnter * setlocal formatoptions-=o
+  autocmd!
+  autocmd BufEnter * setlocal formatoptions-=r
+  autocmd BufEnter * setlocal formatoptions-=o
 augroup END
 
 " ------------------------------------------------------------------------------
@@ -336,12 +341,12 @@ let g:quickrun_config = {}
 
 " MarkdownをMarked 2.appで開く
 let g:quickrun_config.markdown = {
-    \ 'outputter' : 'null',
-    \ 'command'   : 'open',
-    \ 'cmdopt'    : '-a',
-    \ 'args'      : 'Marked\ 2',
-    \ 'exec'      : '%c %o %a %s',
-    \ }
+  \ 'outputter' : 'null',
+  \ 'command'   : 'open',
+  \ 'cmdopt'    : '-a',
+  \ 'args'      : 'Marked\ 2',
+  \ 'exec'      : '%c %o %a %s',
+  \ }
 
 " ------------------------------------------------------------------------------
 " vim-indent-guides
@@ -418,25 +423,25 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " lexima.vim
 " ------------------------------------------------------------------------------
 function! s:as_list(a)
-    return type(a:a) == type([]) ? a:a : [a:a]
+  return type(a:a) == type([]) ? a:a : [a:a]
 endfunction
 
 function! s:add_ignore_rule(rule)
-    let rule = copy(a:rule)
-    let rule.input = rule.char
-    let rule.input_after = ""
-    call lexima#add_rule(rule)
+  let rule = copy(a:rule)
+  let rule.input = rule.char
+  let rule.input_after = ""
+  call lexima#add_rule(rule)
 endfunction
 
 function! s:add_rule(rule, ...)
-    call lexima#add_rule(a:rule)
-    if a:0 == 0
-        return
-    endif
+  call lexima#add_rule(a:rule)
+  if a:0 == 0
+    return
+  endif
 
-    for ignore in s:as_list(a:1)
-        call s:add_ignore_rule(extend(copy(a:rule), ignore))
-    endfor
+  for ignore in s:as_list(a:1)
+    call s:add_ignore_rule(extend(copy(a:rule), ignore))
+  endfor
 endfunction
 
 " |) の場合は補完しない
