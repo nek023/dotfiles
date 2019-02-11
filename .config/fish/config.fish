@@ -36,7 +36,7 @@ end
 set -gx SHELL (which fish)
 
 # lang
-set -gx LANG ja_jp.UTF-8
+set -gx LANG ja_JP.UTF-8
 
 # editor
 if type -qa nvim
