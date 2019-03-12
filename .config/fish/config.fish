@@ -50,6 +50,9 @@ if type -qa less
     set -gx PAGER less
 end
 
+# gpg
+set -gx GPG_TTY (tty)
+
 # __fish_git_prompt
 set __fish_git_prompt_showdirtystate     'yes'
 set __fish_git_prompt_showstashstate     'yes'
