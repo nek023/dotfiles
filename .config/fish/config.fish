@@ -148,6 +148,7 @@ abbr -a gg   'ghq get'
 abbr -a d    'docker'
 abbr -a dc   'docker-compose'
 abbr -a tf   'terraform'
+abbr -a tfw  'terraform workspace'
 
 abbr -a b    'bundle'
 abbr -a be   'bundle exec'
