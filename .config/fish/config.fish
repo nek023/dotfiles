@@ -159,7 +159,7 @@ abbr -a cop  'rubocop'
 abbr -a copa 'rubocop -a'
 abbr -a t    'rspec'
 
-abbr -a brewup     'brew update; brew upgrade'
+abbr -a brewup     'brew update; brew upgrade; brew cleanup'
 abbr -a ssh-config 'vim ~/.ssh/config'
 
 # ------------------------------------------------------------------------------
