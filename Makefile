@@ -5,19 +5,19 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
 
-all:
-
+.PHONY: help
 help:
-	@echo "Usage:"
-	@echo "make list         List dotfiles"
-	@echo "make link         Link dotfiles"
-	@echo "make unlink       Unlink dotfiles"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
+		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-list:
+.PHONY: list
+list: ## List dotfiles
 	@$(foreach val, $(DOTFILES), ls -dF $(val);)
 
-link:
+.PHONY: link
+link: ## Link dotfiles
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
-unlink:
+.PHONY: unlink
+unlink: ## Unlink dotfiles
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
