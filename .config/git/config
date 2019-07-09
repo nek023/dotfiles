@@ -1,6 +1,5 @@
 [core]
   excludesfile = ~/.config/git/ignore
-  hooksPath = ~/.config/git/hooks
   precomposeunicode = true
   editor = vim
 [color]
