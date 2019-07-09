@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
+# Install Command Line Tools
 if [ "$(uname)" == 'Darwin' ]; then
-  # Install Xcode command line tools
   xcode-select --install
   while :
   do
@@ -20,27 +20,10 @@ make link
 popd > /dev/null
 
 if [ "$(uname)" == 'Darwin' ]; then
-  # Install homebrew
+  # Install Homebrew
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-  # Install homebrew/bundle
+  # Install packages
   brew tap homebrew/bundle
-
-  # Install from Brewfile
   brew bundle --file=$HOME/dotfiles/Brewfile
 fi
-
-# Install anyenv
-git clone https://github.com/anyenv/anyenv $HOME/.anyenv
-source $HOME/.bashrc
-
-# Install anyenv-update
-mkdir -p $(anyenv root)/plugins
-git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
-
-# Install envs
-anyenv install rbenv
-anyenv install pyenv
-
-# Install vim plugins
-vim +PlugInstall +qa
