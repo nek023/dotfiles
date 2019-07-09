@@ -19,4 +19,4 @@
   root = ~/.ghq
   root = ~/.go/src
 [include]
-  path = ~/.local-config/git/config
+  path = ~/.config.local/git/config
