@@ -1,9 +1,6 @@
 [core]
-  excludesfile = ~/.config/git/ignore
-  precomposeunicode = true
   editor = vim
-[color]
-  ui = auto
+  excludesfile = ~/.config/git/ignore
 [push]
   default = current
 [pager]
