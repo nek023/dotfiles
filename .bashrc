@@ -5,8 +5,10 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
-# proxy
-test -r $HOME/.proxy && source $HOME/.proxy
+# Source local definitions
+if [ -f $HOME/.bashrc.local ]; then
+  . $HOME/.bashrc.local
+fi
 
 # anyenv
 if type -a anyenv > /dev/null 2>&1; then
