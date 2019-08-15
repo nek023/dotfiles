@@ -73,6 +73,9 @@ if test -d $GOPATH/bin
     set -gx fish_user_paths $GOPATH/bin $fish_user_paths
 end
 
+# rust
+set -gx fish_user_paths $HOME/.cargo/bin $fish_user_paths
+
 # heroku
 if test -d /usr/local/heroku/bin
     set -gx fish_user_paths /usr/local/heroku/bin $fish_user_paths
