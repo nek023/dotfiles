@@ -62,6 +62,9 @@ set __fish_git_prompt_showupstream       'yes'
 # ryotako/fish-global-abbreviation
 set -gx gabbr_config $HOME/.config/fish/gabbr.conf
 
+# homebrew
+set -gx fish_user_paths /usr/local/sbin $fish_user_paths
+
 # anyenv
 if test -d $HOME/.anyenv
     status --is-interactive && source (anyenv init - | psub)
