@@ -114,6 +114,7 @@ alias gpush='git push origin (__git_current_branch)'
 alias gpush!='git push --force-with-lease origin (__git_current_branch)'
 alias la='ls -lAh'
 alias ll='ls -lh'
+alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
 
 # ------------------------------------------------------------------------------
 # Abbreviations
