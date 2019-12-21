@@ -157,7 +157,6 @@ abbr -a dc   'docker-compose'
 abbr -a tf   'terraform'
 abbr -a tfw  'terraform workspace'
 
-abbr -a b    'bundle'
 abbr -a be   'bundle exec'
 abbr -a bi   'bundle install --path=vendor/bundle --binstubs=vendor/bin --jobs=4'
 abbr -a c    'rails c'
