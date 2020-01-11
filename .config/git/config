@@ -17,6 +17,5 @@
   unstage = reset HEAD --
 [ghq]
   root = ~/.ghq
-  root = ~/.go/src
 [include]
   path = ~/.config.local/git/config
