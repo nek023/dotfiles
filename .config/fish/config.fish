@@ -190,6 +190,13 @@ end
 __source_if_exists $HOME/.config.local/fish/config.fish
 
 # ------------------------------------------------------------------------------
+# Fix for direnv bug: https://github.com/direnv/direnv/issues/583
+# ------------------------------------------------------------------------------
+function __direnv_export_eval_on_prompt --on-event fish_prompt
+    type -qa direnv && eval (direnv export fish)
+end
+
+# ------------------------------------------------------------------------------
 # tmux
 # ------------------------------------------------------------------------------
 function __tmux_rename_window --on-event fish_prompt
