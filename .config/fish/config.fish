@@ -201,17 +201,8 @@ end
 # ------------------------------------------------------------------------------
 function __tmux_rename_window --on-event fish_prompt
     if __tmux_is_running
-        set -l git_dir (__git_dir_path)
-        set -l window_name
-
-        if test -n "$git_dir"
-          set window_name (basename (dirname $PWD))/(basename $PWD)
-        else
-          set window_name (basename $PWD)
-        end
-
-        tmux rename-window "$window_name"
+        tmux rename-window (__workdir)
     end
 end
 
-__tmux_create_new_session
+__tmux_create_session
