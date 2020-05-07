@@ -206,7 +206,8 @@ end
 # ------------------------------------------------------------------------------
 function __tmux_rename_window --on-event fish_prompt
     if __tmux_is_running
-        tmux rename-window (__workdir)
+        set -l window_id (tmux list-panes -a -F "#{pane_pid} #{window_id}" | grep $fish_pid | cut -d ' ' -f 2)
+        tmux rename-window -t $window_id (__workdir)
     end
 end
 
