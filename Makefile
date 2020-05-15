@@ -21,3 +21,11 @@ link: ## Link dotfiles
 .PHONY: unlink
 unlink: ## Unlink dotfiles
 	@-$(foreach fn, $(DOTFILES), rm -vrf $(HOME)/$(fn);)
+
+.PHONY: brew-dump
+brew-dump: ## Write installed packages into ~/.Brewfile
+	@brew bundle dump --global --force
+
+.PHONY: brew-install
+brew-install: ## Install packages in ~/.Brewfile
+	@brew bundle --global
