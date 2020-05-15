@@ -1,7 +1,6 @@
-DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .DS_Store .git .gitignore
-DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+CANDIDATES ?= $(wildcard .??*) bin
+EXCLUSIONS ?= .DS_Store .git .gitignore
+DOTFILES   ?= $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
 
@@ -13,12 +12,12 @@ help: ## Show help
 
 .PHONY: list
 list: ## List dotfiles
-	@$(foreach val, $(DOTFILES), ls -dF $(val);)
+	@$(foreach fn, $(DOTFILES), ls -dF $(fn);)
 
 .PHONY: link
 link: ## Link dotfiles
-	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
+	@$(foreach fn, $(DOTFILES), ln -sfnv $(abspath $(fn)) $(HOME)/$(fn);)
 
 .PHONY: unlink
 unlink: ## Unlink dotfiles
-	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
+	@-$(foreach fn, $(DOTFILES), rm -vrf $(HOME)/$(fn);)
