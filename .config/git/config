@@ -1,12 +1,3 @@
-[core]
-  editor = vim
-  excludesfile = ~/.config/git/ignore
-[push]
-  default = current
-[pager]
-  log  = diff-highlight | less
-  show = diff-highlight | less
-  diff = diff-highlight | less
 [alias]
   st = status
   ci = commit
@@ -15,7 +6,21 @@
   pop  = stash pop
   drop = stash drop
   unstage = reset HEAD --
+[core]
+  editor = vim
+  excludesfile = ~/.config/git/ignore
 [ghq]
   root = ~/.ghq
 [include]
   path = ~/.config.local/git/config
+[merge]
+	ff = false
+[pager]
+  log  = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
+[pull]
+	ff = only
+	rebase = true
+[push]
+  default = current
