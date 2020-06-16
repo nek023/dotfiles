@@ -202,6 +202,14 @@ function __direnv_export_eval_on_prompt --on-event fish_prompt
 end
 
 # ------------------------------------------------------------------------------
+# base16-shell
+# ------------------------------------------------------------------------------
+if status --is-interactive && test -d "$HOME/.config/base16-shell"
+    set BASE16_SHELL "$HOME/.config/base16-shell/"
+    source "$BASE16_SHELL/profile_helper.fish"
+end
+
+# ------------------------------------------------------------------------------
 # tmux
 # ------------------------------------------------------------------------------
 function __tmux_rename_window --on-event fish_prompt
