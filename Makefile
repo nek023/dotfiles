@@ -26,6 +26,10 @@ unlink: ## Unlink dotfiles
 setup-anyenv: ## Setup anyenv
 	@./scripts/setup-anyenv.sh
 
+.PHONY: setup-base16-shell
+setup-base16-shell: ## Setup base16-shell
+	@./scripts/setup-base16-shell.sh
+
 .PHONY: link-vscode-settings
 link-vscode-settings: ## Link VSCode settings
 	@test -d $(HOME)/Library/Application\ Support/Code/User \
