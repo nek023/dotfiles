@@ -9,6 +9,12 @@ set fish_greeting
 # パスの短縮表示を無効にする
 set fish_prompt_pwd_dir_length 0
 
+# __fish_git_prompt
+set __fish_git_prompt_showdirtystate     'yes'
+set __fish_git_prompt_showstashstate     'yes'
+set __fish_git_prompt_showuntrackedfiles 'yes'
+set __fish_git_prompt_showupstream       'yes'
+
 # ------------------------------------------------------------------------------
 # Fisher
 # ------------------------------------------------------------------------------
@@ -57,12 +63,6 @@ end
 
 # gpg
 set -gx GPG_TTY (tty)
-
-# __fish_git_prompt
-set __fish_git_prompt_showdirtystate     'yes'
-set __fish_git_prompt_showstashstate     'yes'
-set __fish_git_prompt_showuntrackedfiles 'yes'
-set __fish_git_prompt_showupstream       'yes'
 
 # ryotako/fish-global-abbreviation
 set -gx gabbr_config $HOME/.config/fish/gabbr.conf
@@ -113,10 +113,10 @@ set -gx fish_user_paths $HOME/dotfiles/bin $fish_user_paths
 # Aliases
 # ------------------------------------------------------------------------------
 alias gl='git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%d%Creset'"'"''
-alias grep='command grep -v grep | command grep --color=auto'
 alias gpull='git pull origin (__git_current_branch)'
 alias gpush='git push origin (__git_current_branch)'
 alias gpush!='git push --force-with-lease origin (__git_current_branch)'
+alias grep='command grep -v grep | command grep --color=auto'
 alias la='ls -lAh'
 alias ll='ls -lh'
 alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
@@ -157,6 +157,14 @@ abbr -a gsw  'git switch'
 abbr -a gsc  'git switch -c'
 abbr -a gsm  'git switch master'
 
+abbr -a be   'bundle exec'
+abbr -a bi   'bundle install --jobs=4'
+abbr -a c    'rails c'
+abbr -a s    'rails s'
+abbr -a cop  'rubocop'
+abbr -a copa 'rubocop -a'
+abbr -a t    'rspec'
+
 abbr -a co   'code'
 abbr -a gg   'ghq get'
 abbr -a d    'docker'
@@ -164,16 +172,7 @@ abbr -a dc   'docker-compose'
 abbr -a tf   'terraform'
 abbr -a tfw  'terraform workspace'
 
-abbr -a be   'bundle exec'
-abbr -a bi   'bundle install --path=vendor/bundle --binstubs=vendor/bin --jobs=4'
-abbr -a c    'rails c'
-abbr -a s    'rails s'
-abbr -a cop  'rubocop'
-abbr -a copa 'rubocop -a'
-abbr -a t    'rspec'
-
-abbr -a brewup     'brew update; brew upgrade; brew cleanup'
-abbr -a ssh-config 'vim ~/.ssh/config'
+abbr -a brewup 'brew update; brew upgrade; brew cleanup'
 
 # ------------------------------------------------------------------------------
 # Key bindings
@@ -190,23 +189,20 @@ if functions -q __gabbr_expand
 end
 
 # ------------------------------------------------------------------------------
-# Load local config
+# base16-shell
 # ------------------------------------------------------------------------------
-__source_if_exists $HOME/.config.local/fish/config.fish
-
-# ------------------------------------------------------------------------------
-# Fix for direnv bug: https://github.com/direnv/direnv/issues/583
-# ------------------------------------------------------------------------------
-function __direnv_export_eval_on_prompt --on-event fish_prompt
-    type -qa direnv && eval (direnv export fish)
+if status --is-interactive && test -e $HOME/.config/base16-shell
+    set BASE16_SHELL $HOME/.config/base16-shell
+    source "$BASE16_SHELL/profile_helper.fish"
 end
 
 # ------------------------------------------------------------------------------
-# base16-shell
+# bat
 # ------------------------------------------------------------------------------
-if status --is-interactive && test -d "$HOME/.config/base16-shell"
-    set BASE16_SHELL "$HOME/.config/base16-shell/"
-    source "$BASE16_SHELL/profile_helper.fish"
+if type -aq bat
+    set -gx BAT_THEME=base16
+    set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+    alias cat='bat -p'
 end
 
 # ------------------------------------------------------------------------------
@@ -219,4 +215,17 @@ function __tmux_rename_window --on-event fish_prompt
     end
 end
 
+# ------------------------------------------------------------------------------
+# Fix for direnv bug: https://github.com/direnv/direnv/issues/583
+# ------------------------------------------------------------------------------
+function __direnv_export_eval_on_prompt --on-event fish_prompt
+    type -qa direnv && eval (direnv export fish)
+end
+
+# ------------------------------------------------------------------------------
+# Local config
+# ------------------------------------------------------------------------------
+__source_if_exists $HOME/.config.local/fish/config.fish
+
+# ログイン時にtmuxを起動する
 __tmux_create_session
