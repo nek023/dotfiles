@@ -16,9 +16,9 @@
 [merge]
 	ff = false
 [pager]
-  log  = diff-highlight | less
-  show = diff-highlight | less
-  diff = diff-highlight | less
+  diff = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
+  log  = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
+  show = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 [pull]
 	ff = only
 	rebase = true
