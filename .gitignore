@@ -11,3 +11,5 @@
 .vim/.netrwhist
 .vim/autoload/plug.vim.old
 .vim/plugged
+bin/*
+!bin/.keep
