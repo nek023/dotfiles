@@ -7,6 +7,7 @@
 !.config/git
 !.config/nvim
 !.config/rbenv
+!.config/vscode
 .vim/.netrwhist
 .vim/autoload/plug.vim.old
 .vim/plugged

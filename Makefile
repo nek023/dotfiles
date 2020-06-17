@@ -25,3 +25,24 @@ unlink: ## Unlink dotfiles
 .PHONY: setup-anyenv
 setup-anyenv: ## Setup anyenv
 	@./scripts/setup-anyenv.sh
+
+.PHONY: link-vscode-settings
+link-vscode-settings: ## Link VSCode settings
+	@test -d $(HOME)/Library/Application\ Support/Code/User \
+		&& test ! -e $(HOME)/Library/Application\ Support/Code/User/settings.json \
+		&& ln -sfnv $(HOME)/dotfiles/.config/vscode/settings.json $(HOME)/Library/Application\ Support/Code/User/settings.json \
+		|| :
+
+.PHONY: unlink-vscode-settings
+unlink-vscode-settings: ## Unlink VSCode settings
+	@test -L $(HOME)/Library/Application\ Support/Code/User/settings.json \
+		&& rm -vrf $(HOME)/Library/Application\ Support/Code/User/settings.json \
+		|| :
+
+.PHONY: dump-vscode-extensions
+dump-vscode-extensions: ## Dump VSCode extensions
+	@code --list-extensions > $(HOME)/dotfiles/.config/vscode/extensions
+
+.PHONY: install-vscode-extensions
+install-vscode-extensions: ## Install VSCode extensions
+	@./scripts/install-vscode-extensions.sh

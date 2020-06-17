@@ -1,0 +1,107 @@
+{
+  "breadcrumbs.enabled": true,
+  "editor.fontFamily": "Source Code Pro",
+  "editor.fontSize": 13,
+  "editor.fontWeight": "500",
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "none",
+  "editor.rulers": [100],
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "explorer.openEditors.visible": 0,
+  "extensions.ignoreRecommendations": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/vendor": true
+  },
+  "go.useLanguageServer": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "newFile.defaultBaseFileName": "new",
+  "newFile.defaultFileExtension": ".rb",
+  "newFile.showPathRelativeTo": "project",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/log": true,
+    "**/tmp": true,
+    "**/vendor": true
+  },
+  "sourcekit-lsp.serverPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vim.easymotion": true,
+  "vim.hlsearch": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["H"],
+      "after": ["^"]
+    },
+    {
+      "before": ["L"],
+      "after": ["$"]
+    },
+    {
+      "before": ["J"],
+      "after": ["}"]
+    },
+    {
+      "before": ["K"],
+      "after": ["{"]
+    },
+    {
+      "before": ["<Esc>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["x"],
+      "after": ["\"", "_", "x"]
+    },
+    {
+      "before": ["s"],
+      "after": ["\"", "_", "s"]
+    },
+    {
+      "before": ["f"],
+      "after": ["<leader>", "<leader>", "s"]
+    }
+  ],
+  "vim.useSystemClipboard": true,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["H"],
+      "after": ["^"]
+    },
+    {
+      "before": ["L"],
+      "after": ["$"]
+    },
+    {
+      "before": ["J"],
+      "after": ["}"]
+    },
+    {
+      "before": ["K"],
+      "after": ["{"]
+    }
+  ],
+  "vim.visualstar": true,
+  "window.title": "${dirty}${activeEditorMedium}${separator}${rootPath}",
+  "window.zoomLevel": 0,
+  "workbench.activityBar.visible": false,
+  "workbench.colorTheme": "Base16 Tomorrow Night",
+  "workbench.editor.focusRecentEditorAfterClose": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.statusBar.visible": true,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "[terraform]": {
+    "editor.formatOnSave": true
+  }
+}
