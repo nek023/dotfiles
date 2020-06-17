@@ -21,3 +21,7 @@ link: ## Link dotfiles
 .PHONY: unlink
 unlink: ## Unlink dotfiles
 	@-$(foreach fn, $(DOTFILES), rm -vrf $(HOME)/$(fn);)
+
+.PHONY: setup-anyenv
+setup-anyenv: ## Setup anyenv
+	@./scripts/setup-anyenv.sh
