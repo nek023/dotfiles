@@ -8,6 +8,8 @@
 !.config/nvim
 !.config/rbenv
 !.config/vscode
+.tmux/*
+!.tmux/plugins
 .tmux/plugins/*
 !.tmux/plugins/.keep
 .vim/.netrwhist
