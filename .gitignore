@@ -8,6 +8,8 @@
 !.config/nvim
 !.config/rbenv
 !.config/vscode
+.tmux/plugins/*
+!.tmux/plugins/.keep
 .vim/.netrwhist
 .vim/autoload/plug.vim.old
 .vim/plugged
