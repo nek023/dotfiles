@@ -34,6 +34,9 @@ setup-base16-shell: ## Setup base16-shell
 setup-tmux: ## Setup tmux
 	@./scripts/setup-tmux.sh
 
+.PHONY: setup
+setup: setup-anyenv setup-base16-shell setup-tmux ## Setup all
+
 .PHONY: link-vscode-settings
 link-vscode-settings: ## Link VSCode settings
 	@test -d $(HOME)/Library/Application\ Support/Code/User \
