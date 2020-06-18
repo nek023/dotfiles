@@ -45,8 +45,8 @@ unlink-vscode-settings: ## Unlink VSCode settings
 
 .PHONY: dump-vscode-extensions
 dump-vscode-extensions: ## Dump VSCode extensions
-	@code --list-extensions > $(HOME)/dotfiles/.config/vscode/extensions
+	@./scripts/dump-vscode-extensions.sh > $(HOME)/dotfiles/.config/vscode/extensions
 
 .PHONY: install-vscode-extensions
 install-vscode-extensions: ## Install VSCode extensions
-	@./scripts/install-vscode-extensions.sh
+	@./scripts/install-vscode-extensions.sh $(HOME)/dotfiles/.config/vscode/extensions
