@@ -1,11 +1,3 @@
-if defined?(ActiveRecord)
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
-end
-
-if defined?(AwesomePrint)
-  AwesomePrint.pry!
-end
-
 if defined?(PryByebug)
   Pry.commands.alias_command 'c',   'continue'
   Pry.commands.alias_command 'd',   'down'
