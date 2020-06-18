@@ -200,7 +200,7 @@ end
 # bat
 # ------------------------------------------------------------------------------
 if type -aq bat
-    set -gx BAT_THEME=base16
+    set -gx BAT_THEME base16
     set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
     alias cat='bat -p'
 end
