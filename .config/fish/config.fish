@@ -120,6 +120,7 @@ alias grep='command grep -v grep | command grep --color=auto'
 alias la='ls -lAh'
 alias ll='ls -lh'
 alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
+alias printpath='echo $PATH | string split \' \''
 
 # ------------------------------------------------------------------------------
 # Abbreviations
