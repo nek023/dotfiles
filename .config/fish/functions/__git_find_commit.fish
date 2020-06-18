@@ -1,3 +1,5 @@
+# https://github.com/junegunn/fzf/wiki/Examples#git
+
 function __git_find_commit
     git log --graph --color=always --format='%C(auto)%h%d %s %C(black)%C(bold)%cr' $argv | \
         fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort | \
