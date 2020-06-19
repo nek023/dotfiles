@@ -1,4 +1,4 @@
-CANDIDATES ?= $(wildcard .??*) bin
+CANDIDATES ?= $(wildcard .??*)
 EXCLUSIONS ?= .DS_Store .git .gitignore
 DOTFILES   ?= $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
