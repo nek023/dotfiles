@@ -93,9 +93,7 @@ end
 # https://github.com/tmux/tmux
 # ------------------------------------------------------------------------------
 function __tmux_rename_window --on-event fish_prompt
-    if __tmux_is_running
-        set -l fish_ppid (ps -o ppid= -p $fish_pid | tr -d ' ')
-        set -l window_id (tmux list-panes -a -F "#{pane_pid} #{window_id}" | grep $fish_ppid | cut -d ' ' -f 2)
-        test -n "$window_id" && tmux rename-window -t $window_id (__workdir)
-    end
+    __tmux_is_running || return
+    set -l window_id (tmux list-panes -a -F "#{pane_pid} #{window_id}" | grep $fish_pid | cut -d ' ' -f 2)
+    tmux rename-window -t $window_id (__workdir)
 end
