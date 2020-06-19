@@ -72,6 +72,11 @@ set -gx FZF_DEFAULT_OPTS '
 --color info:150,prompt:110,spinner:150,pointer:167,marker:174
 '
 
+# Google Cloud SDK
+if test -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+end
+
 # ------------------------------------------------------------------------------
 # aliases
 # ------------------------------------------------------------------------------
