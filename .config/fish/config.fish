@@ -19,49 +19,45 @@ set __fish_git_prompt_showupstream       'yes'
 # environment variables
 # ------------------------------------------------------------------------------
 # shell
-set -gx SHELL (which fish)
+set -x SHELL (which fish)
 
 # lang
-set -gx LANG ja_JP.UTF-8
+set -x LANG ja_JP.UTF-8
 
 # XDG Base Directory Specification
-set -gx XDG_CACHE_HOME $HOME/.cache
-set -gx XDG_CONFIG_HOME $HOME/.config
-set -gx XDG_DATA_HOME $HOME/.local/share
+set -x XDG_CACHE_HOME $HOME/.cache
+set -x XDG_CONFIG_HOME $HOME/.config
+set -x XDG_DATA_HOME $HOME/.local/share
 
 # editor
 if type -aq nvim
-    set -gx EDITOR nvim
+    set -x EDITOR nvim
 else if type -aq vim
-    set -gx EDITOR vim
+    set -x EDITOR vim
 end
 
 # pager
 if type -aq less
-    set -gx PAGER less
+    set -x PAGER less
 end
 
 # gpg
-set -gx GPG_TTY (tty)
+set -x GPG_TTY (tty)
 
 # go
-set -gx GOPATH $HOME/.go
+set -x GOPATH $HOME/.go
 
 # bat
 # https://github.com/sharkdp/bat
 if type -aq bat
-    set -gx BAT_THEME base16
-    set -gx MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
+    set -x BAT_THEME base16
+    set -x MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
     alias cat='bat -p'
 end
 
-# fish-global-abbreviation
-# https://github.com/ryotako/fish-global-abbreviation
-set -gx gabbr_config $HOME/.config/fish/gabbr.conf
-
 # fzf
 # https://github.com/junegunn/fzf
-set -gx FZF_DEFAULT_OPTS '
+set -x FZF_DEFAULT_OPTS '
 --reverse
 --extended
 --ansi
@@ -99,7 +95,7 @@ end
 
 # インストール先のパスを変更する
 # https://github.com/jorgebucaran/fisher#changing-the-installation-prefix
-set -g fisher_path $HOME/dotfiles/.config/fish/fisher
+set fisher_path $HOME/dotfiles/.config/fish/fisher
 
 set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
 set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
@@ -107,6 +103,12 @@ set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_com
 for file in $fisher_path/conf.d/*.fish
     builtin source $file 2> /dev/null
 end
+
+# ------------------------------------------------------------------------------
+# fish-global-abbreviation
+# https://github.com/ryotako/fish-global-abbreviation
+# ------------------------------------------------------------------------------
+set gabbr_config $HOME/.config/fish/gabbr.conf
 
 # ------------------------------------------------------------------------------
 # local config
