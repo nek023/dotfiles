@@ -11,17 +11,17 @@ if contains /usr/local/bin $PATH && not contains /usr/local/sbin $PATH
 end
 
 # anyenv
-if type -aq anyenv
+if not string match -e anyenv -q $PATH && type -aq anyenv
     source (anyenv init - | psub)
 end
 
 # go
-if test -d $GOPATH/bin
+if not contains $GOPATH/bin $PATH && test -d $GOPATH/bin
     set -x PATH $GOPATH/bin $PATH
 end
 
 # rust
-if test -d $HOME/.cargo/bin
+if not contains $HOME/.cargo/bin $PATH && test -d $HOME/.cargo/bin
     set -x PATH $HOME/.cargo/bin $PATH
 end
 
@@ -31,7 +31,9 @@ if test -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fis
 end
 
 # dotfiles/bin
-set -x PATH $HOME/dotfiles/bin $PATH
+if not contains $HOME/dotfiles/bin $PATH && test -d $HOME/dotfiles/bin
+    set -x PATH $HOME/dotfiles/bin $PATH
+end
 
 # ------------------------------------------------------------------------------
 # startup
