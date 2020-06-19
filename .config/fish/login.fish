@@ -5,12 +5,14 @@
 # paths
 # ------------------------------------------------------------------------------
 # /usr/local/binのあとに/usr/local/sbinを追加する
-# fish_user_pathsではなくPATHに追加しないと、anyenv init実行時に順番がおかしくなる
-set -x PATH /usr/local/bin /usr/local/sbin (string match -v /usr/local/bin $PATH)
+if contains /usr/local/bin $PATH && not contains /usr/local/sbin $PATH
+    set -l bin_index (contains -i /usr/local/bin $PATH)
+    set -x PATH $PATH[1..$bin_index] /usr/local/sbin $PATH[(math $bin_index+1)..-1]
+end
 
 # anyenv
-if test -d $HOME/.anyenv
-    status --is-interactive && source (anyenv init - | psub)
+if type -aq anyenv
+    source (anyenv init - | psub)
 end
 
 # go
