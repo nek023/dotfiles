@@ -8,6 +8,11 @@
 # fish_user_pathsではなくPATHに追加しないと、anyenv init実行時に順番がおかしくなる
 set -gx PATH /usr/local/bin /usr/local/sbin (string match -v /usr/local/bin $PATH)
 
+# Google Cloud SDK
+if test -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+end
+
 # anyenv
 if test -d $HOME/.anyenv
     status --is-interactive && source (anyenv init - | psub)
