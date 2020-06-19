@@ -1,7 +1,7 @@
 # config.fish
 
 # ------------------------------------------------------------------------------
-# Fish
+# fish variables
 # ------------------------------------------------------------------------------
 # 挨拶メッセージを非表示にする
 set fish_greeting
@@ -16,27 +16,7 @@ set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_showupstream       'yes'
 
 # ------------------------------------------------------------------------------
-# Fisher
-# ------------------------------------------------------------------------------
-# Fisherのインストール
-if not functions -q fisher
-    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-    fish -c fisher
-end
-
-# インストール先のパスを変更する
-set -g fisher_path $HOME/dotfiles/.config/fish/fisher
-
-set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
-set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
-
-for file in $fisher_path/conf.d/*.fish
-    builtin source $file 2> /dev/null
-end
-
-# ------------------------------------------------------------------------------
-# Environment variables
+# environment variables
 # ------------------------------------------------------------------------------
 # shell
 set -gx SHELL (which fish)
@@ -50,51 +30,37 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local/share
 
 # editor
-if type -qa nvim
+if type -aq nvim
     set -gx EDITOR nvim
-else if type -qa vim
+else if type -aq vim
     set -gx EDITOR vim
 end
 
 # pager
-if type -qa less
+if type -aq less
     set -gx PAGER less
 end
 
 # gpg
 set -gx GPG_TTY (tty)
 
-# ryotako/fish-global-abbreviation
-set -gx gabbr_config $HOME/.config/fish/gabbr.conf
-
-# homebrew
-set -gx fish_user_paths /usr/local/sbin $fish_user_paths
-
-# anyenv
-if test -d $HOME/.anyenv
-    status --is-interactive && source (anyenv init - | psub)
-end
-
 # go
 set -gx GOPATH $HOME/.go
-if test -d $GOPATH/bin
-    set -gx fish_user_paths $GOPATH/bin $fish_user_paths
+
+# bat
+# https://github.com/sharkdp/bat
+if type -aq bat
+    set -gx BAT_THEME base16
+    set -gx MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
+    alias cat='bat -p'
 end
 
-# rust
-set -gx fish_user_paths $HOME/.cargo/bin $fish_user_paths
-
-# heroku
-if test -d /usr/local/heroku/bin
-    set -gx fish_user_paths /usr/local/heroku/bin $fish_user_paths
-end
-
-# direnv
-if type -qa direnv
-    eval (direnv hook fish)
-end
+# fish-global-abbreviation
+# https://github.com/ryotako/fish-global-abbreviation
+set -gx gabbr_config $HOME/.config/fish/gabbr.conf
 
 # fzf
+# https://github.com/junegunn/fzf
 set -gx FZF_DEFAULT_OPTS '
 --reverse
 --extended
@@ -106,11 +72,8 @@ set -gx FZF_DEFAULT_OPTS '
 --color info:150,prompt:110,spinner:150,pointer:167,marker:174
 '
 
-# dotfiles/bin
-set -gx fish_user_paths $HOME/dotfiles/bin $fish_user_paths
-
 # ------------------------------------------------------------------------------
-# Aliases
+# aliases
 # ------------------------------------------------------------------------------
 alias gl='git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%d%Creset'"'"''
 alias gpull='git pull origin (__git_current_branch)'
@@ -123,112 +86,31 @@ alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
 alias printpath='echo $PATH | string split \' \''
 
 # ------------------------------------------------------------------------------
-# Abbreviations
+# fisher
+# https://github.com/jorgebucaran/fisher
 # ------------------------------------------------------------------------------
-abbr -a diff 'diff -u'
-abbr -a md   'mkdir'
-abbr -a o    'open'
-abbr -a rf   'rm -rf'
-abbr -a rd   'rmdir'
+# fisherの自動インストール
+# https://github.com/jorgebucaran/fisher#bootstrap-installation
+if not functions -q fisher
+    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
+    fish -c fisher
+end
 
-abbr -a g    'git'
-abbr -a ga   'git add'
-abbr -a gaa  'git add -A'
-abbr -a gac  'git add -A && git commit'
-abbr -a gac! 'git add -A && git commit --amend'
-abbr -a gap  'git add -p'
-abbr -a gb   'git branch'
-abbr -a gbm  'git branch -m'
-abbr -a gco  'git checkout'
-abbr -a gcp  'git cherry-pick'
-abbr -a gc   'git commit'
-abbr -a gc!  'git commit --amend'
-abbr -a gd   'git diff'
-abbr -a gds  'git diff --staged'
-abbr -a gf   'git fetch'
-abbr -a gm   'git merge'
-abbr -a gr   'git rebase'
-abbr -a gri  'git rebase -i'
-abbr -a grm  'git rebase master'
-abbr -a greh 'git reset HEAD'
-abbr -a gre  'git restore'
-abbr -a gres 'git restore -S'
-abbr -a gs   'git status'
-abbr -a gsw  'git switch'
-abbr -a gsc  'git switch -c'
-abbr -a gsm  'git switch master'
+# インストール先のパスを変更する
+# https://github.com/jorgebucaran/fisher#changing-the-installation-prefix
+set -g fisher_path $HOME/dotfiles/.config/fish/fisher
 
-abbr -a be   'bundle exec'
-abbr -a bi   'bundle install --jobs=4'
-abbr -a c    'rails c'
-abbr -a s    'rails s'
-abbr -a cop  'rubocop'
-abbr -a copa 'rubocop -a'
-abbr -a t    'rspec'
+set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
+set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
 
-abbr -a co   'code'
-abbr -a gg   'ghq get'
-abbr -a d    'docker'
-abbr -a dc   'docker-compose'
-abbr -a tf   'terraform'
-abbr -a tfw  'terraform workspace'
-
-abbr -a brewup 'brew update; brew upgrade; brew cleanup'
-
-# ------------------------------------------------------------------------------
-# Key bindings
-# ------------------------------------------------------------------------------
-bind \c{ backward-word
-bind \c} forward-word
-
-if functions -q __gabbr_expand
-    bind ' ' '__gabbr_expand; commandline -i " "'
-    bind ';' '__gabbr_expand; commandline -i "; "'
-    bind \cj '__gabbr_expand; commandline -f execute'
-    bind \cm '__gabbr_expand; commandline -f execute'
-    bind \r  '__gabbr_expand; commandline -f execute'
+for file in $fisher_path/conf.d/*.fish
+    builtin source $file 2> /dev/null
 end
 
 # ------------------------------------------------------------------------------
-# base16-shell
+# local config
 # ------------------------------------------------------------------------------
-if status --is-interactive && test -e $HOME/.config/base16-shell
-    set BASE16_SHELL $HOME/.config/base16-shell
-    source "$BASE16_SHELL/profile_helper.fish"
-end
-
-# ------------------------------------------------------------------------------
-# bat
-# ------------------------------------------------------------------------------
-if type -aq bat
-    set -gx BAT_THEME base16
-    set -gx MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
-    alias cat='bat -p'
-end
-
-# ------------------------------------------------------------------------------
-# tmux
-# ------------------------------------------------------------------------------
-function __tmux_rename_window --on-event fish_prompt
-    if __tmux_is_running
-        set -l window_id (tmux list-panes -a -F "#{pane_pid} #{window_id}" | grep $fish_pid | cut -d ' ' -f 2)
-        tmux rename-window -t $window_id (__workdir)
-    end
-end
-
-# ------------------------------------------------------------------------------
-# Fix for direnv bug: https://github.com/direnv/direnv/issues/583
-# ------------------------------------------------------------------------------
-function __direnv_export_eval_on_prompt --on-event fish_prompt
-    type -qa direnv && eval (direnv export fish)
-end
-
-# ------------------------------------------------------------------------------
-# Local config
-# ------------------------------------------------------------------------------
+status --is-interactive && __source_if_exists $HOME/.config/fish/interactive.fish
+status --is-login && __source_if_exists $HOME/.config/fish/login.fish
 __source_if_exists $HOME/.config.local/fish/config.fish
-
-# ------------------------------------------------------------------------------
-# Startup
-# ------------------------------------------------------------------------------
-__tmux_create_session
