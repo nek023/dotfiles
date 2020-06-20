@@ -72,9 +72,11 @@ end
 # base16-shell
 # https://github.com/chriskempson/base16-shell
 # ------------------------------------------------------------------------------
-if test -d $HOME/.config/base16-shell
-    set BASE16_SHELL $HOME/.config/base16-shell
-    source "$BASE16_SHELL/profile_helper.fish"
+# https://github.com/chriskempson/base16-shell/blob/master/profile_helper.fish
+if test -e ~/.base16_theme
+  set -l SCRIPT_NAME (basename (realpath ~/.base16_theme) .sh)
+  set -gx BASE16_THEME (string match 'base16-*' $SCRIPT_NAME | string sub -s (string length 'base16-*'))
+  eval sh '"'(realpath ~/.base16_theme)'"'
 end
 
 # ------------------------------------------------------------------------------
