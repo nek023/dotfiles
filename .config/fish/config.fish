@@ -79,19 +79,38 @@ set -gx FZF_DEFAULT_OPTS '
 '
 
 # ------------------------------------------------------------------------------
-# aliases
+# paths
 # ------------------------------------------------------------------------------
-alias gl='git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%d%Creset'"'"''
-alias gpull='git pull origin (__git_current_branch)'
-alias gpush='git push origin (__git_current_branch)'
-alias gpush!='git push --force-with-lease origin (__git_current_branch)'
-alias grep='command grep -v grep | command grep --color=auto'
-alias la='ls -lAh'
-alias ll='ls -lh'
-alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
-alias printpath='echo $PATH | string split \' \''
+# /usr/local/binのあとに/usr/local/sbinを追加する
+if contains /usr/local/bin $PATH && not contains /usr/local/sbin $PATH
+    set -l bin_index (contains -i /usr/local/bin $PATH)
+    set -x PATH $PATH[1..$bin_index] /usr/local/sbin $PATH[(math $bin_index+1)..-1]
+end
 
-type -aq bat && alias cat='bat -p'
+# anyenv
+if not string match -e anyenv -q $PATH && type -aq anyenv
+    source (anyenv init - | psub)
+end
+
+# go
+if not contains $GOPATH/bin $PATH && test -d $GOPATH/bin
+    set -x PATH $GOPATH/bin $PATH
+end
+
+# rust
+if not contains ~/.cargo/bin $PATH && test -d ~/.cargo/bin
+    set -x PATH ~/.cargo/bin $PATH
+end
+
+# Google Cloud SDK
+if test -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
+end
+
+# dotfiles/bin
+if not contains ~/dotfiles/bin $PATH && test -d ~/dotfiles/bin
+    set -x PATH ~/dotfiles/bin $PATH
+end
 
 # ------------------------------------------------------------------------------
 # fisher

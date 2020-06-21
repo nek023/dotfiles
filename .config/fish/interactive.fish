@@ -55,6 +55,28 @@ abbr -ag tfw  'terraform workspace'
 abbr -ag brewup 'brew update; brew upgrade; brew cleanup'
 
 # ------------------------------------------------------------------------------
+# aliases
+# ------------------------------------------------------------------------------
+alias gl='git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%d%Creset'"'"''
+alias gpull='git pull origin (__git_current_branch)'
+alias gpush='git push origin (__git_current_branch)'
+alias gpush!='git push --force-with-lease origin (__git_current_branch)'
+alias grep='command grep -v grep | command grep --color=auto'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
+alias printpath='echo $PATH | string split \' \''
+
+type -aq bat && alias cat='bat -p'
+
+if type -aq exa
+    alias ls='exa -g --time-style long-iso'
+    alias la='ls -la'
+    alias ll='ls -l'
+    alias tree='exa -T'
+end
+
+# ------------------------------------------------------------------------------
 # key bindings
 # ------------------------------------------------------------------------------
 bind \c{ backward-word
