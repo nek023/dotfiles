@@ -4,59 +4,60 @@
 # fish variables
 # ------------------------------------------------------------------------------
 # 挨拶メッセージを非表示にする
-set fish_greeting
+set -g fish_greeting
 
 # パスの短縮表示を無効にする
-set fish_prompt_pwd_dir_length 0
+set -g fish_prompt_pwd_dir_length 0
 
-# __fish_git_prompt
-set __fish_git_prompt_showdirtystate     'yes'
-set __fish_git_prompt_showstashstate     'yes'
-set __fish_git_prompt_showuntrackedfiles 'yes'
-set __fish_git_prompt_showupstream       'yes'
+# fish_git_prompt
+# https://github.com/fish-shell/fish-shell/blob/master/share/functions/fish_git_prompt.fish
+set -g __fish_git_prompt_showdirtystate     'yes'
+set -g __fish_git_prompt_showstashstate     'yes'
+set -g __fish_git_prompt_showuntrackedfiles 'yes'
+set -g __fish_git_prompt_showupstream       'yes'
 
 # ------------------------------------------------------------------------------
 # environment variables
 # ------------------------------------------------------------------------------
 # shell
-set -x SHELL (which fish)
+set -gx SHELL (which fish)
 
 # lang
-set -x LANG ja_JP.UTF-8
+set -gx LANG ja_JP.UTF-8
 
 # XDG Base Directory Specification
-set -x XDG_CACHE_HOME ~/.cache
-set -x XDG_CONFIG_HOME ~/.config
-set -x XDG_DATA_HOME ~/.local/share
+set -gx XDG_CACHE_HOME ~/.cache
+set -gx XDG_CONFIG_HOME ~/.config
+set -gx XDG_DATA_HOME ~/.local/share
 
 # editor
 if type -aq nvim
-    set -x EDITOR nvim
+    set -gx EDITOR nvim
 else if type -aq vim
-    set -x EDITOR vim
+    set -gx EDITOR vim
 end
 
 # pager
 if type -aq less
-    set -x PAGER less
+    set -gx PAGER less
 end
 
 # gpg
-set -x GPG_TTY (tty)
+set -gx GPG_TTY (tty)
 
 # go
-set -x GOPATH ~/.go
+set -gx GOPATH ~/.go
 
 # bat
 # https://github.com/sharkdp/bat
 if type -aq bat
-    set -x BAT_THEME base16
-    set -x MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
+    set -gx BAT_THEME base16
+    set -gx MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
 end
 
 # fzf
 # https://github.com/junegunn/fzf
-set -x FZF_DEFAULT_OPTS '
+set -gx FZF_DEFAULT_OPTS '
 --reverse
 --extended
 --ansi
@@ -95,10 +96,10 @@ end
 
 # インストール先のパスを変更する
 # https://github.com/jorgebucaran/fisher#changing-the-installation-prefix
-set fisher_path ~/dotfiles/.config/fish/fisher
+set -g fisher_path ~/dotfiles/.config/fish/fisher
 
-set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
-set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
+set -g fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
+set -g fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
 
 for file in $fisher_path/conf.d/*.fish
     builtin source $file 2> /dev/null
@@ -108,7 +109,7 @@ end
 # fish-global-abbreviation
 # https://github.com/ryotako/fish-global-abbreviation
 # ------------------------------------------------------------------------------
-set gabbr_config $XDG_CONFIG_HOME/fish/gabbr.conf
+set -g gabbr_config $XDG_CONFIG_HOME/fish/gabbr.conf
 
 # ------------------------------------------------------------------------------
 # local config
