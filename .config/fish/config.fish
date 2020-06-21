@@ -124,6 +124,6 @@ set -g gabbr_config $XDG_CONFIG_HOME/fish/gabbr.conf
 # ------------------------------------------------------------------------------
 # local config
 # ------------------------------------------------------------------------------
-status --is-interactive && __source_if_exists $__fish_config_dir/interactive.fish
-status --is-login && __source_if_exists $__fish_config_dir/login.fish
+status is-interactive && __source_if_exists $__fish_config_dir/interactive.fish
+status is-login && __source_if_exists $__fish_config_dir/login.fish
 __source_if_exists ~/.config.local/fish/config.fish
