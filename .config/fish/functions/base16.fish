@@ -1,6 +1,6 @@
 # https://github.com/chriskempson/base16-shell/blob/master/profile_helper.fish
 function base16
-    set base16_dir ~/.config/base16-shell
+    set base16_dir $XDG_CONFIG_HOME/base16-shell
 
     find $base16_dir/scripts -type f -exec basename {} .sh \; | \
         sort | \

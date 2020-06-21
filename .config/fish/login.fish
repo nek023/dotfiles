@@ -21,8 +21,8 @@ if not contains $GOPATH/bin $PATH && test -d $GOPATH/bin
 end
 
 # rust
-if not contains $HOME/.cargo/bin $PATH && test -d $HOME/.cargo/bin
-    set -x PATH $HOME/.cargo/bin $PATH
+if not contains ~/.cargo/bin $PATH && test -d ~/.cargo/bin
+    set -x PATH ~/.cargo/bin $PATH
 end
 
 # Google Cloud SDK
@@ -31,8 +31,8 @@ if test -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fis
 end
 
 # dotfiles/bin
-if not contains $HOME/dotfiles/bin $PATH && test -d $HOME/dotfiles/bin
-    set -x PATH $HOME/dotfiles/bin $PATH
+if not contains ~/dotfiles/bin $PATH && test -d ~/dotfiles/bin
+    set -x PATH ~/dotfiles/bin $PATH
 end
 
 # ------------------------------------------------------------------------------

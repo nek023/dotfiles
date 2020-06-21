@@ -4,7 +4,7 @@ set -eu
 
 readonly INPUT_FILE="${1:-}"
 
-if [ "$INPUT_FILE" == "" ]; then
+if [ -z "$INPUT_FILE" ]; then
   echo "usage: $0 INPUT_FILE"
   exit 1
 fi

@@ -25,9 +25,9 @@ set -x SHELL (which fish)
 set -x LANG ja_JP.UTF-8
 
 # XDG Base Directory Specification
-set -x XDG_CACHE_HOME $HOME/.cache
-set -x XDG_CONFIG_HOME $HOME/.config
-set -x XDG_DATA_HOME $HOME/.local/share
+set -x XDG_CACHE_HOME ~/.cache
+set -x XDG_CONFIG_HOME ~/.config
+set -x XDG_DATA_HOME ~/.local/share
 
 # editor
 if type -aq nvim
@@ -45,14 +45,13 @@ end
 set -x GPG_TTY (tty)
 
 # go
-set -x GOPATH $HOME/.go
+set -x GOPATH ~/.go
 
 # bat
 # https://github.com/sharkdp/bat
 if type -aq bat
     set -x BAT_THEME base16
     set -x MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
-    alias cat='bat -p'
 end
 
 # fzf
@@ -81,6 +80,8 @@ alias ll='ls -lh'
 alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
 alias printpath='echo $PATH | string split \' \''
 
+type -aq bat && alias cat='bat -p'
+
 # ------------------------------------------------------------------------------
 # fisher
 # https://github.com/jorgebucaran/fisher
@@ -88,14 +89,13 @@ alias printpath='echo $PATH | string split \' \''
 # fisherの自動インストール
 # https://github.com/jorgebucaran/fisher#bootstrap-installation
 if not functions -q fisher
-    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
     fish -c fisher
 end
 
 # インストール先のパスを変更する
 # https://github.com/jorgebucaran/fisher#changing-the-installation-prefix
-set fisher_path $HOME/dotfiles/.config/fish/fisher
+set fisher_path ~/dotfiles/.config/fish/fisher
 
 set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
 set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
@@ -108,11 +108,11 @@ end
 # fish-global-abbreviation
 # https://github.com/ryotako/fish-global-abbreviation
 # ------------------------------------------------------------------------------
-set gabbr_config $HOME/.config/fish/gabbr.conf
+set gabbr_config $XDG_CONFIG_HOME/fish/gabbr.conf
 
 # ------------------------------------------------------------------------------
 # local config
 # ------------------------------------------------------------------------------
-status --is-interactive && __source_if_exists $HOME/.config/fish/interactive.fish
-status --is-login && __source_if_exists $HOME/.config/fish/login.fish
-__source_if_exists $HOME/.config.local/fish/config.fish
+status --is-interactive && __source_if_exists $__fish_config_dir/interactive.fish
+status --is-login && __source_if_exists $__fish_config_dir/login.fish
+__source_if_exists ~/.config.local/fish/config.fish
