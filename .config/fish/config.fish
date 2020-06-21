@@ -6,15 +6,25 @@
 # 挨拶メッセージを非表示にする
 set -g fish_greeting
 
-# パスの短縮表示を無効にする
+# パスの短縮表示を無効にする (prompt_pwd)
 set -g fish_prompt_pwd_dir_length 0
 
+# fish_prompt
+set -g fish_color_user        brgreen
+set -g fish_color_cwd         blue
+set -g fish_color_cwd_root    red
+set -g fish_color_host        normal
+set -g fish_color_host_remote yellow
+set -g fish_color_vcs         red
+set -g fish_color_time        555
+set -g fish_color_status_ok   blue
+set -g fish_color_status_ng   red
+
 # fish_git_prompt
-# https://github.com/fish-shell/fish-shell/blob/master/share/functions/fish_git_prompt.fish
-set -g __fish_git_prompt_showdirtystate     'yes'
-set -g __fish_git_prompt_showstashstate     'yes'
-set -g __fish_git_prompt_showuntrackedfiles 'yes'
-set -g __fish_git_prompt_showupstream       'yes'
+set -g __fish_git_prompt_showdirtystate     yes
+set -g __fish_git_prompt_showstashstate     yes
+set -g __fish_git_prompt_showuntrackedfiles yes
+set -g __fish_git_prompt_showupstream       yes
 
 # ------------------------------------------------------------------------------
 # environment variables

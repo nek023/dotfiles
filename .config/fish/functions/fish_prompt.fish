@@ -1,28 +1,32 @@
-function fish_prompt --description 'Write out the prompt'
-		set -l last_status $status
+function fish_prompt
+    set -l last_status $status
+    set -l normal (set_color normal)
+    set -l timestamp '[' (date '+%H:%M:%S') ']'
 
-		if not set -q __fish_prompt_hostname
-				set -g __fish_prompt_hostname (hostname | cut -d . -f 1)
-		end
+    # 直前のコマンドのステータスで色を分ける
+    set -l smallfish '><((・>'
+    set -l smallfish_color $fish_color_status_ok
+    if test $last_status -ne 0
+        set smallfish '><((ｘ>'
+        set smallfish_color $fish_color_status_ng
+    end
 
-		set -l minifish
-		set -l minifish_color
-		if test $last_status -eq 0
-				set minifish '><((・>'
-				set minifish_color blue
-		else
-				set minifish '><((ｘ>'
-				set minifish_color red
-		end
+    # 通常ユーザー/rootユーザーで色を分ける
+    set -l color_cwd $fish_color_cwd
+    set -l suffix '$'
+    if contains -- $USER root toor
+        if set -q fish_color_cwd_root
+            set color_cwd $fish_color_cwd_root
+        end
+        set suffix '#'
+    end
 
-		set -l suffix
-		switch $USER
-		case root toor
-				set suffix '#'
-		case '*'
-				set suffix '$'
-		end
+    # ローカル/リモートで色を分ける
+    set -l color_host $fish_color_host
+    if set -q SSH_TTY
+        set color_host $fish_color_host_remote
+    end
 
-		echo -s (set_color green) "$USER" @ "$__fish_prompt_hostname" (set_color normal) : (set_color blue) (prompt_pwd) (set_color red) (__fish_git_prompt) (set_color 555) " [" (date '+%H:%M:%S') "]"
-		echo -n -s (set_color $minifish_color) "$minifish " (set_color normal) "$suffix "
+    echo -s (set_color $fish_color_user) "$USER" $normal @ (set_color $color_host) (prompt_hostname) $normal : (set_color $color_cwd) (prompt_pwd) (set_color $fish_color_vcs) (fish_vcs_prompt) (set_color $fish_color_time) ' ' $timestamp
+    echo -n -s (set_color $smallfish_color) $smallfish ' ' $normal $suffix ' '
 end
