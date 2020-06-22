@@ -81,36 +81,24 @@ set -gx FZF_DEFAULT_OPTS '
 # ------------------------------------------------------------------------------
 # paths
 # ------------------------------------------------------------------------------
-# /usr/local/binのあとに/usr/local/sbinを追加する
-if contains /usr/local/bin $PATH && not contains /usr/local/sbin $PATH
-    set -l bin_index (contains -i /usr/local/bin $PATH)
-    set -x PATH $PATH[1..$bin_index] /usr/local/sbin $PATH[(math $bin_index+1)..-1]
-end
+# /usr/local/sbin (homebrew)
+__add_fish_user_path /usr/local/sbin
 
 # anyenv
-if not string match -e anyenv -q $PATH && type -aq anyenv
-    source (anyenv init - | psub)
-end
+__add_fish_user_path ~/.anyenv/bin
+type -aq anyenv && source (anyenv init - | psub)
 
 # go
-if not contains $GOPATH/bin $PATH && test -d $GOPATH/bin
-    set -x PATH $GOPATH/bin $PATH
-end
+__add_fish_user_path $GOPATH/bin
 
 # rust
-if not contains ~/.cargo/bin $PATH && test -d ~/.cargo/bin
-    set -x PATH ~/.cargo/bin $PATH
-end
+__add_fish_user_path ~/.cargo/bin
 
 # Google Cloud SDK
-if test -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
-    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
-end
+__add_fish_user_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 
 # dotfiles/bin
-if not contains ~/dotfiles/bin $PATH && test -d ~/dotfiles/bin
-    set -x PATH ~/dotfiles/bin $PATH
-end
+__add_fish_user_path ~/dotfiles/bin
 
 # ------------------------------------------------------------------------------
 # fisher
