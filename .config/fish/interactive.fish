@@ -2,6 +2,28 @@
 # インタラクティブシェルでのみ実行されます
 
 # ------------------------------------------------------------------------------
+# paths
+# ------------------------------------------------------------------------------
+# /usr/local/sbin (homebrew)
+__add_fish_user_path /usr/local/sbin
+
+# anyenv
+__add_fish_user_path ~/.anyenv/bin
+type -aq anyenv && source (anyenv init - | psub)
+
+# go
+__add_fish_user_path $GOPATH/bin
+
+# rust
+__add_fish_user_path ~/.cargo/bin
+
+# Google Cloud SDK
+__add_fish_user_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
+
+# dotfiles/bin
+__add_fish_user_path ~/dotfiles/bin
+
+# ------------------------------------------------------------------------------
 # abbreviations
 # ------------------------------------------------------------------------------
 abbr -ag diff 'diff -u'
