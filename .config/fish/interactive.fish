@@ -60,7 +60,7 @@ abbr -ag gsc  'git switch -c'
 abbr -ag gsm  'git switch master'
 
 abbr -ag be   'bundle exec'
-abbr -ag bi   'bundle install --jobs=4'
+abbr -ag bi   'bundle install'
 abbr -ag c    'rails c'
 abbr -ag s    'rails s'
 abbr -ag cop  'rubocop'
