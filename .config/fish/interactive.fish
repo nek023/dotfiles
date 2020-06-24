@@ -7,10 +7,6 @@
 # /usr/local/sbin (homebrew)
 __add_fish_user_path /usr/local/sbin
 
-# anyenv
-__add_fish_user_path ~/.anyenv/bin
-type -aq anyenv && source (anyenv init - | psub)
-
 # go
 __add_fish_user_path $GOPATH/bin
 
