@@ -34,8 +34,12 @@ setup-base16-shell: ## Setup base16-shell
 setup-tmux: ## Setup tmux
 	@./scripts/setup-tmux.sh
 
+.PHONY: setup-vim-plug
+setup-vim-plug: ## Setup vim-plug
+	@./scripts/setup-vim-plug.sh
+
 .PHONY: setup
-setup: setup-anyenv setup-base16-shell setup-tmux ## Setup all
+setup: setup-anyenv setup-base16-shell setup-tmux setup-vim-plug ## Setup all
 
 .PHONY: link-vscode-settings
 link-vscode-settings: ## Link VSCode settings
@@ -57,3 +61,7 @@ dump-vscode-extensions: ## Dump VSCode extensions
 .PHONY: install-vscode-extensions
 install-vscode-extensions: ## Install VSCode extensions
 	@./scripts/install-vscode-extensions.sh $(HOME)/dotfiles/.config/vscode/extensions
+
+.PHONY: update-vim-plugins
+update-vim-plugins: ## Update vim plugins
+	@vim +PlugUpgrade +PlugUpdate +qa
