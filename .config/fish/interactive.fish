@@ -112,6 +112,7 @@ bind \cg\ca __git_add_files
 bind \cgc __ghq_cd
 bind \cg\cb __git_switch_local_branch
 bind \cg\cg\cb __git_switch_remote_branch
+bind \cr __select_history
 
 # ------------------------------------------------------------------------------
 # base16-shell
