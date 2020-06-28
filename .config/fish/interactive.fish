@@ -108,6 +108,8 @@ if functions -q __gabbr_expand
     bind \r  '__gabbr_expand; commandline -f execute'
 end
 
+bind \cg\ca __git_add_files
+
 # ------------------------------------------------------------------------------
 # base16-shell
 # https://github.com/chriskempson/base16-shell
