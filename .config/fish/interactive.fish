@@ -109,6 +109,7 @@ if functions -q __gabbr_expand
 end
 
 bind \cg\ca __git_add_files
+bind \cgc __ghq_cd
 
 # ------------------------------------------------------------------------------
 # base16-shell
