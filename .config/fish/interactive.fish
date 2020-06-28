@@ -113,6 +113,7 @@ bind \cgc __ghq_cd
 bind \cg\cb __git_switch_local_branch
 bind \cg\cg\cb __git_switch_remote_branch
 bind \cr __select_history
+bind '.' __expand_dots
 
 # ------------------------------------------------------------------------------
 # base16-shell
