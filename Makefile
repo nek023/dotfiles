@@ -24,22 +24,37 @@ unlink: ## Unlink dotfiles
 
 .PHONY: setup-anyenv
 setup-anyenv: ## Setup anyenv
-	@./scripts/setup-anyenv.sh
+	./scripts/setup-anyenv.sh
 
 .PHONY: setup-base16-shell
 setup-base16-shell: ## Setup base16-shell
-	@./scripts/setup-base16-shell.sh
+	./scripts/setup-base16-shell.sh
 
 .PHONY: setup-tmux
 setup-tmux: ## Setup tmux
-	@./scripts/setup-tmux.sh
+	./scripts/setup-tmux.sh
 
-.PHONY: setup-vim-plug
-setup-vim-plug: ## Setup vim-plug
-	@./scripts/setup-vim-plug.sh
+.PHONY: setup-vim-plugins
+setup-vim-plugins: ## Setup vim plugins
+	./scripts/setup-vim-plugins.sh
 
 .PHONY: setup
-setup: setup-anyenv setup-base16-shell setup-tmux setup-vim-plug ## Setup all
+setup: setup-anyenv setup-base16-shell setup-tmux setup-vim-plugins ## Setup all
+
+.PHONY: update-anyenv
+update-anyenv: ## Update anyenv
+	anyenv update
+
+.PHONY: update-base16-shell
+update-base16-shell: ## Update base16-shell
+	./scripts/update-base16-shell.sh
+
+.PHONY: update-vim-plugins
+update-vim-plugins: ## Update vim plugins
+	vim +PlugUpgrade +PlugUpdate +qa
+
+.PHONY: update
+update: update-anyenv update-base16-shell update-vim-plugins ## Update
 
 .PHONY: link-vscode-settings
 link-vscode-settings: ## Link VSCode settings
@@ -61,7 +76,3 @@ dump-vscode-extensions: ## Dump VSCode extensions
 .PHONY: install-vscode-extensions
 install-vscode-extensions: ## Install VSCode extensions
 	@./scripts/install-vscode-extensions.sh $(HOME)/dotfiles/.config/vscode/extensions
-
-.PHONY: update-vim-plugins
-update-vim-plugins: ## Update vim plugins
-	@vim +PlugUpgrade +PlugUpdate +qa
