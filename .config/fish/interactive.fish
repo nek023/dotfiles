@@ -71,6 +71,7 @@ abbr -ag tf   'terraform'
 abbr -ag tfw  'terraform workspace'
 
 abbr -ag brewup 'brew update; brew upgrade; brew cleanup'
+abbr -ag repo   'gh repo view -w'
 
 # ------------------------------------------------------------------------------
 # aliases
