@@ -1,7 +1,5 @@
 function __workdir
-    set -l inside_work_tree (git rev-parse --is-inside-work-tree 2>/dev/null)
-
-    if test "$inside_work_tree" = 'true'
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1
         echo (__short_dirname (git rev-parse --show-toplevel))
     else
         echo (__short_dirname (pwd))
