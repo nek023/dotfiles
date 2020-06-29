@@ -9,8 +9,6 @@
 [core]
   editor = vim
   excludesfile = ~/.config/git/ignore
-[ghq]
-  root = ~/.ghq
 [include]
   path = ~/.config.local/git/config
 [merge]
