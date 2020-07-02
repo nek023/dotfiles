@@ -112,14 +112,6 @@ if functions -q __gabbr_expand
     bind \r  '__gabbr_expand; commandline -f execute'
 end
 
-bind \cg\ca __git_add_files
-bind \cgc __ghq_cd
-bind \cg\cb __git_switch_local_branch
-bind \cg\cg\cb __git_switch_remote_branch
-bind \cr __select_history
-bind '.' __expand_dots
-bind \cgs __ssh_connect
-
 # ------------------------------------------------------------------------------
 # base16-shell
 # https://github.com/chriskempson/base16-shell
