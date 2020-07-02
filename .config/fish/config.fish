@@ -33,7 +33,7 @@ set -g __fish_git_prompt_showupstream       yes
 set -gx SHELL (which fish)
 
 # lang
-set -gx LANG ja_JP.UTF-8
+set -gx LANG en_US.UTF-8
 
 # XDG Base Directory Specification
 set -gx XDG_CACHE_HOME ~/.cache
