@@ -102,15 +102,6 @@ end
 set -g gabbr_config $XDG_CONFIG_HOME/fish/gabbr.conf
 
 # ------------------------------------------------------------------------------
-# anyenv
-# https://github.com/anyenv/anyenv
-# ------------------------------------------------------------------------------
-if status is-interactive && type -aq anyenv
-    # XXENV_ROOTはglobalにexportされないので、config.fish内でsourceしないと消えてしまう
-    source (anyenv init - | psub)
-end
-
-# ------------------------------------------------------------------------------
 # local config
 # ------------------------------------------------------------------------------
 status is-interactive && __source_script $__fish_config_dir/interactive.fish

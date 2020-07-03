@@ -22,10 +22,6 @@ link: ## Link dotfiles
 unlink: ## Unlink dotfiles
 	@-$(foreach fn, $(DOTFILES), rm -vrf $(HOME)/$(fn);)
 
-.PHONY: setup-anyenv
-setup-anyenv: ## Setup anyenv
-	./scripts/setup-anyenv.sh
-
 .PHONY: setup-base16-shell
 setup-base16-shell: ## Setup base16-shell
 	./scripts/setup-base16-shell.sh
@@ -39,11 +35,7 @@ setup-vim-plugins: ## Setup vim plugins
 	./scripts/setup-vim-plugins.sh
 
 .PHONY: setup
-setup: setup-anyenv setup-base16-shell setup-tmux setup-vim-plugins ## Setup all
-
-.PHONY: update-anyenv
-update-anyenv: ## Update anyenv
-	anyenv update
+setup: setup-base16-shell setup-tmux setup-vim-plugins ## Setup all
 
 .PHONY: update-base16-shell
 update-base16-shell: ## Update base16-shell
@@ -54,7 +46,7 @@ update-vim-plugins: ## Update vim plugins
 	vim +PlugUpgrade +PlugUpdate +qa
 
 .PHONY: update
-update: update-anyenv update-base16-shell update-vim-plugins ## Update
+update: update-base16-shell update-vim-plugins ## Update
 
 .PHONY: link-vscode-settings
 link-vscode-settings: ## Link VSCode settings
