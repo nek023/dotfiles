@@ -1,5 +1,10 @@
 function aws-login
-    argparse -n aws-login 'i/incognito' -- $argv || return
+    argparse -n aws-login 'h/help' 'i/incognito' -- $argv || return
+
+    if set -q _flag_help
+        echo 'usage: aws-login [--incognito] [profile]'
+        return
+    end
 
     set -l profile $argv
     if test -z "$profile"
@@ -7,7 +12,7 @@ function aws-login
     end
 
     if test -z "$profile"
-        echo 'usage: aws-login [option] [profile]'
+        aws-login -h
         return
     end
 
