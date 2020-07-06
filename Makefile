@@ -26,16 +26,12 @@ unlink: ## Unlink dotfiles
 setup-base16-shell: ## Setup base16-shell
 	./scripts/setup-base16-shell.sh
 
-.PHONY: setup-tmux
-setup-tmux: ## Setup tmux
-	./scripts/setup-tmux.sh
-
 .PHONY: setup-vim-plugins
 setup-vim-plugins: ## Setup vim plugins
 	./scripts/setup-vim-plugins.sh
 
 .PHONY: setup
-setup: setup-base16-shell setup-tmux setup-vim-plugins ## Setup all
+setup: setup-base16-shell setup-vim-plugins ## Setup all
 
 .PHONY: update-base16-shell
 update-base16-shell: ## Update base16-shell

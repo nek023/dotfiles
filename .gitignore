@@ -9,10 +9,6 @@
 !.config/git
 !.config/nvim
 !.config/vscode
-.tmux/*
-!.tmux/plugins
-.tmux/plugins/*
-!.tmux/plugins/.keep
 .vim/*
 !.vim/indent
 !.vim/init.vim
