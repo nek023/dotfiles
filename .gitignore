@@ -8,7 +8,6 @@
 .config/fish/functions/fisher.fish
 !.config/git
 !.config/nvim
-!.config/rbenv
 !.config/vscode
 .tmux/*
 !.tmux/plugins
