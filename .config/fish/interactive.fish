@@ -5,7 +5,7 @@
 # asdf
 # https://github.com/asdf-vm/asdf
 # ------------------------------------------------------------------------------
-if type -aq asdf
+if type -q asdf
     source /usr/local/opt/asdf/asdf.fish
 end
 
@@ -94,9 +94,9 @@ alias ll='ls -lh'
 alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
 alias printpath='echo $PATH | string split \' \''
 
-type -aq bat && alias cat='bat -p'
+type -q bat && alias cat='bat -p'
 
-if type -aq exa
+if type -q exa
     alias ls='exa -g --time-style long-iso'
     alias la='ls -la'
     alias ll='ls -l'
@@ -135,11 +135,11 @@ end
 # direnv
 # https://github.com/direnv/direnv
 # ------------------------------------------------------------------------------
-type -aq direnv && eval (direnv hook fish)
+type -q direnv && eval (direnv hook fish)
 
 # workaround for https://github.com/direnv/direnv/issues/583
 function __direnv_export_eval_on_prompt --on-event fish_prompt
-    type -aq direnv && eval (direnv export fish)
+    type -q direnv && eval (direnv export fish)
 end
 
 # ------------------------------------------------------------------------------

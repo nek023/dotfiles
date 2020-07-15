@@ -41,14 +41,14 @@ set -gx XDG_CONFIG_HOME ~/.config
 set -gx XDG_DATA_HOME ~/.local/share
 
 # editor
-if type -aq nvim
+if type -q nvim
     set -gx EDITOR nvim
-else if type -aq vim
+else if type -q vim
     set -gx EDITOR vim
 end
 
 # pager
-if type -aq less
+if type -q less
     set -gx PAGER less
 end
 
@@ -60,7 +60,7 @@ set -gx GOPATH ~/.go
 
 # bat
 # https://github.com/sharkdp/bat
-if type -aq bat
+if type -q bat
     set -gx BAT_THEME base16
     set -gx MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
 end
