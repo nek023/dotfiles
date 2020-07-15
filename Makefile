@@ -33,6 +33,10 @@ setup-vim-plugins: ## Setup vim plugins
 .PHONY: setup
 setup: setup-base16-shell setup-vim-plugins ## Setup all
 
+.PHONY: update-asdf-plugins
+update-asdf-plugins: ## Update asdf plugins
+	./scripts/update-asdf-plugins.sh
+
 .PHONY: update-base16-shell
 update-base16-shell: ## Update base16-shell
 	./scripts/update-base16-shell.sh
@@ -42,7 +46,7 @@ update-vim-plugins: ## Update vim plugins
 	./scripts/update-vim-plugins.sh
 
 .PHONY: update
-update: update-base16-shell update-vim-plugins ## Update
+update: update-asdf-plugins update-base16-shell update-vim-plugins ## Update
 
 .PHONY: link-vscode-settings
 link-vscode-settings: ## Link VSCode settings
