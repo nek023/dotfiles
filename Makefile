@@ -39,7 +39,7 @@ update-base16-shell: ## Update base16-shell
 
 .PHONY: update-vim-plugins
 update-vim-plugins: ## Update vim plugins
-	vim +PlugUpgrade +PlugUpdate +qa
+	./scripts/update-vim-plugins.sh
 
 .PHONY: update
 update: update-base16-shell update-vim-plugins ## Update
