@@ -104,7 +104,8 @@ if type -q exa
 end
 
 # 一時的にpyenvのconfig scriptにパスを通さないようにする
-alias brew='env PATH=(string join : (string match -e pyenv/shims -v $PATH)) brew'
+# brewコマンド実行時は~/.asdf/shimsにパスを通さないようにする
+alias brew='env PATH=(string join : (string match -e ~/.asdf/shims -v $PATH)) brew'
 
 # ------------------------------------------------------------------------------
 # key bindings
