@@ -1,8 +1,8 @@
 function aws-login
-    argparse -n aws-login 'h/help' 'i/incognito' -- $argv || return
+    argparse -n aws-login 'h/help' 'i/inprivate' -- $argv || return
 
     if set -q _flag_help
-        echo 'usage: aws-login [--incognito] [profile]'
+        echo 'usage: aws-login [--inprivate] [profile]'
         return
     end
 
@@ -17,11 +17,11 @@ function aws-login
     end
 
     set -l login_url (aws-vault login aws-vault.$profile --stdout)
-    if set -q _flag_incognito
-        open -na 'Google Chrome' --args --incognito \
-            --user-data-dir="$HOME/Library/Application Support/Google/Chrome/aws-vault/$profile" \
+    if set -q _flag_inprivate
+        open -na 'Microsoft Edge' --args --inprivate \
+            --user-data-dir="$HOME/Library/Application Support/Microsoft Edge/aws-vault/$profile" \
             "$login_url"
     else
-        open -na 'Google Chrome' "$login_url"
+        open -na 'Microsoft Edge' "$login_url"
     end
 end
