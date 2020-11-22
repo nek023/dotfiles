@@ -16,7 +16,7 @@ function aws-login
         return
     end
 
-    set -l login_url (aws-vault login aws-vault.$profile --stdout)
+    set -l login_url (aws-vault login aws-vault.$profile --no-session --stdout)
     if set -q _flag_inprivate
         open -na 'Microsoft Edge' --args --inprivate \
             --user-data-dir="$HOME/Library/Application Support/Microsoft Edge/aws-vault/$profile" \
