@@ -23,6 +23,11 @@ function aws-login
         set login_url (aws-vault login aws-vault.$profile --stdout)
     end
 
+    set -l aws_status $status
+    if test $aws_status -ne 0
+        return $aws_status
+    end
+
     if set -q _flag_incognito
         open -na 'Google Chrome' --args --incognito \
             --user-data-dir="$HOME/Library/Application Support/Google/Chrome/aws-vault/$profile" \
