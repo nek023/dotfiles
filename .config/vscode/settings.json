@@ -98,6 +98,15 @@
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.startupEditor": "newUntitledFile",
   "workbench.statusBar.visible": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
   },
@@ -105,6 +114,9 @@
     "editor.formatOnSave": true
   },
   "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
