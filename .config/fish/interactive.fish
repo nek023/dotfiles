@@ -27,6 +27,9 @@ __add_fish_user_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sd
 # dotfiles/bin
 __add_fish_user_path ~/dotfiles/bin
 
+# krew
+__add_fish_user_path ~/.krew/bin
+
 # ------------------------------------------------------------------------------
 # abbreviations
 # ------------------------------------------------------------------------------
