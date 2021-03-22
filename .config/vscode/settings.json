@@ -92,7 +92,6 @@
   ],
   "vim.visualstar": true,
   "window.title": "${dirty}${activeEditorMedium}${separator}${rootPath}",
-  "window.zoomLevel": 0,
   "workbench.activityBar.visible": false,
   "workbench.colorTheme": "Base16 Tomorrow Night",
   "workbench.editor.focusRecentEditorAfterClose": false,
