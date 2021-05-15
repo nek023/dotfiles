@@ -13,22 +13,22 @@ end
 # paths
 # ------------------------------------------------------------------------------
 # /usr/local/sbin (homebrew)
-__add_fish_user_path /usr/local/sbin
+fish_add_path /usr/local/sbin
 
 # go
-__add_fish_user_path $GOPATH/bin
+fish_add_path $GOPATH/bin
 
 # rust
-__add_fish_user_path ~/.cargo/bin
+fish_add_path ~/.cargo/bin
 
 # Google Cloud SDK
-__add_fish_user_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
+fish_add_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 
 # dotfiles/bin
-__add_fish_user_path ~/dotfiles/bin
+fish_add_path ~/dotfiles/bin
 
 # krew
-__add_fish_user_path ~/.krew/bin
+fish_add_path ~/.krew/bin
 
 # ------------------------------------------------------------------------------
 # abbreviations
