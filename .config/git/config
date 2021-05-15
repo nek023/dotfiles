@@ -1,11 +1,6 @@
 [alias]
-  st = status
-  ci = commit
-  co = checkout
-  br = branch
   pop  = stash pop
   drop = stash drop
-  unstage = reset HEAD --
   open = !gh repo view -w -b $(git symbolic-ref --short HEAD)
 [core]
   editor = vim
