@@ -64,7 +64,7 @@ abbr -ag gres 'git restore -S'
 abbr -ag gs   'git status'
 abbr -ag gsw  'git switch'
 abbr -ag gsc  'git switch -c'
-abbr -ag gsm  'git switch master'
+abbr -ag gsm  'git switch (__git_default_branch)'
 
 abbr -ag be   'bundle exec'
 abbr -ag bi   'bundle install'
