@@ -79,7 +79,6 @@ abbr -ag gg   'ghq get'
 abbr -ag d    'docker'
 abbr -ag dc   'docker compose'
 abbr -ag tf   'terraform'
-abbr -ag tfw  'terraform workspace'
 abbr -ag kc   'kubectl'
 
 abbr -ag brewup 'brew update; brew upgrade; brew cleanup'
