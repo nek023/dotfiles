@@ -24,6 +24,14 @@
   "newFile.defaultBaseFileName": "new",
   "newFile.defaultFileExtension": ".rb",
   "newFile.showPathRelativeTo": "project",
+  "ruby.codeCompletion": "rcodetools",
+  "ruby.format": "rubocop",
+  "ruby.intellisense": "rubyLocate",
+  "ruby.lint": {
+    "rubocop": true
+  },
+  "ruby.useBundler": true,
+  "ruby.useLanguageServer": true,
   "search.exclude": {
     "**/node_modules": true,
     "**/bower_components": true,
