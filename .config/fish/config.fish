@@ -96,12 +96,6 @@ for file in $fisher_path/conf.d/*.fish
 end
 
 # ------------------------------------------------------------------------------
-# fish-global-abbreviation
-# https://github.com/ryotako/fish-global-abbreviation
-# ------------------------------------------------------------------------------
-set -g gabbr_config $XDG_CONFIG_HOME/fish/gabbr.conf
-
-# ------------------------------------------------------------------------------
 # local config
 # ------------------------------------------------------------------------------
 status is-interactive && __source_script $__fish_config_dir/interactive.fish

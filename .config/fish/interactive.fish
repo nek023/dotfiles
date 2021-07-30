@@ -115,14 +115,6 @@ alias brew='env PATH=(string join : (string match -e ~/.asdf/shims -v $PATH)) br
 bind \c{ backward-word
 bind \c} forward-word
 
-if functions -q __gabbr_expand
-    bind ' ' '__gabbr_expand; commandline -i " "'
-    bind ';' '__gabbr_expand; commandline -i "; "'
-    bind \cj '__gabbr_expand; commandline -f execute'
-    bind \cm '__gabbr_expand; commandline -f execute'
-    bind \r  '__gabbr_expand; commandline -f execute'
-end
-
 # ------------------------------------------------------------------------------
 # base16-shell
 # https://github.com/chriskempson/base16-shell
