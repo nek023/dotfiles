@@ -117,6 +117,7 @@ bind \c} forward-word
 
 bind \cr __select_history
 bind \cgc __ghq_cd
+bind \cg\ca __git_add_files
 
 # ------------------------------------------------------------------------------
 # base16-shell
