@@ -118,6 +118,8 @@ bind \c} forward-word
 bind \cr __select_history
 bind \cgc __ghq_cd
 bind \cg\ca __git_add_files
+bind \cg\cb __git_switch_local_branch
+bind \cg\cg\cb __git_switch_remote_branch
 
 # ------------------------------------------------------------------------------
 # base16-shell
