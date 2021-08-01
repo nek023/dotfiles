@@ -114,6 +114,7 @@ alias brew='env PATH=(string join : (string match -e ~/.asdf/shims -v $PATH)) br
 # ------------------------------------------------------------------------------
 bind \cr __select_history
 bind \cgc __ghq_cd
+bind \cgh __git_insert_commit
 bind \cg\ca __git_add_files
 bind \cg\cb __git_switch_local_branch
 bind \cg\cg\cb __git_switch_remote_branch
