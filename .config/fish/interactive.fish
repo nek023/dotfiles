@@ -116,6 +116,7 @@ bind \c{ backward-word
 bind \c} forward-word
 
 bind \cr __select_history
+bind \cgc __ghq_cd
 
 # ------------------------------------------------------------------------------
 # base16-shell
