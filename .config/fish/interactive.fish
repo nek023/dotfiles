@@ -120,6 +120,7 @@ bind \cgc __ghq_cd
 bind \cg\ca __git_add_files
 bind \cg\cb __git_switch_local_branch
 bind \cg\cg\cb __git_switch_remote_branch
+bind \cgs __ssh_connect
 
 # ------------------------------------------------------------------------------
 # base16-shell
