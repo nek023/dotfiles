@@ -121,6 +121,7 @@ bind \cg\ca __git_add_files
 bind \cg\cb __git_switch_local_branch
 bind \cg\cg\cb __git_switch_remote_branch
 bind \cgs __ssh_connect
+bind . __replace_multiple_dots
 
 # ------------------------------------------------------------------------------
 # base16-shell
