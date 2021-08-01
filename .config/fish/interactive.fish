@@ -115,6 +115,8 @@ alias brew='env PATH=(string join : (string match -e ~/.asdf/shims -v $PATH)) br
 bind \c{ backward-word
 bind \c} forward-word
 
+bind \cr __select_history
+
 # ------------------------------------------------------------------------------
 # base16-shell
 # https://github.com/chriskempson/base16-shell
