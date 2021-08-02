@@ -77,22 +77,15 @@ set -gx FZF_DEFAULT_OPTS '
 # fisher
 # https://github.com/jorgebucaran/fisher
 # ------------------------------------------------------------------------------
-# fisherの自動インストール
-# https://github.com/jorgebucaran/fisher#bootstrap-installation
-if not functions -q fisher
-    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-    fish -c fisher
-end
-
-# インストール先のパスを変更する
-# https://github.com/jorgebucaran/fisher#changing-the-installation-prefix
+# プラグインのインストール先を変更する
+# https://github.com/jorgebucaran/fisher/issues/640
 set -g fisher_path ~/dotfiles/.config/fish/fisher
 
 set -g fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
 set -g fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
 
 for file in $fisher_path/conf.d/*.fish
-    builtin source $file 2> /dev/null
+    source $file
 end
 
 # ------------------------------------------------------------------------------
