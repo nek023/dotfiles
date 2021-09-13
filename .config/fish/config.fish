@@ -58,15 +58,48 @@ set -gx GPG_TTY (tty)
 # go
 set -gx GOPATH ~/.go
 
+# ------------------------------------------------------------------------------
+# paths
+# ------------------------------------------------------------------------------
+# /usr/local/sbin (homebrew)
+fish_add_path /usr/local/sbin
+
+# go
+fish_add_path $GOPATH/bin
+
+# rust
+fish_add_path ~/.cargo/bin
+
+# Google Cloud SDK
+fish_add_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
+
+# dotfiles/bin
+fish_add_path ~/dotfiles/bin
+
+# krew
+fish_add_path ~/.krew/bin
+
+# ------------------------------------------------------------------------------
+# asdf
+# https://github.com/asdf-vm/asdf
+# ------------------------------------------------------------------------------
+if type -q asdf
+    source /usr/local/opt/asdf/asdf.fish
+end
+
+# ------------------------------------------------------------------------------
 # bat
 # https://github.com/sharkdp/bat
+# ------------------------------------------------------------------------------
 if type -q bat
     set -gx BAT_THEME base16
     set -gx MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
 end
 
+# ------------------------------------------------------------------------------
 # fzf
 # https://github.com/junegunn/fzf
+# ------------------------------------------------------------------------------
 set -gx FZF_DEFAULT_OPTS '
     --ansi --cycle --reverse
     --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:103
@@ -86,6 +119,17 @@ set -g fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_
 
 for file in $fisher_path/conf.d/*.fish
     source $file
+end
+
+# ------------------------------------------------------------------------------
+# direnv
+# https://github.com/direnv/direnv
+# ------------------------------------------------------------------------------
+type -q direnv && direnv hook fish | source
+
+# workaround for https://github.com/direnv/direnv/issues/583
+function __direnv_export_eval_on_prompt --on-event fish_prompt
+    type -q direnv && eval (direnv export fish)
 end
 
 # ------------------------------------------------------------------------------

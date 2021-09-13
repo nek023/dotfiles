@@ -2,35 +2,6 @@
 # インタラクティブシェルでのみ実行されます
 
 # ------------------------------------------------------------------------------
-# asdf
-# https://github.com/asdf-vm/asdf
-# ------------------------------------------------------------------------------
-if type -q asdf
-    source /usr/local/opt/asdf/asdf.fish
-end
-
-# ------------------------------------------------------------------------------
-# paths
-# ------------------------------------------------------------------------------
-# /usr/local/sbin (homebrew)
-fish_add_path /usr/local/sbin
-
-# go
-fish_add_path $GOPATH/bin
-
-# rust
-fish_add_path ~/.cargo/bin
-
-# Google Cloud SDK
-fish_add_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
-
-# dotfiles/bin
-fish_add_path ~/dotfiles/bin
-
-# krew
-fish_add_path ~/.krew/bin
-
-# ------------------------------------------------------------------------------
 # abbreviations
 # ------------------------------------------------------------------------------
 abbr -ag diff 'diff -u'
@@ -130,17 +101,6 @@ if test -e ~/.base16_theme
   set -l SCRIPT_NAME (basename (realpath ~/.base16_theme) .sh)
   set -gx BASE16_THEME (string match 'base16-*' $SCRIPT_NAME | string sub -s (string length 'base16-*'))
   eval sh '"'(realpath ~/.base16_theme)'"'
-end
-
-# ------------------------------------------------------------------------------
-# direnv
-# https://github.com/direnv/direnv
-# ------------------------------------------------------------------------------
-type -q direnv && direnv hook fish | source
-
-# workaround for https://github.com/direnv/direnv/issues/583
-function __direnv_export_eval_on_prompt --on-event fish_prompt
-    type -q direnv && eval (direnv export fish)
 end
 
 # ------------------------------------------------------------------------------
