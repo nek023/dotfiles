@@ -7,14 +7,11 @@
   excludesfile = ~/.config/git/ignore
 [include]
   path = ~/.config.local/git/config
-[merge]
-	ff = false
 [pager]
   diff = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
   log  = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
   show = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 [pull]
-	ff = only
-	rebase = true
+  rebase = false
 [push]
   default = current
