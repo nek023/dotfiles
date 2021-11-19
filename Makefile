@@ -14,6 +14,9 @@ link:
 unlink:
 	@-$(foreach fn, $(DOTFILES), rm -vrf $(HOME)/$(fn);)
 
+.PHONY: setup
+setup: setup-base16-shell setup-vim-plugins
+
 .PHONY: setup-base16-shell
 setup-base16-shell:
 	./scripts/setup-base16-shell.sh
@@ -22,8 +25,8 @@ setup-base16-shell:
 setup-vim-plugins:
 	./scripts/setup-vim-plugins.sh
 
-.PHONY: setup
-setup: setup-base16-shell setup-vim-plugins
+.PHONY: update
+update: update-asdf-plugins update-base16-shell update-vim-plugins
 
 .PHONY: update-asdf-plugins
 update-asdf-plugins:
@@ -36,9 +39,6 @@ update-base16-shell:
 .PHONY: update-vim-plugins
 update-vim-plugins:
 	./scripts/update-vim-plugins.sh
-
-.PHONY: update
-update: update-asdf-plugins update-base16-shell update-vim-plugins
 
 .PHONY: link-vscode-settings
 link-vscode-settings:

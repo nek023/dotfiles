@@ -1,5 +1,5 @@
 # .zlogin
 
-# Run fish
-SHELL=`which fish`
-test -x "$SHELL" && exec -l "$SHELL"
+# Launch fish shell
+FISH_PATH=$(which fish)
+test -x "$FISH_PATH" && exec -l "$FISH_PATH"

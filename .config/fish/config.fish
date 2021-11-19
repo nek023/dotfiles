@@ -59,32 +59,33 @@ set -gx GPG_TTY (tty)
 set -gx GOPATH ~/.go
 
 # ------------------------------------------------------------------------------
-# paths
+# user paths
 # ------------------------------------------------------------------------------
-# /usr/local/sbin (homebrew)
-fish_add_path /usr/local/sbin
+# Homebrew
+fish_add_path -m (brew --prefix)/sbin
+fish_add_path -m (brew --prefix)/bin
 
 # go
-fish_add_path $GOPATH/bin
+fish_add_path -m $GOPATH/bin
 
 # rust
-fish_add_path ~/.cargo/bin
+fish_add_path -m ~/.cargo/bin
 
 # Google Cloud SDK
-fish_add_path /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
-
-# dotfiles/bin
-fish_add_path ~/dotfiles/bin
+fish_add_path -m /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 
 # krew
-fish_add_path ~/.krew/bin
+fish_add_path -m ~/.krew/bin
+
+# dotfiles/bin
+fish_add_path -m ~/dotfiles/bin
 
 # ------------------------------------------------------------------------------
 # asdf
 # https://github.com/asdf-vm/asdf
 # ------------------------------------------------------------------------------
 if type -q asdf
-    source /usr/local/opt/asdf/asdf.fish
+    source (brew --prefix asdf)"/libexec/asdf.fish"
 end
 
 # ------------------------------------------------------------------------------
