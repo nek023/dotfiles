@@ -1,7 +1,5 @@
 castwide.solargraph
 christian-kohler.path-intellisense
-CoenraadS.bracket-pair-colorizer-2
-CraigMaslowski.erb
 dbaeumer.vscode-eslint
 dkundel.vscode-new-file
 EditorConfig.EditorConfig
@@ -12,7 +10,6 @@ hashicorp.terraform
 jebbs.plantuml
 kaiwood.endwise
 kesmarag.base16-tomorrow-night
-marcostazi.VS-code-vagrantfile
 mechatroner.rainbow-csv
 MS-CEINTL.vscode-language-pack-ja
 ms-python.python

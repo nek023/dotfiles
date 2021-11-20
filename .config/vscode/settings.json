@@ -1,8 +1,12 @@
 {
   "breadcrumbs.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "editor.fontFamily": "Source Code Pro",
   "editor.fontSize": 13,
   "editor.fontWeight": "500",
+  "editor.guides.bracketPairs": true,
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "none",
   "editor.rulers": [100],
@@ -15,21 +19,19 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/vendor": true
+    "**/vendor/**": true
   },
   "go.useLanguageServer": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "newFile.defaultBaseFileName": "new",
-  "newFile.defaultFileExtension": ".rb",
+  "newFile.defaultFileExtension": "",
   "newFile.showPathRelativeTo": "project",
+  "partialDiff.enableTelemetry": false,
   "ruby.codeCompletion": "rcodetools",
-  "ruby.format": "rubocop",
+  "ruby.format": "standard",
   "ruby.intellisense": "rubyLocate",
   "ruby.lint": {
-    "rubocop": true
+    "standard": true
   },
   "ruby.useBundler": true,
   "ruby.useLanguageServer": true,
@@ -43,6 +45,7 @@
   "sourcekit-lsp.serverPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
+  "telemetry.telemetryLevel": "off",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vim.easymotion": true,
   "vim.hlsearch": true,
@@ -107,13 +110,16 @@
   "workbench.startupEditor": "newUntitledFile",
   "workbench.statusBar.visible": true,
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   },
   "[markdown]": {
     "files.trimTrailingWhitespace": false
@@ -122,9 +128,11 @@
     "editor.formatOnSave": true
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   }
 }
