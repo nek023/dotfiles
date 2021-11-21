@@ -2,12 +2,12 @@
 
 # Homebrew (Intel)
 if [ -f /usr/local/bin/brew ]; then
-  eval $(/usr/local/bin/brew shellenv)
+  export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
 # Homebrew (Apple Silicon)
 if [ -f /opt/homebrew/bin/brew ]; then
-  eval $(/opt/homebrew/bin/brew shellenv)
+  export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 fi
 
 # Load local config
