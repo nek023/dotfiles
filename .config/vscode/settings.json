@@ -33,7 +33,7 @@
   "ruby.lint": {
     "standard": true
   },
-  "ruby.useBundler": true,
+  "ruby.useBundler": false,
   "ruby.useLanguageServer": true,
   "search.exclude": {
     "**/node_modules": true,
