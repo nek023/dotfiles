@@ -1,4 +1,5 @@
 {
+  "apple-swift-format.path": "/opt/homebrew/bin/swift-format",
   "breadcrumbs.enabled": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
