@@ -24,6 +24,7 @@
   },
   "go.useLanguageServer": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "lldb.library": "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A",
   "newFile.defaultBaseFileName": "new",
   "newFile.defaultFileExtension": "",
   "newFile.showPathRelativeTo": "project",
