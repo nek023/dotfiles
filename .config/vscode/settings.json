@@ -1,6 +1,7 @@
 {
   "apple-swift-format.path": "/opt/homebrew/bin/swift-format",
   "breadcrumbs.enabled": true,
+  "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
