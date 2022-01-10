@@ -7,6 +7,8 @@
   excludesfile = ~/.config/git/ignore
 [include]
   path = ~/.config.local/git/config
+[init]
+  defaultBranch = main
 [pager]
   diff = $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight | less
   log  = $(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight | less
