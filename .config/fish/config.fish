@@ -142,11 +142,6 @@ end
 # ------------------------------------------------------------------------------
 type -q direnv && direnv hook fish | source
 
-# workaround for https://github.com/direnv/direnv/issues/583
-function __direnv_export_eval_on_prompt --on-event fish_prompt
-    type -q direnv && eval (direnv export fish)
-end
-
 # ------------------------------------------------------------------------------
 # local config
 # ------------------------------------------------------------------------------
