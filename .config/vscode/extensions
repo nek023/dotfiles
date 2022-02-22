@@ -10,6 +10,8 @@ hashicorp.terraform
 jebbs.plantuml
 kaiwood.endwise
 kesmarag.base16-tomorrow-night
+KoichiSasada.vscode-rdbg
+mame.ruby-typeprof
 mechatroner.rainbow-csv
 MS-CEINTL.vscode-language-pack-ja
 ms-python.python
@@ -22,6 +24,8 @@ ryu1kn.partial-diff
 scala-lang.scala
 sianglim.slim
 skyapps.fish-vscode
+sswg.swift-lang
+vadimcn.vscode-lldb
 vknabel.vscode-apple-swift-format
 vscodevim.vim
 wingrunr21.vscode-ruby
