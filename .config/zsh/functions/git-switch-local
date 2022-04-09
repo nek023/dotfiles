@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+local branch="$(git-select-branch -q "${BUFFER}")"
+
+if [[ -n "${branch}" ]]; then
+  BUFFER="git switch ${branch}"
+  zle accept-line
+fi
+
+zle redisplay

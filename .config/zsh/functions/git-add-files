@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+# :/ means git root in pathspec: https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
+local files="$(git-select-files -q "${BUFFER}" | sed -e 's/^/:\//' | tr "\n" " ")"
+
+if [[ -n "${files}" ]]; then
+  BUFFER="git add ${files}"
+  zle accept-line
+fi
+
+zle redisplay

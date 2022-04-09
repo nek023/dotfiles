@@ -8,6 +8,13 @@
 !.config/nvim/
 !.config/pry/
 !.config/vscode/
+!.config/zsh/
+.config/zsh/*
+!.config/zsh/.zimrc
+!.config/zsh/.zlogin
+!.config/zsh/.zshrc
+!.config/zsh/abbreviations
+!.config/zsh/functions/
 .vim/*
 !.vim/indent/
 !.vim/init.vim

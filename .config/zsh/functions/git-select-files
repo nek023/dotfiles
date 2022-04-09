@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+local -A opts
+zparseopts -D -A opts -- q: -query:=q
+
+git status --porcelain | fzf -m -q "${opts[-q]}" | cut -c4-

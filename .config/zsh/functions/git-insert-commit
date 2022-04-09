@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+local commit="$(git-select-commit)"
+
+if [[ -n "${commit}" ]]; then
+  LBUFFER="${LBUFFER}${commit}"
+fi
+
+zle redisplay

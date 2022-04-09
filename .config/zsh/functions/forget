@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+local known_hosts="${HOME}/.ssh/known_hosts"
+cp "${known_hosts}" "${known_hosts}.bak"
+sed "$1"d "${known_hosts}".bak > "${known_hosts}"

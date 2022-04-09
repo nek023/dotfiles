@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+BUFFER="$(history -n -r 1 | fzf +m +s -q "${BUFFER}")"
+CURSOR=$#BUFFER
+
+zle redisplay
