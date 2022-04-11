@@ -86,7 +86,7 @@ alias brew='env PATH=(string join : (string match -e "$HOME/.asdf/shims" -v "$PA
 # ------------------------------------------------------------------------------
 # Key bindings
 # ------------------------------------------------------------------------------
-bind . __replace_multiple_dots
+bind . __expand_double_dots
 bind \cr __select_history
 bind \cgc __ghq_cd
 bind \cg\ca __git_add_files
