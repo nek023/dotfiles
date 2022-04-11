@@ -118,10 +118,13 @@ source "${ZIM_HOME}/init.zsh"
 # ------------------------------------------------------------------------------
 # Post-init module configurations
 # ------------------------------------------------------------------------------
-# Unset NO_CLOBBER set by environment module
+# Unset NO_CLOBBER set by environment module.
 unsetopt NO_CLOBBER
 
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+# Exact match takes precedence.
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' '+r:|?=**'
+
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init.
 zmodload -F zsh/terminfo +p:terminfo
 for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
 for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
