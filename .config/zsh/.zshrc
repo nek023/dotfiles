@@ -134,8 +134,7 @@ unset key
 # ------------------------------------------------------------------------------
 alias la='ls -lAh'
 alias ll='ls -lh'
-alias df='df -h'
-alias du='du -h'
+alias diff='diff -u'
 alias grep='command grep -v grep | command grep --color=auto'
 
 alias gl='git log --graph --all --color --pretty=format:"%h %cn %s%Cred%d%Creset"'
@@ -143,8 +142,12 @@ alias gpull='git pull origin $(git-current-branch)'
 alias gpush='git push origin $(git-current-branch)'
 alias gpush!='git push --force-with-lease origin $(git-current-branch)'
 
-alias timestamp='date +%Y%m%d-%H%M%S | tr -d "\n"'
 alias printpath='echo $PATH | tr ":" "\n"'
+alias timestamp='date +%Y%m%d-%H%M%S | tr -d "\n"'
+
+if (( ${+commands[bat]} )); then
+  alias cat='bat -p'
+fi
 
 if (( ${+commands[exa]} )); then
   alias ls='exa -g --group-directories-first --time-style=long-iso'
@@ -231,6 +234,6 @@ bindkey '^g^h' git-insert-commit
 # ------------------------------------------------------------------------------
 # Local configurations
 # ------------------------------------------------------------------------------
-if [[ -f "${HOME}/.zshrc.local" ]]; then
-  source "${HOME}/.zshrc.local"
+if [[ -f "${HOME}/.config.local/zsh/.zshrc" ]]; then
+  source "${HOME}/.config.local/zsh/.zshrc"
 fi
