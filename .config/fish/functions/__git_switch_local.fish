@@ -1,4 +1,4 @@
-function __git_switch_local_branch
+function __git_switch_local
     set -l buffer (commandline)
     set -l branch (__git_select_branch -q "$buffer")
     if test -n "$branch"

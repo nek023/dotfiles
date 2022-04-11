@@ -1,32 +1,21 @@
 function aws-login
-    argparse -n aws-login 'd/duration=' 'h/help' 'i/incognito' -- $argv || return
-
-    if set -q _flag_help
-        echo 'usage: aws-login [options] [profile]'
-        return
-    end
+    argparse -n aws-login 'd/duration=' 'i/incognito' -- $argv || return
 
     set -l profile $argv
     if test -z "$profile"
         set profile (aws-vault list --profiles | egrep "^aws-vault" | string sub -s 11 | fzf +m)
     end
-
-    if test -z "$profile"
-        aws-login -h
-        return
-    end
+    test -n "$profile" || return
 
     set -l login_url
     if set -q _flag_duration
-        set login_url (aws-vault login aws-vault.$profile --stdout --duration $_flag_duration)
+        set login_url (aws-vault login "aws-vault.$profile" --stdout --duration $_flag_duration)
     else
-        set login_url (aws-vault login aws-vault.$profile --stdout)
+        set login_url (aws-vault login "aws-vault.$profile" --stdout)
     end
 
-    set -l aws_status $status
-    if test $aws_status -ne 0
-        return $aws_status
-    end
+    set -l aws_vault_status $status
+    test $aws_vault_status -ne 0 && return $aws_vault_status
 
     if set -q _flag_incognito
         open -na 'Google Chrome' --args --incognito \

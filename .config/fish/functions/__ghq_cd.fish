@@ -1,8 +1,8 @@
 function __ghq_cd
     set -l buffer (commandline)
-    set -l repo (__ghq_select_repo -q "$buffer" | string escape -n)
-    if test -n "$repo"
-        commandline "cd $repo"
+    set -l dir (__ghq_select -q "$buffer")
+    if test -n "$dir"
+        commandline "cd $dir"
         commandline -f execute
     end
     commandline -f repaint

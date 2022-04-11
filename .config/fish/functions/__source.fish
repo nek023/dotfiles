@@ -1,3 +1,3 @@
-function __source_script -a script
+function __source -a script
     test -r $script && source $script
 end

@@ -4,6 +4,6 @@
 # ------------------------------------------------------------------------------
 # startup
 # ------------------------------------------------------------------------------
-if type -q tmux && not __tmux_is_running && not __ssh_is_running
+if type -q tmux && test -z "$TMUX" && test -z "$SSH_CONNECTION"
     tmux
 end

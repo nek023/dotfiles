@@ -90,8 +90,8 @@ bind . __replace_multiple_dots
 bind \cr __select_history
 bind \cgc __ghq_cd
 bind \cg\ca __git_add_files
-bind \cg\cb __git_switch_local_branch
-bind \cg\cg\cb __git_switch_remote_branch
+bind \cg\cb __git_switch_local
+bind \cg\cg\cb __git_switch_remote
 bind \cg\ch __git_insert_commit
 bind \cgs __ssh_connect
 
@@ -107,7 +107,7 @@ source "$BASE16_SHELL/profile_helper.fish"
 # https://github.com/tmux/tmux
 # ------------------------------------------------------------------------------
 function __tmux_rename_window --on-event fish_prompt
-    __tmux_is_running || return
+    test -n "$TMUX" || return
     set -l window_id (tmux list-panes -a -F "#{pane_pid} #{window_id}" | grep $fish_pid | cut -d ' ' -f 2)
     test -n "$window_id" && tmux rename-window -t "$window_id" (__workdir)
 end

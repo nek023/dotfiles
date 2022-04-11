@@ -3,8 +3,8 @@ function __ssh_select_host
 
     set -l config_paths /etc/ssh/ssh_config ~/.ssh/config
     for config_path in $config_paths
-        set -l include_paths (command grep -ri Include $config_path | command grep -v '#' | \
-            string replace -ri -- '.*\s*Include\s+(.*)' '$1')
+        set -l include_paths (command grep -ri Include $config_path | command grep -v '#' \
+            | string replace -ri -- '.*\s*Include\s+(.*)' '$1')
 
         for include_path in $include_paths
             if string match -qri -- '^~/' $include_path || string match -qri -- '^\$HOME/' $include_path

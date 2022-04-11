@@ -2,6 +2,6 @@ function code
     if count $argv > /dev/null
         command code $argv
     else
-        command code $PWD
+        command code "$PWD"
     end
 end

@@ -1,4 +1,4 @@
-function __git_switch_remote_branch
+function __git_switch_remote
     set -l buffer (commandline)
     set -l branch (__git_select_branch -q "$buffer" -r)
     if test -n "$branch"
