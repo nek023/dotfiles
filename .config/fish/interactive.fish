@@ -1,14 +1,8 @@
-# interactive.fish
-# インタラクティブシェルでのみ実行されます
-
 # ------------------------------------------------------------------------------
-# abbreviations
+# Abbreviations
 # ------------------------------------------------------------------------------
-abbr -ag diff 'diff -u'
-abbr -ag md   'mkdir'
 abbr -ag o    'open'
 abbr -ag rf   'rm -rf'
-abbr -ag rd   'rmdir'
 
 abbr -ag g    'git'
 abbr -ag ga   'git add'
@@ -18,90 +12,95 @@ abbr -ag gac! 'git add -A && git commit --amend'
 abbr -ag gap  'git add -p'
 abbr -ag gb   'git branch'
 abbr -ag gbm  'git branch -m'
-abbr -ag gco  'git checkout'
-abbr -ag gcp  'git cherry-pick'
 abbr -ag gc   'git commit'
 abbr -ag gc!  'git commit --amend'
+abbr -ag gco  'git checkout'
+abbr -ag gcp  'git cherry-pick'
 abbr -ag gd   'git diff'
 abbr -ag gds  'git diff --staged'
 abbr -ag gf   'git fetch'
 abbr -ag gm   'git merge'
 abbr -ag gr   'git rebase'
+abbr -ag gre  'git restore'
+abbr -ag greh 'git reset HEAD'
+abbr -ag gres 'git restore -S'
 abbr -ag gri  'git rebase -i'
 abbr -ag grm  'git rebase (__git_default_branch)'
-abbr -ag greh 'git reset HEAD'
-abbr -ag gre  'git restore'
-abbr -ag gres 'git restore -S'
 abbr -ag gs   'git status'
-abbr -ag gsw  'git switch'
 abbr -ag gsc  'git switch -c'
 abbr -ag gsm  'git switch (__git_default_branch)'
+abbr -ag gsw  'git switch'
 
 abbr -ag be   'bundle exec'
 abbr -ag bi   'bundle install'
 abbr -ag c    'rails c'
-abbr -ag s    'rails s'
 abbr -ag cop  'rubocop'
 abbr -ag copa 'rubocop -a'
+abbr -ag s    'rails s'
 abbr -ag t    'rspec'
 
 abbr -ag co   'code'
-abbr -ag gg   'ghq get'
 abbr -ag d    'docker'
 abbr -ag dc   'docker compose'
-abbr -ag tf   'terraform'
+abbr -ag gg   'ghq get'
 abbr -ag kc   'kubectl'
+abbr -ag tf   'terraform'
 
 abbr -ag brewup 'brew update; brew upgrade; brew cleanup'
 
 # ------------------------------------------------------------------------------
-# aliases
+# Aliases
 # ------------------------------------------------------------------------------
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias diff='diff -u'
+alias grep='command grep -v grep | command grep --color=auto'
+
 alias gl='git log --graph --all --color --pretty=format:'"'"'%h %cn %s%Cred%d%Creset'"'"''
 alias gpull='git pull origin (__git_current_branch)'
 alias gpush='git push origin (__git_current_branch)'
 alias gpush!='git push --force-with-lease origin (__git_current_branch)'
-alias grep='command grep -v grep | command grep --color=auto'
-alias la='ls -lAh'
-alias ll='ls -lh'
-alias timestamp='date +%Y%m%d-%H%M%S | tr -d \'\\n\''
-alias printpath='echo $PATH | string split \' \''
 
-type -q bat && alias cat='bat -p'
+alias printpath='echo $PATH | tr " " "\n"'
+alias timestamp='date +%Y%m%d-%H%M%S | tr -d "\n"'
+
+if type -q bar
+    alias cat='bat -p'
+end
 
 if type -q exa
-    alias ls='exa -g --time-style long-iso'
+    alias ls='exa -g --group-directories-first --time-style=long-iso'
     alias la='ls -la'
     alias ll='ls -l'
     alias tree='exa -T'
 end
 
-# 一時的にpyenvのconfig scriptにパスを通さないようにする
-# brewコマンド実行時は~/.asdf/shimsにパスを通さないようにする
-alias brew='env PATH=(string join : (string match -e ~/.asdf/shims -v $PATH)) brew'
+if type -q safe-rm
+    alias rm='safe-rm'
+end
+
+# Temporary remove ~/.asdf/shims from path to avoid conflicting with
+# python*-config scripts provided by Homebrew.
+alias brew='env PATH=(string join : (string match -e "$HOME/.asdf/shims" -v "$PATH")) brew'
 
 # ------------------------------------------------------------------------------
-# key bindings
+# Key bindings
 # ------------------------------------------------------------------------------
+bind . __replace_multiple_dots
 bind \cr __select_history
 bind \cgc __ghq_cd
-bind \cgh __git_insert_commit
 bind \cg\ca __git_add_files
 bind \cg\cb __git_switch_local_branch
 bind \cg\cg\cb __git_switch_remote_branch
+bind \cg\ch __git_insert_commit
 bind \cgs __ssh_connect
-bind . __replace_multiple_dots
 
 # ------------------------------------------------------------------------------
 # base16-shell
 # https://github.com/chriskempson/base16-shell
 # ------------------------------------------------------------------------------
-# https://github.com/chriskempson/base16-shell/blob/master/profile_helper.fish
-if test -e ~/.base16_theme
-  set -l SCRIPT_NAME (basename (realpath ~/.base16_theme) .sh)
-  set -gx BASE16_THEME (string match 'base16-*' $SCRIPT_NAME | string sub -s (string length 'base16-*'))
-  eval sh '"'(realpath ~/.base16_theme)'"'
-end
+set -gx BASE16_SHELL "$HOME/.config/base16-shell/"
+source "$BASE16_SHELL/profile_helper.fish"
 
 # ------------------------------------------------------------------------------
 # tmux

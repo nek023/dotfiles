@@ -1,7 +1,5 @@
-# config.fish
-
 # ------------------------------------------------------------------------------
-# fish variables
+# Fish configurations
 # ------------------------------------------------------------------------------
 # 挨拶メッセージを非表示にする
 set -g fish_greeting
@@ -27,80 +25,76 @@ set -g __fish_git_prompt_showuntrackedfiles yes
 set -g __fish_git_prompt_showupstream       yes
 
 # ------------------------------------------------------------------------------
-# environment variables
+# Environment variables
 # ------------------------------------------------------------------------------
-# shell
-set -gx SHELL (which fish)
-
-# lang
+# Shell
 set -gx LANG en_US.UTF-8
+type -q vim && set -gx EDITOR vim
+type -q less && set -gx PAGER less
 
 # XDG Base Directory Specification
-set -gx XDG_CACHE_HOME ~/.cache
-set -gx XDG_CONFIG_HOME ~/.config
-set -gx XDG_DATA_HOME ~/.local/share
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_CACHE_HOME "$HOME/.cache"
+set -gx XDG_DATA_HOME "$HOME/.local/share"
+set -gx XDG_STATE_HOME "$HOME/.local/state"
 
-# editor
-if type -q nvim
-    set -gx EDITOR nvim
-else if type -q vim
-    set -gx EDITOR vim
-end
-
-# pager
-if type -q less
-    set -gx PAGER less
-end
-
-# gpg
+# GPG
 set -gx GPG_TTY (tty)
 
-# go
-set -gx GOPATH ~/.go
+# Go
+set -gx GOPATH "$HOME/.go"
 
 # ------------------------------------------------------------------------------
 # Homebrew
 # https://brew.sh/
 # ------------------------------------------------------------------------------
-# Intel
-if test -f /usr/local/bin/brew
-  eval (/usr/local/bin/brew shellenv)
-end
-
 # Apple Silicon
 if test -f /opt/homebrew/bin/brew
   eval (/opt/homebrew/bin/brew shellenv)
 end
 
-# ------------------------------------------------------------------------------
-# user paths
-# ------------------------------------------------------------------------------
-# Homebrew
-fish_add_path -m (brew --prefix)/sbin
-fish_add_path -m (brew --prefix)/bin
-
-# go
-fish_add_path -m $GOPATH/bin
-
-# rust
-fish_add_path -m ~/.cargo/bin
-
-# Google Cloud SDK
-fish_add_path -m /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
-
-# krew
-fish_add_path -m ~/.krew/bin
-
-# dotfiles/bin
-fish_add_path -m ~/dotfiles/bin
+# Intel
+if test -f /usr/local/bin/brew
+  eval (/usr/local/bin/brew shellenv)
+end
 
 # ------------------------------------------------------------------------------
 # asdf
 # https://github.com/asdf-vm/asdf
 # ------------------------------------------------------------------------------
 if type -q asdf
-    source (brew --prefix asdf)"/libexec/asdf.fish"
+    source (brew --prefix asdf)"/asdf.fish"
 end
+
+# ------------------------------------------------------------------------------
+# Paths
+# ------------------------------------------------------------------------------
+# Go
+fish_add_path -m "$GOPATH/bin"
+
+# dotfiles
+fish_add_path -m "$HOME/dotfiles/bin"
+
+# ------------------------------------------------------------------------------
+# Fisher
+# https://github.com/jorgebucaran/fisher
+# ------------------------------------------------------------------------------
+# プラグインのインストール先を変更する
+# https://github.com/jorgebucaran/fisher/issues/640
+set -g fisher_path ~/dotfiles/.config/fish/fisher
+
+set -g fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
+set -g fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
+
+for file in $fisher_path/conf.d/*.fish
+    source $file
+end
+
+# ------------------------------------------------------------------------------
+# direnv
+# https://github.com/direnv/direnv
+# ------------------------------------------------------------------------------
+type -q direnv && direnv hook fish | source
 
 # ------------------------------------------------------------------------------
 # bat
@@ -122,29 +116,8 @@ set -gx FZF_DEFAULT_OPTS '
 '
 
 # ------------------------------------------------------------------------------
-# fisher
-# https://github.com/jorgebucaran/fisher
+# Local configurations
 # ------------------------------------------------------------------------------
-# プラグインのインストール先を変更する
-# https://github.com/jorgebucaran/fisher/issues/640
-set -g fisher_path ~/dotfiles/.config/fish/fisher
-
-set -g fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..-1]
-set -g fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..-1]
-
-for file in $fisher_path/conf.d/*.fish
-    source $file
-end
-
-# ------------------------------------------------------------------------------
-# direnv
-# https://github.com/direnv/direnv
-# ------------------------------------------------------------------------------
-type -q direnv && direnv hook fish | source
-
-# ------------------------------------------------------------------------------
-# local config
-# ------------------------------------------------------------------------------
-status is-interactive && __source_script $__fish_config_dir/interactive.fish
-status is-login && __source_script $__fish_config_dir/login.fish
-__source_script ~/.config.local/fish/config.fish
+status is-interactive && __source_script "$__fish_config_dir/interactive.fish"
+status is-login && __source_script "$__fish_config_dir/login.fish"
+__source_script "$HOME/.config.local/fish/config.fish"
