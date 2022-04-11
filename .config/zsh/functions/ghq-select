@@ -3,5 +3,5 @@
 local -A opts
 zparseopts -D -A opts -- q: -query:=q
 
-local dir="$(ghq list -p | sed -e "s|${HOME}/||g" | fzf +m -q "${opts[-q]}")"
+local dir="$(ghq list -p | sed -e "s|${HOME}/||" | fzf +m -q "${opts[-q]}")"
 [[ -n "${dir}" ]] && echo "${HOME}/${dir}"

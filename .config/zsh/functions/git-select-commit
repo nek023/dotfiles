@@ -3,5 +3,5 @@
 local -A opts
 zparseopts -D -A opts -- q: -query:=q
 
-git log --color --format='%C(auto)%h%d %s %C(black)%C(bold)%cr' | \
-  fzf +m +s -q "${opts[-q]}" | grep -o '[a-f0-9]\{7\}' | head -1
+git log --color --format='%C(auto)%h%d %s %C(black)%C(bold)%cr' \
+  | fzf +m +s -q "${opts[-q]}" | grep -o '[a-f0-9]\{7\}' | head -1

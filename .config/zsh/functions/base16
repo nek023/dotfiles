@@ -4,6 +4,6 @@
 
 local theme="$(find "${BASE16_SHELL}/scripts" -type f -exec basename {} .sh \; \
 | cut -c8- | sort | fzf +m +s)"
-[[ -z "${theme}" ]] && return 1
+[[ -n "${theme}" ]] || return
 
 eval "base16_${theme}"

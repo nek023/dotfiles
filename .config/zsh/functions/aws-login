@@ -7,7 +7,7 @@ local profile "$1"
 if [[ -z "${profile}" ]]; then
   profile="$(aws-vault list --profiles | grep -E "^aws-vault" | cut -c11- | fzf +m)"
 fi
-[[ -z "${profile}" ]] && return 1
+[[ -n "${profile}" ]] || return
 
 local login_url
 if [[ -n "${opts[(i)-d]}" ]]; then

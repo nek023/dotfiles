@@ -214,7 +214,7 @@ done
 # Key bindings
 # ------------------------------------------------------------------------------
 zle -N zsh-select-history
-bindkey '^r' zsh-select-history
+bindkey '^r' select-history
 
 zle -N ghq-cd
 bindkey '^gc' ghq-cd

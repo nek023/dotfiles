@@ -3,4 +3,4 @@
 local -A opts
 zparseopts -D -A opts -- q: -query:=q
 
-git status --porcelain | fzf -m -q "${opts[-q]}" | cut -c4-
+git status --porcelain | fzf -m -q "${opts[-q]}" | cut -c4- | sed -e 's/^.* -> //g'
