@@ -216,7 +216,7 @@ done
 # ------------------------------------------------------------------------------
 # Key bindings
 # ------------------------------------------------------------------------------
-zle -N zsh-select-history
+zle -N select-history
 bindkey '^r' select-history
 
 zle -N ghq-cd
