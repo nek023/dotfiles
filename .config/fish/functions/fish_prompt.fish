@@ -1,4 +1,5 @@
 function fish_prompt
+    set -l cmd_duration $CMD_DURATION
     set -l last_status $status
     set -l normal (set_color normal)
     set -l timestamp (date '+%H:%M:%S')
@@ -27,12 +28,18 @@ function fish_prompt
         set color_host $fish_color_host_remote
     end
 
-    printf "\n%s%s%s@%s%s%s:%s%s%s%s %s[%s]\n%s%s%s %s " \
+    # コマンド実行時間が100msを超えていたら表示する
+    set -l duration ''
+    if test $cmd_duration -ge 100
+        set duration " ("$cmd_duration"ms)"
+    end
+
+    printf "\n%s%s%s@%s%s%s:%s%s%s%s %s[%s]%s\n%s%s%s %s " \
         (set_color $fish_color_user) $USER $normal \
         (set_color $color_host) (prompt_hostname) $normal \
         (set_color $color_cwd) (prompt_pwd) \
         (set_color $fish_color_vcs) (fish_vcs_prompt) \
-        (set_color $fish_color_time) $timestamp \
+        (set_color $fish_color_time) $timestamp $duration \
         (set_color $smallfish_color) $smallfish $normal \
         $suffix
 end
