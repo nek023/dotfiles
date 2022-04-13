@@ -93,6 +93,11 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
+# Specifies how suggestions should be generated.
+# At first chooses the most recent match from history, then cxhooses a suggestion.
+typeset -ga ZSH_AUTOSUGGEST_STRATEGY
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 # ------------------------------------------------------------------------------
 # Initialize modules
 # ------------------------------------------------------------------------------
