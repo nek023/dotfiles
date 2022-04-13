@@ -1,7 +1,7 @@
 function fish_prompt
     set -l last_status $status
     set -l normal (set_color normal)
-    set -l timestamp '[' (date '+%H:%M:%S') ']'
+    set -l timestamp (date '+%H:%M:%S')
 
     # 直前のコマンドのステータスで色を分ける
     set -l smallfish '><((・>'
@@ -27,6 +27,12 @@ function fish_prompt
         set color_host $fish_color_host_remote
     end
 
-    echo -s (set_color $fish_color_user) "$USER" $normal @ (set_color $color_host) (prompt_hostname) $normal : (set_color $color_cwd) (prompt_pwd) (set_color $fish_color_vcs) (fish_vcs_prompt) (set_color $fish_color_time) ' ' $timestamp
-    echo -n -s (set_color $smallfish_color) $smallfish ' ' $normal $suffix ' '
+    printf "\n%s%s%s@%s%s%s:%s%s%s%s %s[%s]\n%s%s%s %s " \
+        (set_color $fish_color_user) $USER $normal \
+        (set_color $color_host) (prompt_hostname) $normal \
+        (set_color $color_cwd) (prompt_pwd) \
+        (set_color $fish_color_vcs) (fish_vcs_prompt) \
+        (set_color $fish_color_time) $timestamp \
+        (set_color $smallfish_color) $smallfish $normal \
+        $suffix
 end
