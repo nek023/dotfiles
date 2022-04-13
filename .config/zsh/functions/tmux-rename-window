@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+if [[ -z "${TMUX}" ]]; then
+  return 0
+fi
+
+local window_id="$(tmux list-panes -a -F '#{pane_pid} #{window_id}' | grep "$$" | cut -d' ' -f2)"
+
+if [[ -n "${window_id}" ]]; then
+  tmux rename-window -t "${window_id}" "$(workdir)"
+fi
