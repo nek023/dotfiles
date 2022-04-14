@@ -28,18 +28,19 @@ function fish_prompt
         set color_host $fish_color_host_remote
     end
 
-    # コマンド実行時間が100msを超えていたら表示する
-    set -l duration ''
-    if test $cmd_duration -ge 100
-        set duration " ("$cmd_duration"ms)"
-    end
-
-    printf "\n%s%s%s@%s%s%s:%s%s%s%s %s[%s]%s\n%s%s%s %s " \
-        (set_color $fish_color_user) $USER $normal \
-        (set_color $color_host) (prompt_hostname) $normal \
+    echo
+    echo -ns \
+        (set_color $fish_color_user) $USER $normal '@' \
+        (set_color $color_host) (prompt_hostname) $normal ':' \
         (set_color $color_cwd) (prompt_pwd) \
         (set_color $fish_color_vcs) (fish_vcs_prompt) \
-        (set_color $fish_color_time) $timestamp $duration \
-        (set_color $smallfish_color) $smallfish $normal \
-        $suffix
+        (set_color $fish_color_time) ' ' $timestamp
+
+    # コマンド実行時間が100msを超えていたら表示する
+    if test $cmd_duration -ge 100
+        echo -ns " (" $cmd_duration "ms)"
+    end
+
+    echo
+    echo -ns (set_color $smallfish_color) $smallfish $normal ' ' $suffix ' '
 end
