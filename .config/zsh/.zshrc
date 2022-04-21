@@ -10,6 +10,8 @@ setopt HIST_IGNORE_ALL_DUPS
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
 
+setopt nopromptbang prompt{cr,percent,sp,subst}
+
 # ------------------------------------------------------------------------------
 # Environment variables
 # ------------------------------------------------------------------------------
@@ -212,6 +214,11 @@ if [[ -n "${PS1}" && -s "${BASE16_SHELL}/profile_helper.sh" ]]; then
 fi
 
 # ------------------------------------------------------------------------------
+# git-prompt
+# ------------------------------------------------------------------------------
+source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+
+# ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
 export FPATH="${ZDOTDIR}/functions:${FPATH}"
@@ -223,7 +230,18 @@ done
 # ------------------------------------------------------------------------------
 # Hooks
 # ------------------------------------------------------------------------------
+autoload -Uz add-zsh-hook
+
+# duration-info
+if (( ${+functions[duration-info-preexec]} && ${+functions[duration-info-precmd]} )); then
+  zstyle ':zim:duration-info' format ' %B%F{yellow}(%d)%f%b'
+  zstyle ':zim:duration-info' threshold 0.5
+  add-zsh-hook preexec duration-info-preexec
+  add-zsh-hook precmd duration-info-precmd
+fi
+
 add-zsh-hook precmd tmux-rename-window
+add-zsh-hook precmd prompt
 
 # ------------------------------------------------------------------------------
 # Key bindings
