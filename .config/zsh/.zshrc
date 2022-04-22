@@ -10,8 +10,6 @@ setopt HIST_IGNORE_ALL_DUPS
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
 
-setopt nopromptbang prompt{cr,percent,sp,subst}
-
 # ------------------------------------------------------------------------------
 # Environment variables
 # ------------------------------------------------------------------------------
@@ -54,6 +52,17 @@ fi
 if [[ -f /usr/local/bin/brew ]]; then
   eval $(/usr/local/bin/brew shellenv)
 fi
+
+# ------------------------------------------------------------------------------
+# Prompt
+# ------------------------------------------------------------------------------
+source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+
+setopt prompt_subst
+
+PROMPT='
+%(3L.%F{yellow}(%L)%f .)%(!.%F{red}%n%f.${SSH_TTY:+"%F{yellow}%n%f"})${SSH_TTY:+"@%F{green}%m%f:"}%F{cyan}%~%f%F{red}$(git-info)%f${duration_info}
+%(1j.%F{blue}*%f .)%(?.%F{green}.%F{red}%? )%(!.#.$)%f '
 
 # ------------------------------------------------------------------------------
 # asdf
@@ -214,11 +223,6 @@ if [[ -n "${PS1}" && -s "${BASE16_SHELL}/profile_helper.sh" ]]; then
 fi
 
 # ------------------------------------------------------------------------------
-# git-prompt
-# ------------------------------------------------------------------------------
-source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
-
-# ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
 export FPATH="${ZDOTDIR}/functions:${FPATH}"
@@ -241,7 +245,6 @@ if (( ${+functions[duration-info-preexec]} && ${+functions[duration-info-precmd]
 fi
 
 add-zsh-hook precmd tmux-rename-window
-add-zsh-hook precmd prompt
 
 # ------------------------------------------------------------------------------
 # Key bindings
