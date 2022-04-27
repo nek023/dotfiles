@@ -238,7 +238,7 @@ autoload -Uz add-zsh-hook
 
 # duration-info
 if (( ${+functions[duration-info-preexec]} && ${+functions[duration-info-precmd]} )); then
-  zstyle ':zim:duration-info' format ' %B%F{yellow}(%d)%f%b'
+  zstyle ':zim:duration-info' format ' %F{yellow}(%d)%f'
   zstyle ':zim:duration-info' threshold 0.5
   add-zsh-hook preexec duration-info-preexec
   add-zsh-hook precmd duration-info-precmd
