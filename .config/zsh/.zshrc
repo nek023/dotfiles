@@ -97,7 +97,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 # Set what highlighters will be used.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp)
 
 # Customize the main highlighter styles.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
@@ -147,6 +147,11 @@ for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search
 for key ('k') bindkey -M vicmd ${key} history-substring-search-up
 for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
+
+# Add highlight for abbrreviations.
+typeset -A ZSH_HIGHLIGHT_REGEXP
+ZSH_HIGHLIGHT_REGEXP=('^[[:blank:][:space:]]*('${(j:|:)${(k)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' 'fg=green')
+ZSH_HIGHLIGHT_REGEXP+=('[[:<:]]('${(j:|:)${(k)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' 'fg=green')
 
 # ------------------------------------------------------------------------------
 # Aliases
