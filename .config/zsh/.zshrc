@@ -134,7 +134,7 @@ source "${ZIM_HOME}/init.zsh"
 # ------------------------------------------------------------------------------
 # Post-init module configurations
 # ------------------------------------------------------------------------------
-# Unset NO_CLOBBER set by environment module.
+# Allow redirection to overwrite existing files.
 unsetopt NO_CLOBBER
 
 # Exact match takes precedence.
