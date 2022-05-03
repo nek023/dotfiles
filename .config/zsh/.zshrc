@@ -78,6 +78,9 @@ fi
 # Go
 export PATH="${GOPATH}/bin:${PATH}"
 
+# Java
+export PATH="$(brew --prefix java)/bin:${PATH}"
+
 # dotfiles
 export PATH="${HOME}/dotfiles/bin:${PATH}"
 
