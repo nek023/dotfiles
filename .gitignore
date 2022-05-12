@@ -6,6 +6,7 @@
 .config/fish/fisher/
 !.config/git/
 !.config/nvim/
+!.config/tmux/
 !.config/vscode/
 !.config/zsh/
 .config/zsh/*
