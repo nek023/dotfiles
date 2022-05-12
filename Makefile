@@ -14,6 +14,9 @@ link:
 unlink:
 	@-$(foreach fn, $(DOTFILES), rm -vrf $(HOME)/$(fn);)
 
+.PHONY: relink
+relink: unlink link
+
 .PHONY: setup
 setup: setup-base16-shell setup-vim-plugins
 
