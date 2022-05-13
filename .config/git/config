@@ -2,6 +2,8 @@
   pop  = stash pop
   drop = stash drop
   open = !gh repo view -w -b $(git symbolic-ref --short HEAD)
+[commit]
+  verbose = true
 [core]
   editor = vim
   excludesfile = ~/.config/git/ignore
