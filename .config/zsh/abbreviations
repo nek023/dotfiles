@@ -40,6 +40,11 @@ abbr copa="rubocop -a"
 abbr s="rails s"
 abbr t="rspec"
 
+abbr n="npm"
+abbr nr="npm run"
+abbr y="yarn"
+abbr yr="yarn run"
+
 abbr co="code"
 abbr d="docker"
 abbr dc="docker compose"
