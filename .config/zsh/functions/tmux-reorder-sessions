@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+if [[ -z "${TMUX}" ]]; then
+  return 0
+fi
+
 local sessions=$(tmux ls -F "#{session_name}" | sort)
 local num=0
 
@@ -7,3 +11,5 @@ for session in "${(f)sessions}"; do
   tmux rename -t "${session}" "${num}"
   ((num++))
 done
+
+return 0
