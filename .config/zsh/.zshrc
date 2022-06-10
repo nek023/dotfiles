@@ -56,7 +56,7 @@ fi
 # ------------------------------------------------------------------------------
 # Prompt
 # ------------------------------------------------------------------------------
-source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
 
 setopt prompt_subst
 
@@ -69,7 +69,7 @@ PROMPT='
 # https://github.com/asdf-vm/asdf
 # ------------------------------------------------------------------------------
 if (( ${+commands[asdf]} )); then
-  source "$(brew --prefix asdf)/asdf.sh"
+  source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
 fi
 
 # ------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ fi
 export PATH="${GOPATH}/bin:${PATH}"
 
 # Java
-export PATH="$(brew --prefix java)/bin:${PATH}"
+export PATH="${HOMEBREW_PREFIX}/opt/openjdk/bin:${PATH}"
 
 # dotfiles
 export PATH="${HOME}/dotfiles/bin:${PATH}"
