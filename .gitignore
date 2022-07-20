@@ -5,6 +5,9 @@
 .config/fish/fish_variables
 .config/fish/fisher/
 !.config/git/
+!.config/karabiner/
+.config/karabiner/*
+!.config/karabiner/karabiner.json
 !.config/nvim/
 !.config/tmux/
 !.config/vscode/
