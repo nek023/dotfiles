@@ -18,7 +18,11 @@ unlink:
 relink: unlink link
 
 .PHONY: setup
-setup: setup-base16-shell setup-vim-plugins
+setup: setup-asdf-plugins setup-base16-shell setup-vim-plugins
+
+.PHONY: setup-asdf-plugins
+setup-asdf-plugins:
+	./scripts/setup-asdf-plugins.sh
 
 .PHONY: setup-base16-shell
 setup-base16-shell:
