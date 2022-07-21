@@ -42,24 +42,3 @@ update-base16-shell:
 .PHONY: update-vim-plugins
 update-vim-plugins:
 	./scripts/update-vim-plugins.sh
-
-.PHONY: link-vscode-settings
-link-vscode-settings:
-	@test -d $(HOME)/Library/Application\ Support/Code/User \
-		&& test ! -e $(HOME)/Library/Application\ Support/Code/User/settings.json \
-		&& ln -sfnv $(HOME)/dotfiles/.config/vscode/settings.json $(HOME)/Library/Application\ Support/Code/User/settings.json \
-		|| :
-
-.PHONY: unlink-vscode-settings
-unlink-vscode-settings:
-	@test -L $(HOME)/Library/Application\ Support/Code/User/settings.json \
-		&& rm -vrf $(HOME)/Library/Application\ Support/Code/User/settings.json \
-		|| :
-
-.PHONY: dump-vscode-extensions
-dump-vscode-extensions:
-	./scripts/dump-vscode-extensions.sh > $(HOME)/dotfiles/.config/vscode/extensions
-
-.PHONY: install-vscode-extensions
-install-vscode-extensions:
-	./scripts/install-vscode-extensions.sh $(HOME)/dotfiles/.config/vscode/extensions

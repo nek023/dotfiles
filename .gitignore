@@ -10,7 +10,6 @@
 !.config/karabiner/karabiner.json
 !.config/nvim/
 !.config/tmux/
-!.config/vscode/
 !.config/zsh/
 .config/zsh/*
 !.config/zsh/.zimrc
