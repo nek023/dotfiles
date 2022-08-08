@@ -45,6 +45,7 @@ abbr nr="npm run"
 abbr y="yarn"
 abbr yr="yarn run"
 
+abbr a="aws-login"
 abbr co="code"
 abbr d="docker"
 abbr dc="docker compose"
