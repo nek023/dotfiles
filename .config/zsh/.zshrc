@@ -235,7 +235,7 @@ export FZF_DEFAULT_OPTS='
 export BASE16_SHELL="${XDG_CONFIG_HOME}/base16-shell"
 
 if [[ -n "${PS1}" && -s "${BASE16_SHELL}/profile_helper.sh" ]]; then
-  eval "$("${BASE16_SHELL}/profile_helper.sh")"
+  source "${BASE16_SHELL}/profile_helper.sh"
 fi
 
 # ------------------------------------------------------------------------------
