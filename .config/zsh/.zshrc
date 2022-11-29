@@ -88,6 +88,21 @@ if [[ -e "${HOME}/.asdf/plugins/java" ]]; then
 fi
 
 # ------------------------------------------------------------------------------
+# miniconda
+# ------------------------------------------------------------------------------
+__conda_setup="$("${HOMEBREW_PREFIX}/Caskroom/miniconda/base/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "${HOMEBREW_PREFIX}/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "${HOMEBREW_PREFIX}/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="${HOMEBREW_PREFIX}/Caskroom/miniconda/base/bin:${PATH}"
+    fi
+fi
+unset __conda_setup
+
+# ------------------------------------------------------------------------------
 # dotfiles/bin
 # ------------------------------------------------------------------------------
 export PATH="${HOME}/dotfiles/bin:${PATH}"
