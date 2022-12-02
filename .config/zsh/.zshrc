@@ -298,6 +298,10 @@ bindkey '^g^g^b' git-switch-remote
 zle -N git-insert-commit
 bindkey '^g^h' git-insert-commit
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^[e' edit-command-line
+
 # ------------------------------------------------------------------------------
 # Local configurations
 # ------------------------------------------------------------------------------
