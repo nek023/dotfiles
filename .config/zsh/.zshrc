@@ -192,7 +192,7 @@ alias gac!='git add -A && git commit --amend'
 alias gl='git log --graph --all --color --pretty=format:"%h %cn %s%Cred%d%Creset"'
 alias gpull='git pull origin $(git-current-branch)'
 alias gpush='git push origin $(git-current-branch)'
-alias gpush!='git push --force-with-lease origin $(git-current-branch)'
+alias gpush!='git push --force-with-lease --force-if-includes origin $(git-current-branch)'
 
 alias printpath='echo $PATH | tr ":" "\n"'
 alias timestamp='date +%Y%m%d-%H%M%S | tr -d "\n"'
