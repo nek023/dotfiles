@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -eu
+
+if [ "$*" = -usage ]; then
+  echo "open today's daily memo"
+  exit
+fi
+
+title=diary
+filename="$(date +%Y-%m-%d)-${title}.md"
+
+if memo cat $filename &> /dev/null; then
+  memo edit $filename
+else
+  memo new $title
+fi

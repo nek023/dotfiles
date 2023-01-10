@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+
+if [ "$*" = -usage ]; then
+  echo "open memo _posts directory in Finder"
+  exit
+fi
+
+memodir=$(cat ~/.config/memo/config.toml | grep memodir | sed -e 's/memodir = "\(.*\)"/\1/' -e "s|^~|$HOME|")
+open $memodir
