@@ -7,7 +7,7 @@ if [ "$*" = -usage ]; then
   exit
 fi
 
-title=diary
+title=daily
 filename="$(date +%Y-%m-%d)-${title}.md"
 
 if memo cat $filename &> /dev/null; then
