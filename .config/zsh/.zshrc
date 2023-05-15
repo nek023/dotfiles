@@ -310,6 +310,9 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^[e' edit-command-line
 
+zle -N replace-command-line
+bindkey '^[r' replace-command-line
+
 # ------------------------------------------------------------------------------
 # Local configurations
 # ------------------------------------------------------------------------------

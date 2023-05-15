@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+if (( ! ${+commands[rep]} )); then
+  echo "rep must be installed: https://github.com/nek023/rep"
+  return
+fi
+
+BUFFER=$(echo -n "${BUFFER}" | rep)
+CURSOR=$#BUFFER
+
+zle redisplay
