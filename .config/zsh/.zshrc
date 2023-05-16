@@ -36,6 +36,9 @@ export GPG_TTY="$(tty)"
 # Go
 export GOPATH="${HOME}/.go"
 
+# asdf
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+
 # ------------------------------------------------------------------------------
 # Homebrew
 # https://brew.sh/
