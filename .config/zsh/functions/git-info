@@ -1,7 +1,9 @@
 #!/bin/zsh
 
-GIT_PS1_SHOWDIRTYSTATE=1 \
-GIT_PS1_SHOWSTASHSTATE=1 \
-GIT_PS1_SHOWUNTRACKEDFILES=1 \
-GIT_PS1_SHOWUPSTREAM=auto \
-  __git_ps1 ' (%s)'
+if typeset -f __git_ps1 > /dev/null; then
+  GIT_PS1_SHOWDIRTYSTATE=1 \
+  GIT_PS1_SHOWSTASHSTATE=1 \
+  GIT_PS1_SHOWUNTRACKEDFILES=1 \
+  GIT_PS1_SHOWUPSTREAM=auto \
+    __git_ps1 ' (%s)'
+fi
