@@ -94,8 +94,12 @@ export PATH="${HOMEBREW_PREFIX}/opt/openjdk/bin:${PATH}"
 # asdf
 # https://github.com/asdf-vm/asdf
 # ------------------------------------------------------------------------------
-if (( ${+commands[asdf]} )); then
+if [ -f "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ]; then
+  # macOS
   source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
+elif [ -f "${HOME}/.asdf/asdf.sh" ]; then
+  # Linux
+  source "${HOME}/.asdf/asdf.sh"
 fi
 
 # ------------------------------------------------------------------------------
