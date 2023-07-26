@@ -56,15 +56,22 @@ fi
 # ------------------------------------------------------------------------------
 # Prompt
 # ------------------------------------------------------------------------------
-if [ -f "${HOME}/.config/git/completion/git-prompt.sh" ]; then
-  source "${HOME}/.config/git/completion/git-prompt.sh"
-fi
-
 setopt prompt_subst
 
 PROMPT='
 %(3L.%F{yellow}(%L)%f .)%(!.%F{red}%n%f.${SSH_TTY:+"%F{yellow}%n%f"})${SSH_TTY:+"@%F{green}%m%f:"}%F{cyan}%~%f%F{red}$(git-info)%f${duration_info}
 %(1j.%F{blue}*%f .)%(?.%F{green}.%F{red}%? )%(!.#.$)%f '
+
+# ------------------------------------------------------------------------------
+# Git
+# ------------------------------------------------------------------------------
+if [ -f "${HOME}/.config/git/completion/git-prompt.sh" ]; then
+  source "${HOME}/.config/git/completion/git-prompt.sh"
+fi
+
+if [ -d "${HOMEBREW_PREFIX}/share/git-core/contrib/diff-highlight" ]; then
+  export PATH="${HOMEBREW_PREFIX}/share/git-core/contrib/diff-highlight:${PATH}"
+fi
 
 # ------------------------------------------------------------------------------
 # Go
