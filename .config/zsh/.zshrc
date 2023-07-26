@@ -56,7 +56,9 @@ fi
 # ------------------------------------------------------------------------------
 # Prompt
 # ------------------------------------------------------------------------------
-source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
+if [ -f "${HOME}/.config/git/completion/git-prompt.sh" ]; then
+  source "${HOME}/.config/git/completion/git-prompt.sh"
+fi
 
 setopt prompt_subst
 
