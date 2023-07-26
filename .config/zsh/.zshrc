@@ -213,6 +213,8 @@ alias timestamp='date +%Y%m%d-%H%M%S | tr -d "\n"'
 
 if (( ${+commands[bat]} )); then
   alias cat='bat -p'
+elif (( ${+commands[batcat]} )); then
+  alias cat='batcat -p'
 fi
 
 if (( ${+commands[exa]} )); then
