@@ -17,13 +17,6 @@ unlink:
 .PHONY: relink
 relink: unlink link
 
-.PHONY: setup
-setup: setup-git
-
-.PHONY: setup-git
-setup-git:
-	./scripts/setup-git.sh
-
 .PHONY: update
 update: update-asdf-plugins update-base16-shell update-vim-plugins
 

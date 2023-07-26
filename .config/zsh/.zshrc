@@ -68,8 +68,12 @@ PROMPT='
 # ------------------------------------------------------------------------------
 # Git
 # ------------------------------------------------------------------------------
-if [ -f "${XDG_CONFIG_HOME}/git/completion/git-prompt.sh" ]; then
-  source "${XDG_CONFIG_HOME}/git/completion/git-prompt.sh"
+if [ -f "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh" ]; then
+  # macOS
+  source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
+elif [ -f /etc/bash_completion.d/git-prompt ]; then
+  # Linux
+  source /etc/bash_completion.d/git-prompt
 fi
 
 if [ -d "${HOMEBREW_PREFIX}/share/git-core/contrib/diff-highlight" ]; then
