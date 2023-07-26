@@ -179,11 +179,6 @@ for key ('k') bindkey -M vicmd ${key} history-substring-search-up
 for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 
-# Add highlight for abbrreviations.
-typeset -A ZSH_HIGHLIGHT_REGEXP
-ZSH_HIGHLIGHT_REGEXP=('^[[:blank:][:space:]]*('${(j:|:)${(k)ABBR_REGULAR_USER_ABBREVIATIONS}}')$' 'fg=green')
-ZSH_HIGHLIGHT_REGEXP+=('[[:<:]]('${(j:|:)${(k)ABBR_GLOBAL_USER_ABBREVIATIONS}}')$' 'fg=green')
-
 # ------------------------------------------------------------------------------
 # Aliases
 # ------------------------------------------------------------------------------
