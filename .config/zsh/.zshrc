@@ -65,8 +65,8 @@ PROMPT='
 # ------------------------------------------------------------------------------
 # Git
 # ------------------------------------------------------------------------------
-if [ -f "${HOME}/.config/git/completion/git-prompt.sh" ]; then
-  source "${HOME}/.config/git/completion/git-prompt.sh"
+if [ -f "${XDG_CONFIG_HOME}/git/completion/git-prompt.sh" ]; then
+  source "${XDG_CONFIG_HOME}/git/completion/git-prompt.sh"
 fi
 
 if [ -d "${HOMEBREW_PREFIX}/share/git-core/contrib/diff-highlight" ]; then

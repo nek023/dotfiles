@@ -2,4 +2,4 @@
 
 set -eu
 
-curl -o "${HOME}/.config/git/completion/git-prompt.sh" https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+curl -o "${XDG_CONFIG_HOME}/git/completion/git-prompt.sh" https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
