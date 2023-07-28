@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 local -A opts
-zparseopts -D -A opts -- d: -duration:=d i -incognito=i
+zparseopts -A opts -D -M -- d: -duration:=d i -incognito=i
 
 local profile="$1"
 if [[ -z "${profile}" ]]; then

@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 local -A opts
-zparseopts -D -A opts -- q: -query:=q
+zparseopts -A opts -D -M -- q: -query:=q
 
 local dir="$(ghq list -p | sed -e "s|${HOME}/||" | fzf +m -q "${opts[-q]}")"
 
