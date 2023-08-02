@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eu
+
+if [[ -f /opt/homebrew/bin/pinentry-mac ]]; then
+  exec /opt/homebrew/bin/pinentry-mac "$@"
+elif [[ -f /usr/bin/pinentry-curses ]]; then
+  exec /usr/bin/pinentry-curses "$@"
+fi

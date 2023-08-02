@@ -19,5 +19,3 @@
 .vim/*
 !.vim/indent/
 !.vim/init.vim
-bin/*
-!bin/.keep
