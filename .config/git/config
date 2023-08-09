@@ -5,14 +5,19 @@
 [core]
   editor = vim
   excludesfile = ~/.config/git/ignore
+  pager = delta --diff-highlight
+[delta]
+  navigate = true
+[diff]
+  colorMoved = default
 [include]
   path = ~/.config.local/git/config
 [init]
   defaultBranch = main
-[pager]
-  diff = diff-highlight | less
-  log  = diff-highlight | less
-  show = diff-highlight | less
+[interactive]
+  diffFilter = delta --color-only
+[merge]
+  conflictstyle = diff3
 [pull]
   rebase = false
 [push]

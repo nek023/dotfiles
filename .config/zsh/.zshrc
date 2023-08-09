@@ -76,10 +76,6 @@ elif [ -f /etc/bash_completion.d/git-prompt ]; then
   source /etc/bash_completion.d/git-prompt
 fi
 
-if [ -d "${HOMEBREW_PREFIX}/share/git-core/contrib/diff-highlight" ]; then
-  export PATH="${HOMEBREW_PREFIX}/share/git-core/contrib/diff-highlight:${PATH}"
-fi
-
 # ------------------------------------------------------------------------------
 # Go
 # ------------------------------------------------------------------------------
