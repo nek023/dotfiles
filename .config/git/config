@@ -5,7 +5,7 @@
 [core]
   editor = vim
   excludesfile = ~/.config/git/ignore
-  pager = delta --diff-highlight
+  pager = delta --diff-highlight --keep-plus-minus-markers
 [delta]
   navigate = true
 [diff]
@@ -15,7 +15,7 @@
 [init]
   defaultBranch = main
 [interactive]
-  diffFilter = delta --diff-highlight
+  diffFilter = delta --diff-highlight --keep-plus-minus-markers
 [merge]
   conflictstyle = diff3
 [pull]
