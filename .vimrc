@@ -19,6 +19,9 @@ set shiftwidth=4
 " インデントを 'shiftwidth' の値の倍数に丸める
 set shiftround
 
+" テキスト幅による自動改行を無効化する
+set textwidth=0
+
 " 文字コードの指定
 set encoding=utf-8
 
