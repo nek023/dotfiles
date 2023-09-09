@@ -213,11 +213,11 @@ elif (( ${+commands[batcat]} )); then
   alias cat='batcat -p'
 fi
 
-if (( ${+commands[exa]} )); then
-  alias ls='exa -g --group-directories-first --time-style=long-iso'
+if (( ${+commands[eza]} )); then
+  alias ls='eza -g --group-directories-first --time-style=long-iso'
   alias la='ls -la'
   alias ll='ls -l'
-  alias tree='exa -T'
+  alias tree='eza -T'
 fi
 
 if (( ${+commands[safe-rm]} )); then

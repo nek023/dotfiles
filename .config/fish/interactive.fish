@@ -68,11 +68,11 @@ if type -q bar
     alias cat='bat -p'
 end
 
-if type -q exa
-    alias ls='exa -g --group-directories-first --time-style=long-iso'
+if type -q eza
+    alias ls='eza -g --group-directories-first --time-style=long-iso'
     alias la='ls -la'
     alias ll='ls -l'
-    alias tree='exa -T'
+    alias tree='eza -T'
 end
 
 if type -q safe-rm
