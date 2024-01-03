@@ -10,6 +10,11 @@
   navigate = true
 [diff]
   colorMoved = default
+  tool = difftastic
+[difftool]
+  prompt = false
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
 [include]
   path = ~/.config.local/git/config
 [init]
@@ -18,6 +23,8 @@
   diffFilter = delta --diff-highlight --keep-plus-minus-markers
 [merge]
   conflictstyle = diff3
+[pager]
+  difftool = true
 [pull]
   rebase = false
 [push]
