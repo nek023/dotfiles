@@ -86,28 +86,28 @@ export PATH="${GOPATH}/bin:${PATH}"
 # ------------------------------------------------------------------------------
 export PATH="${HOMEBREW_PREFIX}/opt/openjdk/bin:${PATH}"
 
-# ------------------------------------------------------------------------------
-# asdf
-# https://github.com/asdf-vm/asdf
-# ------------------------------------------------------------------------------
-if [ -f "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ]; then
-  ASDF_FORCE_PREPEND=yes source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
-fi
-
-# ------------------------------------------------------------------------------
-# asdf-java
-# https://github.com/halcyon/asdf-java
-# ------------------------------------------------------------------------------
-if [[ -e "${HOME}/.asdf/plugins/java" ]]; then
-  source "${HOME}/.asdf/plugins/java/set-java-home.zsh"
-fi
-
-# ------------------------------------------------------------------------------
-# mise
-# https://mise.jdx.dev/
-# ------------------------------------------------------------------------------
 if (( ${+commands[mise]} )); then
+  # ------------------------------------------------------------------------------
+  # mise
+  # https://mise.jdx.dev/
+  # ------------------------------------------------------------------------------
   export PATH="${XDG_DATA_HOME}/mise/shims:${PATH}"
+else
+  # ------------------------------------------------------------------------------
+  # asdf
+  # https://github.com/asdf-vm/asdf
+  # ------------------------------------------------------------------------------
+  if [ -f "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ]; then
+    ASDF_FORCE_PREPEND=yes source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
+  fi
+
+  # ------------------------------------------------------------------------------
+  # asdf-java
+  # https://github.com/halcyon/asdf-java
+  # ------------------------------------------------------------------------------
+  if [[ -e "${HOME}/.asdf/plugins/java" ]]; then
+    source "${HOME}/.asdf/plugins/java/set-java-home.zsh"
+  fi
 fi
 
 # ------------------------------------------------------------------------------
