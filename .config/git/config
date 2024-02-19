@@ -2,13 +2,16 @@
   pop  = stash pop
   drop = stash drop
   open = !gh repo view -w -b $(git symbolic-ref --short HEAD)
+[branch]
+  sort = -committerdate
 [core]
   editor = vim
-  excludesfile = ~/.config/git/ignore
+  excludesfile = ~/.config/git/.gitignore
   pager = delta --diff-highlight --keep-plus-minus-markers
 [delta]
   navigate = true
 [diff]
+  algorithm = histogram
   colorMoved = default
   tool = difftastic
 [difftool]
@@ -22,10 +25,13 @@
 [interactive]
   diffFilter = delta --diff-highlight --keep-plus-minus-markers
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 [pager]
   difftool = true
 [pull]
   rebase = false
 [push]
   default = current
+[rebase]
+  autosquash = true
+  autostash = true
