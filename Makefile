@@ -31,3 +31,4 @@ update-base16-shell:
 .PHONY: update-vim-plugins
 update-vim-plugins:
 	./scripts/update-vim-plugins.sh
+	./scripts/update-nvim-plugins.sh
