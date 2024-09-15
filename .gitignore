@@ -8,6 +8,9 @@
 !.config/memo/
 .config/memo/_posts
 !.config/nvim/
+.config/nvim/*
+!.config/nvim/init.lua
+!.config/nvim/lua/
 !.config/tmux/
 !.config/zsh/
 .config/zsh/*
