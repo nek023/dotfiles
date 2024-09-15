@@ -13,7 +13,9 @@ WORDCHARS=${WORDCHARS//[\/]}
 # Shell
 export LANG=en_US.UTF-8
 
-if (( ${+commands[vim]} )); then
+if (( ${+commands[nvim]} )); then
+  export EDITOR=nvim
+elif (( ${+commands[vim]} )); then
   export EDITOR=vim
 fi
 
