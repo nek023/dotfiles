@@ -5,7 +5,7 @@
 [branch]
   sort = -committerdate
 [core]
-  editor = vim
+  editor = nvim
   excludesfile = ~/.config/git/.gitignore
   pager = delta --diff-highlight --keep-plus-minus-markers
 [delta]
