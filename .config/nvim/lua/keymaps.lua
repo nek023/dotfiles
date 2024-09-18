@@ -1,5 +1,3 @@
-vim.g.mapleader = "\\"
-
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "J", "}")
 vim.keymap.set("", "K", "{")
