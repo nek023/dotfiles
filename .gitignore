@@ -21,4 +21,4 @@
 !.config/zsh/functions/
 .vim/*
 !.vim/indent/
-!.vim/init.vim
+!.vim/vimrc
