@@ -20,7 +20,7 @@ return function(config)
   return config
 end
 ]]
-local local_config_path = os.getenv("HOME") .. "/.config.local/wezterm/wezterm.lua"
+local local_config_path = wezterm.home_dir .. "/.config.local/wezterm/wezterm.lua"
 local local_config, ok = loadfile(local_config_path)
 if local_config ~= nil then
   config = local_config()(config)
