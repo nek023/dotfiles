@@ -13,6 +13,7 @@
 !.config/nvim/init.lua
 !.config/nvim/lua/
 !.config/tmux/
+!.config/wezterm/
 !.config/zsh/
 .config/zsh/*
 !.config/zsh/.zimrc
