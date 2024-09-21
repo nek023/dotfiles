@@ -1,0 +1,155 @@
+" ------------------------------------------------------------------------------
+" 基本
+" ------------------------------------------------------------------------------
+" 文字コード
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+
+" vi互換を無効化
+set nocompatible
+
+" 行番号を表示
+set number
+
+" 自動インデント
+set autoindent
+
+" 自動インデントでコードの構造に応じたインデントを挿入する
+set smartindent
+
+" タブ文字の代わりにスペースを挿入する
+set expandtab
+
+" タブ文字を何文字のスペースとして表示するか
+set tabstop=4
+
+" タブ文字をキーボードで入力した際に何文字の空白文字にするか
+set softtabstop=4
+
+" インデントを変更する際に何文字分ずらすか
+set shiftwidth=4
+
+" インデント幅がshiftwidthの値の倍数になるようにスペースを挿入する
+set shiftround
+
+" テキスト幅による自動改行を無効化する
+set textwidth=0
+
+" Backspaceでインデント・改行・挿入開始点を削除できるようにする
+set backspace=indent,eol,start
+
+" 画面に収まりきらない行を折り返して表示する
+set wrap
+
+" 行頭の余白内でTabを押すとshiftwidth分だけインデントする
+set smarttab
+
+" ステータスラインにコマンド候補を表示する
+set wildmenu
+
+" 複数のコマンドがマッチする場合、リストを表示して最初の候補を挿入する
+set wildmode=list:full
+
+" ステータスラインを常に表示する
+set laststatus=2
+
+" ステータスラインに表示する内容の設定
+set statusline=%f%m%=%y[%{&fileencoding}][%{&fileformat}]
+
+" 検索にヒットした文字列をハイライトする
+set hlsearch
+
+" 検索時に大文字小文字を無視する
+set ignorecase
+
+" 大文字を含めて検索した場合は大文字小文字を無視しない
+set smartcase
+
+" インクリメンタルサーチを有効にする
+set incsearch
+
+" タブ・空白・改行などの非表示文字を表示する
+set list
+set listchars=tab:>\ ,trail:-
+
+" vimの外でのファイル変更を自動的に反映させる
+set autoread
+
+" バッファのスワップファイルを作成しない
+set noswapfile
+
+" バックアップファイルを作成しない
+set nobackup
+
+" ビープ音と画面のフラッシュを無効にする
+set noerrorbells
+set novisualbell
+set visualbell t_vb=
+
+" 折り畳みの設定
+set foldmethod=marker
+set foldcolumn=3
+set foldlevel=99
+
+" 補完候補選択時にプレビューを表示しない
+set completeopt=menuone
+
+" スクロール時にカーソルを中央に維持
+"set scrolloff=999999
+
+" カーソルがある行を強調表示する
+set cursorline
+
+" キーボード操作以外の再描画を遅らせる
+set lazyredraw
+
+" シンタックスハイライトを有効化
+syntax on
+
+" 対応する括弧のハイライトを無効にする
+let loaded_matchparen = 1
+
+" システムのクリップボードと連携する
+set clipboard+=unnamedplus
+
+" 24bit colorを有効化
+set termguicolors
+
+" ------------------------------------------------------------------------------
+" キーマッピング
+" ------------------------------------------------------------------------------
+" <leader> の設定
+let mapleader = '\'
+
+" 高速移動
+noremap H b
+noremap J }
+noremap K {
+noremap L w
+
+" 行移動を見た目上の移動にする
+noremap j gj
+noremap k gk
+
+" 行頭・行末移動
+noremap 9 ^
+noremap 0 $
+
+" 挿入モードでShift+Tabでインデントを減らす
+inoremap <S-Tab> <C-d>
+
+" ビジュアルモードでインデントを継続的に変更できるようにする
+vnoremap < <gv
+vnoremap > >gv
+
+" 検索にヒットした候補に移動したときに表示位置を中央に修正する
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" 検索にヒットした文字列のハイライトを非表示にする
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
