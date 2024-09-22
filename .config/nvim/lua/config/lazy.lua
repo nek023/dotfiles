@@ -1,3 +1,5 @@
+-- https://lazy.folke.io/installation
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -31,5 +33,8 @@ require("lazy").setup({
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = {
+    enabled = true,
+    notify = false
+  },
 })
