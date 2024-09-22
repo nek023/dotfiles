@@ -10,13 +10,27 @@ config.font = wezterm.font_with_fallback({
 })
 config.hide_tab_bar_if_only_one_tab = true
 config.window_background_opacity = 0.8
+config.window_decorations = "TITLE | RESIZE | MACOS_FORCE_ENABLE_SHADOW"
 config.macos_window_background_blur = 20
+
+config.keys = {
+  {
+    key = "Enter",
+    mods = "CMD",
+    action = wezterm.action.ToggleFullScreen,
+  },
+  {
+    key = "P",
+    mods = "CMD",
+    action = wezterm.action.ActivateCommandPalette,
+  },
+}
 
 --[[
 ~/.config.local/wezterm/wezterm.luaに以下のように書くことで設定を上書きできる
 
 return function(config)
-  -- (configを上書きする)
+  -- (configを変更する)
   return config
 end
 ]]
