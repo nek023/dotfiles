@@ -11,20 +11,23 @@ config.font = wezterm.font_with_fallback({
   "Symbols Nerd Font Mono"
 })
 
+config.default_cursor_style = "BlinkingBlock"
+config.cursor_blink_rate = 500
+config.cursor_blink_ease_in = "Constant"
+config.cursor_blink_ease_out = "Constant"
+
 config.command_palette_rows = 14
 config.hide_tab_bar_if_only_one_tab = true
 config.window_background_opacity = 0.8
 config.window_decorations = "TITLE | RESIZE | MACOS_FORCE_ENABLE_SHADOW"
 config.macos_window_background_blur = 20
 
-config.default_cursor_style = "BlinkingBlock"
-config.cursor_blink_rate = 500
-config.cursor_blink_ease_in = "Constant"
-config.cursor_blink_ease_out = "Constant"
+config.window_close_confirmation = "AlwaysPrompt"
+config.skip_close_confirmation_for_processes_named = {}
 
 config.keys = {
   { key = "Enter", mods = "SUPER", action = wezterm.action.ToggleFullScreen },
-  { key = "P",     mods = "SUPER", action = wezterm.action.ActivateCommandPalette }
+  { key = "P",     mods = "SUPER", action = wezterm.action.ActivateCommandPalette },
 }
 
 --[[
