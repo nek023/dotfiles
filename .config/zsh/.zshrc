@@ -122,15 +122,30 @@ fi
 # ------------------------------------------------------------------------------
 __conda_setup="$("${HOMEBREW_PREFIX}/Caskroom/miniconda/base/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+  eval "$__conda_setup"
 else
-    if [ -f "${HOMEBREW_PREFIX}/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "${HOMEBREW_PREFIX}/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="${HOMEBREW_PREFIX}/Caskroom/miniconda/base/bin:${PATH}"
-    fi
+  if [ -f "${HOMEBREW_PREFIX}/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+    . "${HOMEBREW_PREFIX}/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+  else
+    export PATH="${HOMEBREW_PREFIX}/Caskroom/miniconda/base/bin:${PATH}"
+  fi
 fi
 unset __conda_setup
+
+# ------------------------------------------------------------------------------
+# fvm
+# ------------------------------------------------------------------------------
+# Add path for Flutter installed by `fvm global`
+export PATH="${HOME}/fvm/default/bin:${PATH}"
+
+# Add path for Dart bins, especially for protoc_plugin
+# https://pub.dev/packages/protoc_plugin
+export PATH="${HOME}/.pub-cache/bin:${PATH}"
+
+# Completions
+if [ -f "${XDG_CONFIG_HOME}/.dart-cli-completion/zsh-config.zsh" ]; then
+  . "${XDG_CONFIG_HOME}/.dart-cli-completion/zsh-config.zsh"
+fi
 
 # ------------------------------------------------------------------------------
 # dotfiles/bin
