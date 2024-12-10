@@ -1,10 +1,15 @@
 #!/bin/zsh
 
-local number=$(gh pr list \
+local prs=$(gh pr list \
   --json number,title,headRefName,updatedAt \
-  --template '{{range .}}{{tablerow (printf "#%v" .number) .title .headRefName (timeago .updatedAt)}}{{end}}' \
-  | fzf +m +s \
-  | sed 's/^#\([0-9]*\).*/\1/')
+  --template '{{range .}}{{tablerow (printf "#%v" .number) .title .headRefName (timeago .updatedAt)}}{{end}}')
+
+if [[ -z "${prs}" ]]; then
+  echo "no open pull requests found"
+  return
+fi
+
+local number=$(echo "${prs}" | fzf +m +s | sed 's/^#\([0-9]*\).*/\1/')
 
 if [[ -n "${number}" ]]; then
   gh pr checkout "${number}"
