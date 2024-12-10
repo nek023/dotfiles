@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+local number=$(gh pr list \
+  --json number,title,headRefName,updatedAt \
+  --template '{{range .}}{{tablerow (printf "#%v" .number) .title .headRefName (timeago .updatedAt)}}{{end}}' \
+  | fzf +m +s \
+  | sed 's/^#\([0-9]*\).*/\1/')
+
+if [[ -n "${number}" ]]; then
+  gh pr checkout "${number}"
+fi
