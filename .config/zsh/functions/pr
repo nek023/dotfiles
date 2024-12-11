@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 local prs=$(gh pr list \
+  --limit 100 \
   --json number,title,headRefName,updatedAt \
   --template '{{range .}}{{tablerow (printf "#%v" .number) .title .headRefName (timeago .updatedAt)}}{{end}}')
 
