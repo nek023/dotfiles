@@ -107,6 +107,8 @@ fi
 # ------------------------------------------------------------------------------
 if (( ! ${+commands[mise]} )) && [ -f "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ]; then
   ASDF_FORCE_PREPEND=yes source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
+elif [ -f "${HOME}/.asdf/asdf.sh" ]; then
+  source "${HOME}/.asdf/asdf.sh"
 fi
 
 # ------------------------------------------------------------------------------
