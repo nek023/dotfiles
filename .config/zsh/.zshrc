@@ -105,11 +105,8 @@ fi
 # asdf
 # https://github.com/asdf-vm/asdf
 # ------------------------------------------------------------------------------
-if (( ! ${+commands[mise]} )) && [ -f "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh" ]; then
-  ASDF_FORCE_PREPEND=yes source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
-elif [ -f "${HOME}/.asdf/asdf.sh" ]; then
-  source "${HOME}/.asdf/asdf.sh"
-fi
+export ASDF_DATA_DIR="${HOME}/.asdf"
+export PATH="${ASDF_DATA_DIR}/shims:${PATH}"
 
 # ------------------------------------------------------------------------------
 # asdf-java
