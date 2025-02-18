@@ -250,10 +250,6 @@ if (( ${+commands[safe-rm]} )); then
   alias rm='safe-rm'
 fi
 
-# Temporary remove ~/.asdf/shims from path to avoid conflicting with
-# python*-config scripts provided by Homebrew.
-alias brew='PATH=$(echo $PATH | sed -e "s|${HOME}/.asdf/shims:||g") brew'
-
 # ------------------------------------------------------------------------------
 # direnv
 # https://github.com/direnv/direnv
