@@ -1,5 +1,5 @@
 CANDIDATES ?= $(wildcard .??*)
-EXCLUSIONS ?= .DS_Store .git .gitignore
+EXCLUSIONS ?= .DS_Store .git .github .gitignore
 DOTFILES   ?= $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .PHONY: list
