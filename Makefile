@@ -18,7 +18,7 @@ unlink:
 relink: unlink link
 
 .PHONY: update
-update: update-asdf-plugins update-base16-shell update-vim-plugins
+update: update-asdf-plugins update-base16-shell update-vim-plugins update-nvim-plugins update-zimfw
 
 .PHONY: update-asdf-plugins
 update-asdf-plugins:
@@ -31,4 +31,11 @@ update-base16-shell:
 .PHONY: update-vim-plugins
 update-vim-plugins:
 	./scripts/update-vim-plugins.sh
+
+.PHONY: update-nvim-plugins
+update-nvim-plugins:
 	./scripts/update-nvim-plugins.sh
+
+.PHONY: update-zimfw-modules
+update-zimfw:
+	./scripts/update-zimfw.sh
