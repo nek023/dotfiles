@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+local dir="$(ghq-select -q "${BUFFER}")"
+
+if [[ -n "${dir}" ]]; then
+  BUFFER="code -n ${dir}"
+  zle accept-line
+fi
+
+zle redisplay

@@ -316,6 +316,9 @@ bindkey '^r' select-history
 zle -N ghq-cd
 bindkey '^gc' ghq-cd
 
+zle -N ghq-code
+bindkey '^g^v' ghq-code
+
 zle -N git-add-files
 bindkey '^g^a' git-add-files
 
