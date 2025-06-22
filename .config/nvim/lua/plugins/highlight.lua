@@ -3,11 +3,9 @@ return {{
     config = function()
         local highlight = require("nvim-highlight-colors")
         highlight.setup({
-            render = "virtual",
-            virtual_symbol = "■",
-            virtual_symbol_prefix = "",
-            virtual_symbol_suffix = " ",
-            virtual_symbol_position = "inline"
+            render = "background",
+            enable_named_colors = false,
+            enable_tailwind = true,
         })
         highlight.turnOn()
     end
