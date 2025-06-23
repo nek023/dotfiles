@@ -54,5 +54,6 @@ abbr gg="ghq get"
 abbr k="kubectl"
 abbr tf="terraform"
 abbr cc="claude"
+abbr ccc="claude --continue"
 
 abbr brewup="brew update; brew upgrade; brew cleanup"
