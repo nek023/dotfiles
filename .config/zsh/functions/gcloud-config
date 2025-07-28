@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+config_name=$(gcloud config configurations list --format='table[no-heading](is_active.yesno(yes="*",no="-"), name, properties.core.account, properties.core.project.yesno(no="(unset)"))' \
+  | fzf +m -q "$1" \
+  | awk '{print $2}')
+
+if [[ -n "${config_name}" ]]; then
+  gcloud config configurations activate "${config_name}"
+fi
