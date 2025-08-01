@@ -141,8 +141,9 @@ if [ -f "${XDG_CONFIG_HOME}/.dart-cli-completion/zsh-config.zsh" ]; then
 fi
 
 # ------------------------------------------------------------------------------
-# dotfiles/bin
+# User-specific executable files
 # ------------------------------------------------------------------------------
+export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="${HOME}/dotfiles/bin:${PATH}"
 
 # ------------------------------------------------------------------------------
