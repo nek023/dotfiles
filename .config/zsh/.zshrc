@@ -135,11 +135,6 @@ export PATH="${HOME}/fvm/default/bin:${PATH}"
 # https://pub.dev/packages/protoc_plugin
 export PATH="${HOME}/.pub-cache/bin:${PATH}"
 
-# Completions
-if [ -f "${XDG_CONFIG_HOME}/.dart-cli-completion/zsh-config.zsh" ]; then
-  . "${XDG_CONFIG_HOME}/.dart-cli-completion/zsh-config.zsh"
-fi
-
 # ------------------------------------------------------------------------------
 # User-specific executable files
 # ------------------------------------------------------------------------------
@@ -203,6 +198,22 @@ for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search
 for key ('k') bindkey -M vicmd ${key} history-substring-search-up
 for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
+
+# ------------------------------------------------------------------------------
+# Completions
+# ------------------------------------------------------------------------------
+# Buildpacks
+source $(pack completion --shell zsh)
+
+# fvm
+if [ -f "${XDG_CONFIG_HOME}/.dart-cli-completion/zsh-config.zsh" ]; then
+  . "${XDG_CONFIG_HOME}/.dart-cli-completion/zsh-config.zsh"
+fi
+
+# kubectl
+if (( ${+commands[kubectl]} )); then
+  source <(kubectl completion zsh)
+fi
 
 # ------------------------------------------------------------------------------
 # Aliases
@@ -274,14 +285,6 @@ export BASE16_SHELL="${XDG_CONFIG_HOME}/base16-shell"
 
 if [[ -n "${PS1}" && -s "${BASE16_SHELL}/profile_helper.sh" ]]; then
   source "${BASE16_SHELL}/profile_helper.sh"
-fi
-
-# ------------------------------------------------------------------------------
-# kubernetes
-# https://kubernetes.io/
-# ------------------------------------------------------------------------------
-if (( ${+commands[kubectl]} )); then
-  source <(kubectl completion zsh)
 fi
 
 # ------------------------------------------------------------------------------
