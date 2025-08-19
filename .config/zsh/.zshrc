@@ -203,7 +203,9 @@ unset key
 # Completions
 # ------------------------------------------------------------------------------
 # Buildpacks
-source $(pack completion --shell zsh)
+if (( ${+commands[pack]} )); then
+  source $(pack completion --shell zsh)
+fi
 
 # fvm
 if [ -f "${XDG_CONFIG_HOME}/.dart-cli-completion/zsh-config.zsh" ]; then
