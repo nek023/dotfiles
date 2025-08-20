@@ -6,7 +6,7 @@
   sort = -committerdate
 [core]
   editor = nvim
-  excludesfile = ~/.config/git/.gitignore
+  excludesfile = ~/.config/git/ignore
   pager = delta --diff-highlight --keep-plus-minus-markers
 [delta]
   navigate = true
