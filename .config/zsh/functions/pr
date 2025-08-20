@@ -2,8 +2,13 @@
 
 local prs=$(gh pr list \
   --limit 100 \
-  --json number,title,headRefName,updatedAt \
-  --template '{{range .}}{{tablerow (printf "#%v" .number) .title .headRefName (timeago .updatedAt)}}{{end}}')
+  --json number,title,headRefName,updatedAt,statusCheckRollup \
+  --template '{{range .}}
+    {{- $concl := (join "" (pluck "conclusion" .statusCheckRollup)) -}}
+    {{- $status := "🟡" -}}
+    {{- if regexMatch "^(SUCCESS|SKIPPED)+$" $concl -}}{{ $status = "✅" }}
+    {{- else if contains "FAILURE" $concl -}}{{ $status = "❌" }}{{- end -}}
+    {{- tablerow (printf "#%v" .number) .title $status .headRefName (timeago .updatedAt) -}}{{end}}')
 
 if [[ -z "${prs}" ]]; then
   echo "no open pull requests found"
