@@ -7,7 +7,7 @@
 [core]
   editor = nvim
   excludesfile = ~/.config/git/ignore
-  pager = delta --diff-highlight --keep-plus-minus-markers
+  pager = sh -c 'command -v delta >/dev/null 2>&1 && delta --diff-highlight --keep-plus-minus-markers || less'
 [delta]
   navigate = true
 [diff]
@@ -23,7 +23,7 @@
 [init]
   defaultBranch = main
 [interactive]
-  diffFilter = delta --diff-highlight --keep-plus-minus-markers
+  diffFilter = sh -c 'command -v delta >/dev/null 2>&1 && delta --diff-highlight --keep-plus-minus-markers || cat'
 [merge]
   conflictstyle = zdiff3
 [pager]
