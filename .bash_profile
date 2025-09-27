@@ -5,8 +5,8 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
-# Launch fish shell if startup command is not specified
-if [ -z "$BASH_EXECUTION_STRING" ]; then
-  FISH_PATH=$(which fish)
-  test -x "$FISH_PATH" && exec -l "$FISH_PATH"
+ZSH_CMD=$(command -v zsh)
+if [ -t 1 ] && [ -x "$ZSH_CMD" ] && [ "$SHELL" != "$ZSH_CMD" ]; then
+  export SHELL="$ZSH_CMD"
+  exec -l "$SHELL"
 fi

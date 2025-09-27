@@ -5,14 +5,14 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
-# Homebrew (Intel)
-if [ -f /usr/local/bin/brew ]; then
-  export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-fi
-
-# Homebrew (Apple Silicon)
+# Homebrew (macOS)
 if [ -f /opt/homebrew/bin/brew ]; then
   export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+fi
+
+# Homebrew (Linux)
+if [ -f /opt/homebrew/bin/brew ]; then
+  export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
 fi
 
 # Load local config
