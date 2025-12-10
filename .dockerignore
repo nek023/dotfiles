@@ -1,0 +1,35 @@
+# Git関連
+.git
+.github
+.gitignore
+
+# macOS
+.DS_Store
+
+# ログファイル
+*.log
+
+# Zsh関連のキャッシュと履歴
+.config/zsh/.zcompcache
+.config/zsh/.zcompdump*
+.config/zsh/.zsh_history
+
+# Fish関連のキャッシュ
+.config/fish/fish_variables
+.config/fish/fisher
+
+# Vim/Neovim関連のキャッシュ
+.vim/.netrwhist
+.config/nvim/lazy-lock.json
+
+# その他のキャッシュ
+.cache
+
+# ドキュメント（不要な場合）
+# README.md
+# CLAUDE.md
+
+# Docker関連（ビルド時に自分自身を含めない）
+Dockerfile
+.dockerignore
+docker-compose.yml

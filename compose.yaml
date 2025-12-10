@@ -1,0 +1,16 @@
+name: dotfiles
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/home/dev/dotfiles
+      - home:/home/dev
+    working_dir: /home/dev
+    stdin_open: true
+    tty: true
+
+volumes:
+  home:
+    driver: local
