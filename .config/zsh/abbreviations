@@ -53,6 +53,7 @@ abbr dc="docker compose"
 abbr gg="ghq get"
 abbr k="kubectl"
 abbr tf="terraform"
+abbr tfd="terraform-docs"
 abbr cc="claude"
 abbr ccc="claude --continue"
 
