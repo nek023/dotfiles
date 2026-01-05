@@ -1,0 +1,17 @@
+theme = Tomorrow Night Eighties
+
+font-family = ""
+font-family = Source Code Pro
+font-family = Noto Sans Mono CJK JP
+
+cursor-style = block
+cursor-style-blink = true
+
+background-opacity = 0.8
+background-blur = 20
+macos-non-native-fullscreen = true
+
+keybind = cmd+enter=toggle_fullscreen
+keybind = cmd+p=toggle_command_palette
+
+config-file = ?~/.config.local/ghostty/config

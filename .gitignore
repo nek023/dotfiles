@@ -4,6 +4,9 @@
 .config/fish/conf.d/
 .config/fish/fish_variables
 .config/fish/fisher/
+!.config/ghostty/
+.config/ghostty/*
+!.config/ghostty/config
 !.config/git/
 !.config/ideavim/
 !.config/memo/
