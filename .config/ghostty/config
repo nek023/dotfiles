@@ -13,5 +13,6 @@ macos-non-native-fullscreen = true
 
 keybind = cmd+enter=toggle_fullscreen
 keybind = cmd+p=toggle_command_palette
+keybind = shift+enter=text:\n
 
 config-file = ?~/.config.local/ghostty/config
