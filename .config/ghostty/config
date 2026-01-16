@@ -1,5 +1,8 @@
 theme = Tomorrow Night Eighties
 
+title = " "
+macos-titlebar-proxy-icon = hidden
+
 font-family = ""
 font-family = Monaspace Neon
 font-family = Noto Sans Mono CJK JP
