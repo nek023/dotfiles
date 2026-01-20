@@ -1,7 +1,6 @@
 theme = Tomorrow Night Eighties
 
 title = " "
-macos-titlebar-proxy-icon = hidden
 
 font-family = ""
 font-family = Monaspace Neon
@@ -12,10 +11,14 @@ cursor-style-blink = true
 
 background-opacity = 0.8
 background-blur = 20
-macos-non-native-fullscreen = true
 
 keybind = cmd+enter=toggle_fullscreen
 keybind = cmd+p=toggle_command_palette
 keybind = shift+enter=text:\n
+
+macos-non-native-fullscreen = true
+macos-titlebar-proxy-icon = hidden
+
+quit-after-last-window-closed = true
 
 config-file = ?~/.config.local/ghostty/config
