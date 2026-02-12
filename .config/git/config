@@ -18,6 +18,12 @@
   prompt = false
 [difftool "difftastic"]
   cmd = difft "$LOCAL" "$REMOTE"
+[gtr "ai"]
+  default = claude
+[gtr "editor"]
+  default = vscode
+[gtr "copy"]
+  includedirs = .claude
 [include]
   path = ~/.config.local/git/config
 [init]
