@@ -28,23 +28,23 @@ vim.keymap.set("n", "g*", "g*zz")
 vim.keymap.set("n", "g#", "g#zz")
 
 -- 検索にヒットした文字列のハイライトを非表示にする
-vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { silent = true })
+vim.keymap.set("n", "<Esc><Esc>", "<cmd>nohlsearch<CR>", { silent = true })
 
 -- ウィンドウのリサイズ幅を変更する
-vim.keymap.set("n", "<C-w>+", ":resize +5<CR>", { silent = true })
-vim.keymap.set("n", "<C-w>-", ":resize -5<CR>", { silent = true })
-vim.keymap.set("n", "<C-w>>", ":vertical resize +10<CR>", { silent = true })
-vim.keymap.set("n", "<C-w><", ":vertical resize -10<CR>", { silent = true })
+vim.keymap.set("n", "<C-w>+", "<cmd>resize +5<CR>", { silent = true })
+vim.keymap.set("n", "<C-w>-", "<cmd>resize -5<CR>", { silent = true })
+vim.keymap.set("n", "<C-w>>", "<cmd>vertical resize +10<CR>", { silent = true })
+vim.keymap.set("n", "<C-w><", "<cmd>vertical resize -10<CR>", { silent = true })
 
 -- 新しいタブを開く
-vim.keymap.set("n", "tt", ":tablast <bar> tabnew<CR>", { silent = true })
+vim.keymap.set("n", "tt", "<cmd>tablast <bar> tabnew<CR>", { silent = true })
 
 -- タブを閉じる
-vim.keymap.set("n", "tc", ":tabclose<CR>", { silent = true })
+vim.keymap.set("n", "tc", "<cmd>tabclose<CR>", { silent = true })
 
 -- 前後のタブに移動する
-vim.keymap.set("n", "tn", ":tabnext<CR>", { silent = true })
-vim.keymap.set("n", "tp", ":tabprevious<CR>", { silent = true })
+vim.keymap.set("n", "tn", "<cmd>tabnext<CR>", { silent = true })
+vim.keymap.set("n", "tp", "<cmd>tabprevious<CR>", { silent = true })
 
 -- nvim-telescope
 local telescope = require("telescope.builtin")
@@ -54,4 +54,4 @@ vim.keymap.set("n", "<leader>fb", telescope.buffers)
 vim.keymap.set("n", "<leader>fh", telescope.help_tags)
 
 -- nvim-tree
-vim.keymap.set("n", "<C-e>", ":NvimTreeToggle<CR>", { silent = true })
+vim.keymap.set("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { silent = true })
