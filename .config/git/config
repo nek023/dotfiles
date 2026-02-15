@@ -6,7 +6,6 @@
   sort = -committerdate
 [core]
   editor = nvim
-  excludesfile = ~/.config/git/ignore
   pager = sh -c 'command -v delta >/dev/null 2>&1 && delta --diff-highlight --keep-plus-minus-markers || less'
 [delta]
   navigate = true
@@ -34,8 +33,6 @@
   conflictstyle = zdiff3
 [pager]
   difftool = true
-[pull]
-  rebase = false
 [push]
   default = current
 [rebase]
