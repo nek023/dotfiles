@@ -1,7 +1,8 @@
 [alias]
-  pop  = stash pop
+  ddiff = -c diff.external=difft diff
   drop = stash drop
   open = !gh repo view -w -b $(git symbolic-ref --short HEAD)
+  pop  = stash pop
 [branch]
   sort = -committerdate
 [core]
