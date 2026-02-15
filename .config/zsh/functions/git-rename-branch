@@ -14,4 +14,8 @@ ${EDITOR:-vim} "${tmp_file}"
 local new_branch=$(cat "${tmp_file}" | tr -d "[:space:]")
 rm -f "${tmp_file}"
 
+if [[ -z "${new_branch}" || "${new_branch}" == "${current_branch}" ]]; then
+  return 0
+fi
+
 git branch -m "${new_branch}"

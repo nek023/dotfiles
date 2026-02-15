@@ -44,12 +44,12 @@ export HOMEBREW_NO_ANALYTICS=1
 # ------------------------------------------------------------------------------
 # macOS
 if [[ -f /opt/homebrew/bin/brew ]]; then
-  eval $(/opt/homebrew/bin/brew shellenv)
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Linux
 if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
-  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # ------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
 # Specifies how suggestions should be generated.
-# At first chooses the most recent match from history, then cxhooses a suggestion.
+# At first chooses the most recent match from history, then chooses a suggestion.
 typeset -ga ZSH_AUTOSUGGEST_STRATEGY
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
@@ -209,7 +209,7 @@ unset key
 # ------------------------------------------------------------------------------
 # Buildpacks
 if (( ${+commands[pack]} )); then
-  source $(pack completion --shell zsh)
+  source "$(pack completion --shell zsh)"
 fi
 
 # fvm
@@ -228,7 +228,7 @@ fi
 alias la='ls -lAh'
 alias ll='ls -lh'
 alias diff='diff -u'
-alias grep='command grep -v grep | command grep --color=auto'
+alias grep='command grep --color=auto'
 
 alias gc!='git commit --amend'
 alias gac!='git add -A && git commit --amend'

@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-if [[ "${VSCODE_INJECTION}" = 1 && ! "$*" =~ -n && ! "$*" =~ -r ]]; then
+if [[ "${VSCODE_INJECTION}" = 1 && ! "$*" =~ (^| )-n( |$) && ! "$*" =~ (^| )-r( |$) ]]; then
   command code -r ${@:-$PWD}
 else
   command code ${@:-$PWD}

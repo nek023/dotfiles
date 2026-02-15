@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-config_name=$(gcloud config configurations list --format='table[no-heading](is_active.yesno(yes="*",no="-"), name, properties.core.account, properties.core.project.yesno(no="(unset)"))' \
+local config_name=$(gcloud config configurations list --format='table[no-heading](is_active.yesno(yes="*",no="-"), name, properties.core.account, properties.core.project.yesno(no="(unset)"))' \
   | grep --color=always -E '^(\*)|$' \
   | fzf +m -q "$1" \
   | awk '{print $2}')

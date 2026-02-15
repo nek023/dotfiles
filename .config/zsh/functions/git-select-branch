@@ -5,5 +5,5 @@ zparseopts -A opts -D -M -- q: -query:=q r -remotes=r
 
 local git_opts
 [[ -n "${opts[(i)-r]}" ]] && git_opts="-r"
-eval "git branch --format='%(refname:short)' --sort=-committerdate ${git_opts}" \
+git branch --format='%(refname:short)' --sort=-committerdate ${=git_opts} \
   | fzf +m +s -q "${opts[-q]}"
