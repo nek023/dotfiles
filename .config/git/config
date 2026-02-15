@@ -1,8 +1,8 @@
 [alias]
-  ddiff = -c diff.external=difft diff
-  drop = stash drop
-  open = !gh repo view -w -b $(git symbolic-ref --short HEAD)
   pop  = stash pop
+  drop = stash drop
+  sdiff = -c delta.side-by-side=true diff
+  open = !gh repo view -w -b $(git symbolic-ref --short HEAD)
 [branch]
   sort = -committerdate
 [core]
@@ -13,11 +13,6 @@
 [diff]
   algorithm = histogram
   colorMoved = default
-  tool = difftastic
-[difftool]
-  prompt = false
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
 [gtr "ai"]
   default = claude
 [gtr "editor"]
@@ -32,8 +27,6 @@
   diffFilter = sh -c 'command -v delta >/dev/null 2>&1 && delta --diff-highlight --keep-plus-minus-markers || cat'
 [merge]
   conflictstyle = zdiff3
-[pager]
-  difftool = true
 [push]
   default = current
 [rebase]
