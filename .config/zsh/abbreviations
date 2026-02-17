@@ -56,5 +56,6 @@ abbr tf="terraform"
 abbr tfd="terraform-docs"
 abbr cc="claude"
 abbr ccc="claude --continue"
+abbr ccr="claude --resume"
 
 abbr brewup="brew update; brew upgrade; brew cleanup"
