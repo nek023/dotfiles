@@ -1,6 +1,6 @@
-CANDIDATES ?= $(wildcard .??*)
-EXCLUSIONS ?= .DS_Store .git .github .gitignore
-DOTFILES   ?= $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+CANDIDATES := $(wildcard .??*)
+EXCLUSIONS := .DS_Store .editorconfig .git .gitignore
+DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .PHONY: list
 list:
@@ -8,11 +8,23 @@ list:
 
 .PHONY: link
 link:
-	@$(foreach fn, $(DOTFILES), ln -sfnv $(abspath $(fn)) $(HOME)/$(fn);)
+	@$(foreach fn, $(DOTFILES), \
+		if [ -d "$(HOME)/$(fn)" ] && [ ! -L "$(HOME)/$(fn)" ]; then \
+			echo "WARN: $(HOME)/$(fn) is a real directory, skipping"; \
+		else \
+			ln -sfnv $(abspath $(fn)) $(HOME)/$(fn); \
+		fi; \
+	)
 
 .PHONY: unlink
 unlink:
-	@-$(foreach fn, $(DOTFILES), rm -vrf $(HOME)/$(fn);)
+	@$(foreach fn, $(DOTFILES), \
+		if [ -L "$(HOME)/$(fn)" ]; then \
+			rm -vf $(HOME)/$(fn); \
+		elif [ -e "$(HOME)/$(fn)" ]; then \
+			echo "WARN: $(HOME)/$(fn) is not a symlink, skipping"; \
+		fi; \
+	)
 
 .PHONY: relink
 relink: unlink link
@@ -36,6 +48,6 @@ update-vim-plugins:
 update-nvim-plugins:
 	./scripts/update-nvim-plugins.sh
 
-.PHONY: update-zimfw-modules
+.PHONY: update-zimfw
 update-zimfw:
 	./scripts/update-zimfw.sh
