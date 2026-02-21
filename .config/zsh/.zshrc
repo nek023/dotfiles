@@ -316,7 +316,14 @@ if (( ${+functions[duration-info-preexec]} && ${+functions[duration-info-precmd]
   add-zsh-hook precmd duration-info-precmd
 fi
 
-add-zsh-hook precmd tmux-rename-window
+# tmux ウィンドウの自動リネーム (precmd で即座に反映)
+if [[ -n "${TMUX}" ]]; then
+  _tmux-rename-window() {
+    tmux rename-window "$(tmux display-message -p '#{s|^.*/([^/]+/[^/]+)$|\1:pane_current_path}')"
+    tmux set -w automatic-rename on
+  }
+  add-zsh-hook precmd _tmux-rename-window
+fi
 
 # ------------------------------------------------------------------------------
 # Key bindings

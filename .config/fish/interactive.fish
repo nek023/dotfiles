@@ -102,12 +102,3 @@ bind \cgs __ssh_connect
 set -gx BASE16_SHELL "$HOME/.config/base16-shell/"
 source "$BASE16_SHELL/profile_helper.fish"
 
-# ------------------------------------------------------------------------------
-# tmux
-# https://github.com/tmux/tmux
-# ------------------------------------------------------------------------------
-function __tmux_rename_window --on-event fish_prompt
-    test -n "$TMUX" || return
-    set -l window_id (tmux list-panes -a -F "#{pane_pid} #{window_id}" | grep $fish_pid | cut -d ' ' -f 2)
-    test -n "$window_id" && tmux rename-window -t "$window_id" (__workdir)
-end

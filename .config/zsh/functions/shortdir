@@ -1,4 +1,0 @@
-#!/bin/zsh
-
-local dir=${1:-$PWD}
-echo "$(basename "$(dirname "${dir}")")/$(basename "${dir}")"
