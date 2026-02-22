@@ -3,7 +3,7 @@ function aws-login
 
     set -l profile $argv
     if test -z "$profile"
-        set profile (aws-vault list --profiles | egrep "^aws-vault" | string sub -s 11 | fzf +m)
+        set profile (aws-vault list --profiles | grep -E "^aws-vault" | string sub -s 11 | fzf +m)
     end
     test -n "$profile" || return
 
@@ -18,10 +18,10 @@ function aws-login
     test $aws_vault_status -ne 0 && return $aws_vault_status
 
     if set -q _flag_incognito
-        open -na 'Google Chrome' --args --incognito \
-            --user-data-dir="$HOME/Library/Application Support/Google/Chrome/aws-vault/$profile" \
+        open -na 'Microsoft Edge' --args --incognito \
+            --user-data-dir="$HOME/Library/Application Support/Microsoft Edge/aws-vault/$profile" \
             "$login_url"
     else
-        open -na 'Google Chrome' "$login_url"
+        open -na 'Microsoft Edge' "$login_url"
     end
 end

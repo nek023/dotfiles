@@ -29,7 +29,13 @@ set -g __fish_git_prompt_showupstream       yes
 # ------------------------------------------------------------------------------
 # Shell
 set -gx LANG en_US.UTF-8
-type -q vim && set -gx EDITOR vim
+
+if type -q nvim
+  set -gx EDITOR nvim
+else if type -q vim
+  set -gx EDITOR vim
+end
+
 type -q less && set -gx PAGER less
 
 # XDG Base Directory Specification
@@ -44,26 +50,62 @@ set -gx GPG_TTY (tty)
 # Go
 set -gx GOPATH "$HOME/.go"
 
+# Homebrew
+set -gx HOMEBREW_NO_ANALYTICS 1
+
 # ------------------------------------------------------------------------------
 # Homebrew
 # https://brew.sh/
 # ------------------------------------------------------------------------------
-# Apple Silicon
+# macOS (Apple Silicon)
 if test -f /opt/homebrew/bin/brew
   eval (/opt/homebrew/bin/brew shellenv)
 end
 
-# Intel
+# macOS (Intel)
 if test -f /usr/local/bin/brew
   eval (/usr/local/bin/brew shellenv)
+end
+
+# Linux
+if test -f /home/linuxbrew/.linuxbrew/bin/brew
+  eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 end
 
 # ------------------------------------------------------------------------------
 # asdf
 # https://github.com/asdf-vm/asdf
 # ------------------------------------------------------------------------------
-if type -q asdf
-    source (brew --prefix asdf)"/asdf.fish"
+set -gx ASDF_DATA_DIR "$HOME/.asdf"
+fish_add_path -m "$ASDF_DATA_DIR/shims"
+
+# ------------------------------------------------------------------------------
+# asdf-java
+# https://github.com/halcyon/asdf-java
+# ------------------------------------------------------------------------------
+if not type -q mise; and test -e "$HOME/.asdf/plugins/java/set-java-home.fish"
+  source "$HOME/.asdf/plugins/java/set-java-home.fish"
+end
+
+# ------------------------------------------------------------------------------
+# mise
+# https://mise.jdx.dev/
+# ------------------------------------------------------------------------------
+if type -q mise
+  mise activate fish | source
+end
+
+# ------------------------------------------------------------------------------
+# miniconda
+# ------------------------------------------------------------------------------
+if set -q HOMEBREW_PREFIX; and test -f "$HOMEBREW_PREFIX/Caskroom/miniconda/base/bin/conda"
+  if set -l conda_setup ("$HOMEBREW_PREFIX/Caskroom/miniconda/base/bin/conda" 'shell.fish' 'hook' 2>/dev/null)
+    eval $conda_setup
+  else if test -f "$HOMEBREW_PREFIX/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
+    source "$HOMEBREW_PREFIX/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
+  else
+    fish_add_path -m "$HOMEBREW_PREFIX/Caskroom/miniconda/base/bin"
+  end
 end
 
 # ------------------------------------------------------------------------------
@@ -71,6 +113,30 @@ end
 # ------------------------------------------------------------------------------
 # Go
 fish_add_path -m "$GOPATH/bin"
+
+# Ruby
+if set -q HOMEBREW_PREFIX
+  fish_add_path -m "$HOMEBREW_PREFIX/opt/ruby/bin"
+end
+
+# Java
+if set -q HOMEBREW_PREFIX
+  fish_add_path -m "$HOMEBREW_PREFIX/opt/openjdk/bin"
+end
+
+# PostgreSQL
+if set -q HOMEBREW_PREFIX
+  fish_add_path -m "$HOMEBREW_PREFIX/opt/postgresql@18/bin"
+end
+
+# fvm (Flutter)
+fish_add_path -m "$HOME/fvm/default/bin"
+
+# Dart (protoc_plugin etc.)
+fish_add_path -m "$HOME/.pub-cache/bin"
+
+# User-specific executable files
+fish_add_path -m "$HOME/.local/bin"
 
 # dotfiles
 fish_add_path -m "$HOME/dotfiles/bin"
@@ -101,8 +167,8 @@ type -q direnv && direnv hook fish | source
 # https://github.com/sharkdp/bat
 # ------------------------------------------------------------------------------
 if type -q bat
-    set -gx BAT_THEME base16
-    set -gx MANPAGER 'sh -c "col -bx | bat -l man -p --theme=\'Monokai Extended\'"'
+  set -gx BAT_THEME base16
+  set -gx MANPAGER "sh -c \"col -bx | bat -l man -p --theme='Monokai Extended'\""
 end
 
 # ------------------------------------------------------------------------------
@@ -110,9 +176,9 @@ end
 # https://github.com/junegunn/fzf
 # ------------------------------------------------------------------------------
 set -gx FZF_DEFAULT_OPTS '
-    --ansi --cycle --reverse
-    --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:103
-    --color info:150,prompt:110,spinner:150,pointer:167,marker:174
+  --ansi --cycle --reverse
+  --color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:103
+  --color info:150,prompt:110,spinner:150,pointer:167,marker:174
 '
 
 # ------------------------------------------------------------------------------
