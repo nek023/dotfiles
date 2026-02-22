@@ -184,6 +184,6 @@ set -gx FZF_DEFAULT_OPTS '
 # ------------------------------------------------------------------------------
 # Local configurations
 # ------------------------------------------------------------------------------
-status is-interactive && __source "$__fish_config_dir/interactive.fish"
-status is-login && __source "$__fish_config_dir/login.fish"
-__source "$HOME/.config.local/fish/config.fish"
+status is-interactive && source "$__fish_config_dir/interactive.fish"
+status is-login && source "$__fish_config_dir/login.fish"
+test -r "$HOME/.config.local/fish/config.fish" && source "$HOME/.config.local/fish/config.fish"
