@@ -109,7 +109,6 @@ bind \cg\ca __git_add_files
 bind \cg\cb __git_switch_local
 bind \cg\cg\cb __git_switch_remote
 bind \cg\ch __git_insert_commit
-bind \cgs __ssh_connect
 bind \ee edit_command_buffer
 
 # ------------------------------------------------------------------------------
