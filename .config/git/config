@@ -27,6 +27,8 @@
   diffFilter = sh -c 'command -v delta >/dev/null 2>&1 && delta --diff-highlight --keep-plus-minus-markers || cat'
 [merge]
   conflictstyle = zdiff3
+[pull]
+  rebase = false
 [push]
   default = current
 [rebase]
