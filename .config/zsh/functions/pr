@@ -18,5 +18,6 @@ fi
 local number=$(echo "${prs}" | fzf +m +s | sed 's/^#\([0-9]*\).*/\1/')
 
 if [[ -n "${number}" ]]; then
+  echo "checkout #${number}"
   gh pr checkout "${number}"
 fi

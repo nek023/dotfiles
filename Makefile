@@ -30,7 +30,11 @@ unlink:
 relink: unlink link
 
 .PHONY: update
-update: update-asdf-plugins update-base16-shell update-vim-plugins update-nvim-plugins update-zimfw
+update: update-brew update-asdf-plugins update-base16-shell update-vim-plugins update-nvim-plugins update-zimfw
+
+.PHONY: update-brew
+update-brew:
+	brew update && brew upgrade
 
 .PHONY: update-asdf-plugins
 update-asdf-plugins:
@@ -51,3 +55,8 @@ update-nvim-plugins:
 .PHONY: update-zimfw
 update-zimfw:
 	./scripts/update-zimfw.sh
+
+.PHONY: cleanup
+cleanup:
+	brew cleanup
+	docker system prune -f

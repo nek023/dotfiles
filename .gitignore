@@ -21,6 +21,7 @@
 .config/zsh/*
 !.config/zsh/.zimrc
 !.config/zsh/.zlogin
+!.config/zsh/.zshenv
 !.config/zsh/.zshrc
 !.config/zsh/abbreviations
 !.config/zsh/functions/
