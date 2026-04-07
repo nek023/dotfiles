@@ -2,7 +2,6 @@
 # Abbreviations
 # https://github.com/olets/zsh-abbr
 # ------------------------------------------------------------------------------
-abbr m="make"
 abbr o="open"
 abbr rf="rm -rf"
 
