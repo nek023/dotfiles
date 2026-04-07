@@ -43,6 +43,12 @@ abbr nr="npm run"
 abbr y="yarn"
 abbr yr="yarn run"
 
+abbr mi="mise install"
+abbr ml="mise ls"
+abbr mr="mise run"
+abbr mt="mise tasks"
+abbr mx="mise exec"
+
 abbr co="code"
 abbr d="docker"
 abbr dc="docker compose"
