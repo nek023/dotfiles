@@ -1,0 +1,113 @@
+#!/bin/zsh
+
+# Generate a sandbox name prefix from the current directory.
+_prefix() {
+  local remote="$(git remote get-url origin 2>/dev/null)"
+  if [[ -n "${remote}" ]]; then
+    # Strip .git suffix, then extract org/repo
+    local stripped="${remote%.git}"
+    local repo="${stripped##*/}"
+    local rest="${stripped%/*}"
+    local org="${rest##*[:/]}"
+    echo "${org}-${repo}"
+  else
+    local hash="$(echo "${PWD}" | shasum | cut -c1-4)"
+    echo "$(basename "${PWD}")-${hash}"
+  fi
+}
+
+# List sandbox sessions matching the current directory's prefix.
+_list() {
+  local prefix="$(_prefix)"
+  openshell sandbox list --names 2>/dev/null | grep "^${prefix}\(-[0-9]*\)\?$"
+}
+
+# Create providers if they don't exist.
+_ensure_providers() {
+  if ! openshell provider get github &>/dev/null; then
+    GITHUB_TOKEN="$(gh auth token 2>/dev/null)" \
+      openshell provider create --name github --type github --from-existing 2>/dev/null
+  fi
+}
+
+# Create a new sandbox session for the current directory.
+_create() {
+  local prefix="$(_prefix)"
+  local sessions=("${(@f)$(_list)}")
+  sessions=(${sessions:#})
+
+  local name
+  if (( ${#sessions} == 0 )); then
+    name="${prefix}"
+  else
+    local max=1
+    for s in "${sessions[@]}"; do
+      if [[ "${s}" =~ -([0-9]+)$ ]]; then
+        local n="${match[1]}"
+        (( n >= max )) && max=$(( n + 1 ))
+      fi
+    done
+    (( max == 1 )) && max=2
+    name="${prefix}-${max}"
+  fi
+
+  _ensure_providers
+  openshell sandbox create --name "${name}" --upload . -- sh -c "claude update; claude"
+}
+
+# Delete a sandbox session for the current directory.
+_delete() {
+  local sessions=("${(@f)$(_list)}")
+  sessions=(${sessions:#})
+
+  if (( ${#sessions} == 0 )); then
+    echo "no sessions found for this directory" >&2
+    return 1
+  fi
+
+  local selected
+  if (( ${#sessions} == 1 )); then
+    selected="${sessions[1]}"
+  else
+    selected="$(printf '%s\n' "${sessions[@]}" | fzf +m +s --prompt='delete> ')"
+  fi
+
+  if [[ -n "${selected}" ]]; then
+    openshell sandbox delete "${selected}"
+  fi
+}
+
+# Main
+case "${1}" in
+  create|new) _create ;;
+  list|ls)    _list ;;
+  delete)     _delete ;;
+  help|--help|-h)
+    echo "usage: osdev [create|list|delete|help]"
+    echo ""
+    echo "  (none)   connect to existing session, or create one"
+    echo "  create   create a new session (alias: new)"
+    echo "  list     list sessions for current directory (alias: ls)"
+    echo "  delete   delete a session"
+    ;;
+  "")
+    local sessions=("${(@f)$(_list)}")
+    sessions=(${sessions:#})
+
+    case "${#sessions}" in
+      0) _create ;;
+      1) openshell sandbox connect "${sessions[1]}" ;;
+      *)
+        local selected="$(printf '%s\n' "${sessions[@]}" | fzf +m +s --prompt='session> ')"
+        if [[ -n "${selected}" ]]; then
+          openshell sandbox connect "${selected}"
+        fi
+        ;;
+    esac
+    ;;
+  *)
+    echo "osdev: unknown subcommand '${1}'" >&2
+    echo "run 'osdev help' for usage" >&2
+    return 1
+    ;;
+esac
