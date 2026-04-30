@@ -53,12 +53,18 @@ if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
 fi
 
 # ------------------------------------------------------------------------------
+# History
+# ------------------------------------------------------------------------------
+# Save command start time and duration to the history file.
+setopt EXTENDED_HISTORY
+
+# ------------------------------------------------------------------------------
 # Prompt
 # ------------------------------------------------------------------------------
 setopt prompt_subst
 
 PROMPT='
-%(3L.%F{yellow}(%L)%f .)%(!.%F{red}%n%f.${SSH_TTY:+"%F{yellow}%n%f"})${SSH_TTY:+"@%F{green}%m%f:"}%F{cyan}%~%f%F{red}$(git-info)%f${duration_info}
+%(3L.%F{yellow}(%L)%f .)%(!.%F{red}%n%f.${SSH_TTY:+"%F{yellow}%n%f"})${SSH_TTY:+"@%F{green}%m%f:"}%F{cyan}%~%f%F{red}$(git-info)%f${duration_info} %F{242}[%D{%H:%M:%S}]%f
 %(1j.%F{blue}*%f .)%(?.%F{green}.%F{red}%? )%(!.#.$)%f '
 
 # ------------------------------------------------------------------------------
