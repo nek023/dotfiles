@@ -1,4 +1,14 @@
 # ------------------------------------------------------------------------------
+# cmux
+# ------------------------------------------------------------------------------
+# cmux ssh overrides ZDOTDIR with its own working directory, so restore the
+# original ZDOTDIR ($CMUX_REAL_ZDOTDIR); otherwise ZIM_HOME and the functions
+# directory cannot be resolved correctly.
+if [[ -n "${CMUX_REAL_ZDOTDIR:-}" && "${ZDOTDIR:-}" != "${CMUX_REAL_ZDOTDIR}" ]]; then
+  ZDOTDIR="${CMUX_REAL_ZDOTDIR}"
+fi
+
+# ------------------------------------------------------------------------------
 # Zsh configurations
 # ------------------------------------------------------------------------------
 # Set editor default keymap to emacs (`-e`) or vi (`-v`).
