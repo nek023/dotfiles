@@ -8,6 +8,9 @@
 .config/ghostty/*
 !.config/ghostty/config
 !.config/git/
+!.config/herdr/
+.config/herdr/*
+!.config/herdr/config.toml
 !.config/ideavim/
 !.config/memo/
 .config/memo/_posts

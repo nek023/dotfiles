@@ -1,0 +1,34 @@
+onboarding = false
+
+[theme]
+name = "catppuccin"
+
+[keys]
+prefix = "ctrl+t"
+
+reload_config = "r"
+resize_mode = "ctrl+r"
+
+new_workspace = "t"
+close_workspace = "ctrl+shift+c"
+next_workspace = "alt+n"
+previous_workspace = "alt+p"
+rename_workspace = "shift+r"
+
+new_tab = "ctrl+n"
+next_tab = "ctrl+alt+n"
+previous_tab = "ctrl+alt+p"
+
+focus_pane_left = "alt+h"
+focus_pane_down = "alt+j"
+focus_pane_up = "alt+k"
+focus_pane_right = "alt+l"
+close_pane = "c"
+split_vertical = "|"
+split_horizontal = "-"
+
+[ui.toast]
+delivery = "terminal"
+
+[ui.sound]
+enabled = false
