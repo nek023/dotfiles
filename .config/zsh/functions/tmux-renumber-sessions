@@ -4,9 +4,11 @@ if [[ -z "${TMUX}" ]]; then
   return 0
 fi
 
-local sessions=$(tmux ls -F "#{session_name}" | sort)
-local num=0
+# 名前のないセッション (数字のみで自動命名されたもの) のみリネーム対象とする
+local sessions=$(tmux ls -F "#{session_name}" | grep -E '^[0-9]+$' | sort -n)
+[[ -z $sessions ]] && return 0
 
+local num=0
 for session in "${(f)sessions}"; do
   tmux rename -t "${session}" "${num}"
   ((num++))
