@@ -35,7 +35,21 @@ vim.opt.smartcase = true
 vim.opt.swapfile = false
 
 -- システムのクリップボードと連携する
+-- OSC 52 経由でターミナルにクリップボード操作を委ねることで、
+-- ローカル (Ghostty) でもリモート (mosh + Ghostty) でも同じ仕組みで動作する。
+-- tmux 側で set-clipboard on を有効化している前提。
 vim.opt.clipboard:append({"unnamedplus"})
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+  },
+  paste = {
+    ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+  },
+}
 
 --  24bit colorを有効化
 vim.opt.termguicolors = true
