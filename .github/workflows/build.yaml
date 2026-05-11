@@ -26,5 +26,8 @@ jobs:
             sudo apt-get update && sudo apt-get install -y stow
           fi
       - run: make list
-      - run: make link
-      - run: make unlink
+      - name: Test stow link/unlink against a clean HOME
+        run: |
+          export HOME=$(mktemp -d)
+          make link
+          make unlink
