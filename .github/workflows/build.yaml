@@ -16,8 +16,11 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: Install stow
         run: |
           if [ "$RUNNER_OS" = "macOS" ]; then
@@ -25,7 +28,7 @@ jobs:
           else
             sudo apt-get update && sudo apt-get install -y stow
           fi
-      - run: make list
+
       - name: Test stow link/unlink against a clean HOME
         run: |
           export HOME=$(mktemp -d)
