@@ -59,7 +59,7 @@ for repo in "$DOTFILES" "$DLOCAL"; do
 done
 
 # ---- 1) remove old top-level $HOME symlinks pointing into the repos ----
-echo "==> [1/4] Removing old top-level symlinks in \$HOME"
+echo "==> [1/5] Removing old top-level symlinks in \$HOME"
 removed=0
 shopt -s dotglob nullglob
 for entry in "$HOME"/*; do
@@ -97,7 +97,7 @@ rescue_tree() {
   done < <(find "$src" \( -type f -o -type l \) -print0)
 }
 
-echo "==> [2/4] Rescuing untracked data from OLD top-level repo paths"
+echo "==> [2/5] Rescuing untracked data from OLD top-level repo paths"
 # Top-level items that the old Makefile used to symlink into $HOME.
 OLD_PATHS=(.bash_profile .bashrc .config .config.local .vim .zshenv .ssh .claude .gemini)
 for path in "${OLD_PATHS[@]}"; do
@@ -125,7 +125,7 @@ if [ -d "$HOME/.ssh" ]; then
 fi
 
 # ---- 3) ensure stow is installed ----
-echo "==> [3/4] Ensuring GNU Stow is installed"
+echo "==> [3/5] Ensuring GNU Stow is installed"
 if ! command -v stow >/dev/null 2>&1; then
   echo "    installing via Homebrew..."
   brew install stow
@@ -134,11 +134,23 @@ else
 fi
 
 # ---- 4) link both repos with the new stow Makefile ----
-echo "==> [4/4] Linking both repos with stow"
+echo "==> [4/5] Linking both repos with stow"
 (cd "$DOTFILES" && make link)
 if [ -d "$DLOCAL" ]; then
   (cd "$DLOCAL" && make link)
 fi
+
+# ---- 5) remove empty leftover directories inside the repos ----
+# After rescue, the OLD top-level paths (.config/, .vim/, ...) usually
+# leave a husk of empty subdirectories behind. `-empty` only matches
+# truly empty dirs, so anything that still holds a conflicting file
+# (skipped by rescue) is preserved for manual inspection. `.git/` is
+# excluded to be safe — some refs subdirs can legitimately be empty.
+echo "==> [5/5] Removing empty leftover directories in the repos"
+for repo in "$DOTFILES" "$DLOCAL"; do
+  [ -d "$repo" ] || continue
+  find "$repo" -depth -type d -empty -not -path '*/.git/*' -delete 2>/dev/null || true
+done
 
 cat <<'EOF'
 
@@ -148,12 +160,9 @@ Migration done. Suggested verifications:
   ssh -G github.com | grep identity # should reference your real key
   cd ~/dotfiles && git status       # clean working tree
 
-If something looks off, the old top-level repo paths still hold any
-files that conflicted with $HOME. Inspect them before deleting:
+If something looks off, the old top-level repo paths may still hold
+files that conflicted with $HOME (rescue skipped them). Inspect with:
   find ~/dotfiles ~/dotfiles-local \
     -maxdepth 2 \( -name .config -o -name .ssh -o -name .claude \
                  -o -name .gemini -o -name .vim \) -type d 2>/dev/null
-
-Once verified, clean up empty leftover dirs (safe — only deletes empty):
-  find ~/dotfiles ~/dotfiles-local -depth -type d -empty -delete 2>/dev/null
 EOF
