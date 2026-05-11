@@ -1,33 +1,26 @@
-CANDIDATES := $(wildcard .??*)
-EXCLUSIONS := .DS_Store .claude .editorconfig .git .gitignore
-DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+STOW_DIR    := home
+STOW_TARGET := $(HOME)
+STOW_FLAGS  := --target=$(STOW_TARGET) --dir=.
 
 .PHONY: list
 list:
-	@$(foreach fn, $(DOTFILES), ls -dF $(fn);)
+	@ls -AlF $(STOW_DIR)/
 
 .PHONY: link
 link:
-	@$(foreach fn, $(DOTFILES), \
-		if [ -d "$(HOME)/$(fn)" ] && [ ! -L "$(HOME)/$(fn)" ]; then \
-			echo "WARN: $(HOME)/$(fn) is a real directory, skipping"; \
-		else \
-			ln -sfnv $(abspath $(fn)) $(HOME)/$(fn); \
-		fi; \
-	)
+	@command -v stow >/dev/null 2>&1 || { \
+		echo "stow not found, installing via Homebrew..."; \
+		brew install stow; \
+	}
+	stow $(STOW_FLAGS) $(STOW_DIR)
 
 .PHONY: unlink
 unlink:
-	@$(foreach fn, $(DOTFILES), \
-		if [ -L "$(HOME)/$(fn)" ]; then \
-			rm -vf $(HOME)/$(fn); \
-		elif [ -e "$(HOME)/$(fn)" ]; then \
-			echo "WARN: $(HOME)/$(fn) is not a symlink, skipping"; \
-		fi; \
-	)
+	stow $(STOW_FLAGS) -D $(STOW_DIR)
 
 .PHONY: relink
-relink: unlink link
+relink:
+	stow $(STOW_FLAGS) -R $(STOW_DIR)
 
 .PHONY: update
 update: update-brew update-asdf-plugins update-base16-shell update-vim-plugins update-nvim-plugins update-zimfw

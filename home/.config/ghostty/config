@@ -22,4 +22,4 @@ macos-titlebar-proxy-icon = hidden
 
 quit-after-last-window-closed = true
 
-config-file = ?~/.config.local/ghostty/config
+config-file = ?~/.config/ghostty/config.local

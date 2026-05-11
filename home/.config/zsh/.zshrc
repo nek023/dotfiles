@@ -371,6 +371,6 @@ bindkey '^[r' replace-command-line
 # ------------------------------------------------------------------------------
 # Local configurations
 # ------------------------------------------------------------------------------
-if [[ -f "${HOME}/.config.local/zsh/.zshrc" ]]; then
-  source "${HOME}/.config.local/zsh/.zshrc"
+if [[ -f "${HOME}/.config/zsh/.zshrc.local" ]]; then
+  source "${HOME}/.config/zsh/.zshrc.local"
 fi

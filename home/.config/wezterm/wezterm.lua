@@ -31,14 +31,14 @@ config.keys = {
 }
 
 --[[
-~/.config.local/wezterm/wezterm.luaに以下のように書くことで設定を上書きできる
+~/.config/wezterm/local.luaに以下のように書くことで設定を上書きできる
 
 return function(config)
   -- (configを変更する)
   return config
 end
 ]]
-local local_config_path = wezterm.home_dir .. "/.config.local/wezterm/wezterm.lua"
+local local_config_path = wezterm.home_dir .. "/.config/wezterm/local.lua"
 local local_config, ok = loadfile(local_config_path)
 if local_config ~= nil then
   config = local_config()(config)

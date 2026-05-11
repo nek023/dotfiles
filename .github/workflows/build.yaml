@@ -18,6 +18,13 @@ jobs:
           - ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Install stow
+        run: |
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            brew install stow
+          else
+            sudo apt-get update && sudo apt-get install -y stow
+          fi
       - run: make list
       - run: make link
       - run: make unlink

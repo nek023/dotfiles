@@ -20,7 +20,7 @@
 [gtr "copy"]
   includedirs = .claude
 [include]
-  path = ~/.config.local/git/config
+  path = ~/.config/git/config.local
 [init]
   defaultBranch = main
 [interactive]
