@@ -1,6 +1,6 @@
 STOW_DIR    := home
 STOW_TARGET := $(HOME)
-STOW_FLAGS  := --target=$(STOW_TARGET) --dir=.
+STOW_FLAGS  := --target=$(STOW_TARGET) --dir=. --no-folding
 
 .PHONY: list
 list:
