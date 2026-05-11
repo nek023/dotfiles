@@ -1,6 +1,2 @@
 \.DS_Store
 \.gitignore
-swiftpm
-plugged
-virtenv
-node_modules
