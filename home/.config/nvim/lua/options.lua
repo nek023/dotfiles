@@ -35,27 +35,31 @@ vim.opt.smartcase = true
 vim.opt.swapfile = false
 
 -- システムのクリップボードと連携する
--- コピーは OSC 52 でターミナル (Ghostty) に委ね、ローカル/リモート (mosh) を
--- 問わず同じ仕組みで pasteboard へ転送する。tmux 側で set-clipboard on が前提。
--- ペーストは OSC 52 read が Ghostty のセキュリティ制約で動かないため、
--- pbpaste が使える環境ではそれを優先し、無ければ OSC 52 にフォールバックする。
 vim.opt.clipboard:append({"unnamedplus"})
-local osc52 = require("vim.ui.clipboard.osc52")
-local has_pbpaste = vim.fn.executable("pbpaste") == 1
-vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    ["+"] = osc52.copy("+"),
-    ["*"] = osc52.copy("*"),
-  },
-  paste = has_pbpaste and {
-    ["+"] = { "pbpaste" },
-    ["*"] = { "pbpaste" },
-  } or {
-    ["+"] = osc52.paste("+"),
-    ["*"] = osc52.paste("*"),
-  },
-}
+
+-- VSCode NeoVim 拡張は独自のクリップボードプロバイダを使うため、ここでは上書きしない
+if not vim.g.vscode then
+  -- コピーは OSC 52 でターミナル (Ghostty) に委ね、ローカル/リモート (mosh) を
+  -- 問わず同じ仕組みで pasteboard へ転送する (tmux 側で set-clipboard on が前提)。
+  -- ペーストは OSC 52 read が Ghostty のセキュリティ制約で動かないため、
+  -- pbpaste が使える環境ではそれを優先し、無ければ OSC 52 にフォールバックする。
+  local osc52 = require("vim.ui.clipboard.osc52")
+  local has_pbpaste = vim.fn.executable("pbpaste") == 1
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = osc52.copy("+"),
+      ["*"] = osc52.copy("*"),
+    },
+    paste = has_pbpaste and {
+      ["+"] = { "pbpaste" },
+      ["*"] = { "pbpaste" },
+    } or {
+      ["+"] = osc52.paste("+"),
+      ["*"] = osc52.paste("*"),
+    },
+  }
+end
 
 --  24bit colorを有効化
 vim.opt.termguicolors = true
