@@ -9,8 +9,8 @@ font-family = Noto Sans Mono CJK JP
 cursor-style = block
 cursor-style-blink = true
 
-background-opacity = 0.8
-background-blur = 20
+background-opacity = 0.0
+background-blur = macos-glass-regular
 
 keybind = cmd+enter=toggle_fullscreen
 keybind = cmd+p=toggle_command_palette
@@ -19,6 +19,7 @@ keybind = shift+enter=text:\n
 macos-non-native-fullscreen = true
 macos-option-as-alt = true
 macos-titlebar-proxy-icon = hidden
+macos-titlebar-style = transparent
 
 quit-after-last-window-closed = true
 
