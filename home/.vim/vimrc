@@ -208,7 +208,7 @@ call plug#end()
 " iceberg
 " ------------------------------------------------------------------------------
 set background=dark
-colorscheme iceberg
+silent! colorscheme iceberg
 
 " ------------------------------------------------------------------------------
 " nerdtree

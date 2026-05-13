@@ -3,4 +3,4 @@ require("options")
 require("keymaps")
 require("lsp")
 
-vim.cmd[[colorscheme iceberg]]
+pcall(vim.cmd, [[colorscheme iceberg]])
