@@ -73,21 +73,6 @@ if test -f /home/linuxbrew/.linuxbrew/bin/brew
 end
 
 # ------------------------------------------------------------------------------
-# asdf
-# https://github.com/asdf-vm/asdf
-# ------------------------------------------------------------------------------
-set -gx ASDF_DATA_DIR "$HOME/.asdf"
-fish_add_path -m "$ASDF_DATA_DIR/shims"
-
-# ------------------------------------------------------------------------------
-# asdf-java
-# https://github.com/halcyon/asdf-java
-# ------------------------------------------------------------------------------
-if not type -q mise; and test -e "$HOME/.asdf/plugins/java/set-java-home.fish"
-  source "$HOME/.asdf/plugins/java/set-java-home.fish"
-end
-
-# ------------------------------------------------------------------------------
 # mise
 # https://mise.jdx.dev/
 # ------------------------------------------------------------------------------

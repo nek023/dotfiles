@@ -104,21 +104,6 @@ export PATH="${HOMEBREW_PREFIX}/opt/ruby/bin:${PATH}"
 export PATH="${HOMEBREW_PREFIX}/opt/openjdk/bin:${PATH}"
 
 # ------------------------------------------------------------------------------
-# asdf
-# https://github.com/asdf-vm/asdf
-# ------------------------------------------------------------------------------
-export ASDF_DATA_DIR="${HOME}/.asdf"
-export PATH="${ASDF_DATA_DIR}/shims:${PATH}"
-
-# ------------------------------------------------------------------------------
-# asdf-java
-# https://github.com/halcyon/asdf-java
-# ------------------------------------------------------------------------------
-if (( ! ${+commands[mise]} )) && [[ -e "${HOME}/.asdf/plugins/java" ]]; then
-  source "${HOME}/.asdf/plugins/java/set-java-home.zsh"
-fi
-
-# ------------------------------------------------------------------------------
 # mise
 # https://mise.jdx.dev/
 # ------------------------------------------------------------------------------

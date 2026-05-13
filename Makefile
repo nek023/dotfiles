@@ -23,15 +23,11 @@ relink:
 	stow $(STOW_FLAGS) -R $(STOW_DIR)
 
 .PHONY: update
-update: update-brew update-asdf-plugins update-base16-shell update-vim-plugins update-nvim-plugins update-zimfw
+update: update-brew update-base16-shell update-vim-plugins update-nvim-plugins update-zimfw
 
 .PHONY: update-brew
 update-brew:
 	brew update && brew upgrade
-
-.PHONY: update-asdf-plugins
-update-asdf-plugins:
-	./scripts/update-asdf-plugins.sh
 
 .PHONY: update-base16-shell
 update-base16-shell:

@@ -94,10 +94,6 @@ if type -q safe-rm
   alias rm='safe-rm'
 end
 
-# Temporary remove ~/.asdf/shims from path to avoid conflicting with
-# python*-config scripts provided by Homebrew.
-alias brew='env PATH=(string join : (string match -e "$HOME/.asdf/shims" -v "$PATH")) brew'
-
 # ------------------------------------------------------------------------------
 # Key bindings
 # ------------------------------------------------------------------------------
