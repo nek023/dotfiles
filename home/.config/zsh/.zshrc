@@ -145,7 +145,6 @@ export PATH="${HOMEBREW_PREFIX}/opt/postgresql@18/bin:${PATH}"
 # User-specific executable files
 # ------------------------------------------------------------------------------
 export PATH="${HOME}/.local/bin:${PATH}"
-export PATH="${HOME}/dotfiles/bin:${PATH}"
 
 # ------------------------------------------------------------------------------
 # Module configurations
