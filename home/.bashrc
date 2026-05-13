@@ -11,7 +11,7 @@ if [ -f /opt/homebrew/bin/brew ]; then
 fi
 
 # Homebrew (Linux)
-if [ -f /opt/homebrew/bin/brew ]; then
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
   export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
 fi
 
