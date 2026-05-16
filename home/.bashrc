@@ -5,14 +5,11 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
-# Homebrew (macOS)
-if [ -f /opt/homebrew/bin/brew ]; then
-  export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
-fi
-
-# Homebrew (Linux)
-if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-  export PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
+# Homebrew (macOS first, then Linux as fallback)
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # Load local config

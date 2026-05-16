@@ -233,9 +233,27 @@ alias grep='command grep --color=auto'
 alias gc!='git commit --amend'
 alias gac!='git add -A && git commit --amend'
 alias gl='git log --graph --all --color --date=format:"%Y-%m-%d %H:%M" --pretty=format:"%C(auto)%h %C(green)%cd%C(reset) %C(blue)%cn%C(reset) %<|(-1,trunc)%s%C(red)%d%C(reset)"'
-alias gpull='git pull origin $(git-current-branch)'
-alias gpush='git push origin $(git-current-branch)'
-alias gpush!='git push --force-with-lease --force-if-includes origin $(git-current-branch)'
+# Refuse to push/pull when HEAD is detached so we never operate on an empty branch.
+gpull() {
+  local branch
+  branch=$(git-current-branch) || return $?
+  [[ -n "${branch}" ]] || { echo "gpull: not on a branch" >&2; return 1; }
+  git pull origin "${branch}"
+}
+
+gpush() {
+  local branch
+  branch=$(git-current-branch) || return $?
+  [[ -n "${branch}" ]] || { echo "gpush: not on a branch" >&2; return 1; }
+  git push origin "${branch}"
+}
+
+function 'gpush!' {
+  local branch
+  branch=$(git-current-branch) || return $?
+  [[ -n "${branch}" ]] || { echo "gpush!: not on a branch" >&2; return 1; }
+  git push --force-with-lease --force-if-includes origin "${branch}"
+}
 
 alias printpath='echo $PATH | tr ":" "\n"'
 alias timestamp='date +%Y%m%d-%H%M%S | tr -d "\n"'

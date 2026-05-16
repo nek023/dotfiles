@@ -2,7 +2,8 @@
 
 local config_name=$(gcloud config configurations list --format='table[no-heading](is_active.yesno(yes="*",no="-"), name, properties.core.account, properties.core.project.yesno(no="(unset)"))' \
   | grep --color=always -E '^(\*)|$' \
-  | fzf +m -q "$1" \
+  | fzf +m --ansi -q "$1" \
+  | sed $'s/\x1b\\[[0-9;]*m//g' \
   | awk '{print $2}')
 
 if [[ -n "${config_name}" ]]; then
