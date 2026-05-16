@@ -1,10 +1,14 @@
 #!/bin/zsh
 
 # :/ means git root in pathspec: https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
-local files="$(git-select-files -q "${BUFFER}" | sed -e 's/^/:\//' | tr "\n" " ")"
+local -a files
+files=("${(@f)$(git-select-files -q "${BUFFER}")}")
+files=(${files:#})
 
-if [[ -n "${files}" ]]; then
-  BUFFER="git add ${files}"
+if (( ${#files} > 0 )); then
+  local -a pathspecs
+  pathspecs=("${(@)files/#/:\/}")
+  BUFFER="git add ${(j: :)${(@q-)pathspecs}}"
   zle accept-line
 fi
 

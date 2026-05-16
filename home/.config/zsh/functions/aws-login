@@ -11,17 +11,16 @@ fi
 
 local login_url
 if [[ -n "${opts[(i)-d]}" ]]; then
-  login_url="$(aws-vault login "aws-vault.${profile}" --stdout --duration "${opts[-d]}")"
+  login_url="$(aws-vault login "aws-vault.${profile}" --stdout --duration "${opts[-d]}")" || return $?
 else
-  login_url="$(aws-vault login "aws-vault.${profile}" --stdout)"
+  login_url="$(aws-vault login "aws-vault.${profile}" --stdout)" || return $?
 fi
 
-local aws_vault_status="$?"
-[[ "${aws_vault_status}" -ne 0 ]] && return "${aws_vault_status}"
+[[ -n "${login_url}" ]] || return 1
 
 if [[ -n "${opts[(i)-i]}" ]]; then
   open -na 'Microsoft Edge' --args --incognito \
-    --user-data-dir="${HOME}/Library/Application Support/Microsoft\ Edge/aws-vault/${profile}" \
+    --user-data-dir="${HOME}/Library/Application Support/Microsoft Edge/aws-vault/${profile}" \
     "${login_url}"
 else
   open -na 'Microsoft Edge' "${login_url}"
