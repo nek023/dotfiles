@@ -7,7 +7,7 @@ files=(${files:#})
 
 if (( ${#files} > 0 )); then
   local -a pathspecs
-  pathspecs=("${(@)files/#/:\/}")
+  pathspecs=(":/"${^files})
   BUFFER="git add ${(j: :)${(@q-)pathspecs}}"
   zle accept-line
 fi
