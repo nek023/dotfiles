@@ -317,7 +317,7 @@ fi
 # ------------------------------------------------------------------------------
 export FPATH="${ZDOTDIR}/functions:${FPATH}"
 
-for file in "${ZDOTDIR}"/functions/*(N); do
+for file in "${ZDOTDIR}"/functions/*(N-.); do
   autoload $(basename "${file}")
 done
 
