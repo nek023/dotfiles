@@ -126,10 +126,10 @@ let mapleader = '\'
 nnoremap <leader>s :source ~/.vimrc<CR>
 
 " 高速移動
-noremap H b
+noremap H ^
 noremap J }
 noremap K {
-noremap L w
+noremap L $
 
 " 行移動を見た目上の移動にする
 noremap j gj

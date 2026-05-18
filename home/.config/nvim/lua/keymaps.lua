@@ -1,8 +1,8 @@
 -- 高速移動
-vim.keymap.set("", "H", "b")
+vim.keymap.set("", "H", "^")
 vim.keymap.set("", "J", "}")
 vim.keymap.set("", "K", "{")
-vim.keymap.set("", "L", "w")
+vim.keymap.set("", "L", "$")
 
 -- 行移動を見た目上の移動にする
 vim.keymap.set("", "j", "gj")
