@@ -238,21 +238,21 @@ gpull() {
   local branch
   branch=$(git-current-branch) || return $?
   [[ -n "${branch}" ]] || { echo "gpull: not on a branch" >&2; return 1; }
-  git pull origin "${branch}"
+  git pull "$@" origin "${branch}"
 }
 
 gpush() {
   local branch
   branch=$(git-current-branch) || return $?
   [[ -n "${branch}" ]] || { echo "gpush: not on a branch" >&2; return 1; }
-  git push origin "${branch}"
+  git push "$@" origin "${branch}"
 }
 
 function 'gpush!' {
   local branch
   branch=$(git-current-branch) || return $?
   [[ -n "${branch}" ]] || { echo "gpush!: not on a branch" >&2; return 1; }
-  git push --force-with-lease --force-if-includes origin "${branch}"
+  git push --force-with-lease --force-if-includes "$@" origin "${branch}"
 }
 
 alias printpath='echo $PATH | tr ":" "\n"'
