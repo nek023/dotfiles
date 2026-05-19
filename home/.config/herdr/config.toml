@@ -11,13 +11,13 @@ resize_mode = "ctrl+r"
 
 new_workspace = "t"
 close_workspace = "ctrl+shift+c"
-next_workspace = "alt+n"
-previous_workspace = "alt+p"
+next_workspace = "alt+shift+n"
+previous_workspace = "alt+shift+p"
 rename_workspace = "shift+r"
 
-new_tab = "ctrl+n"
-next_tab = "ctrl+alt+n"
-previous_tab = "ctrl+alt+p"
+new_tab = "shift+t"
+next_tab = "alt+n"
+previous_tab = "alt+p"
 
 focus_pane_left = "alt+h"
 focus_pane_down = "alt+j"
@@ -26,6 +26,10 @@ focus_pane_right = "alt+l"
 close_pane = "c"
 split_vertical = "|"
 split_horizontal = "-"
+zoom = "z"
+
+[keys.indexed]
+tabs = "ctrl"
 
 [ui.toast]
 delivery = "terminal"
