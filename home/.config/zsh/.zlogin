@@ -11,6 +11,9 @@ if [[ "$(uname)" == 'Linux' ]]; then
   ssh-add -l >/dev/null 2>&1
   if (( $? == 2 )); then
     if [[ -n $SSH_AUTH_SOCK ]]; then
+      # Remove a stale socket left by a dead agent; otherwise ssh-agent -a
+      # fails to bind and every new shell keeps hitting the same error.
+      rm -f "$SSH_AUTH_SOCK"
       eval "$(ssh-agent -a $SSH_AUTH_SOCK)" > /dev/null
     else
       eval "$(ssh-agent)" > /dev/null
