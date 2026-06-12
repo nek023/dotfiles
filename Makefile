@@ -27,7 +27,7 @@ update: update-brew update-base16-shell update-vim-plugins update-nvim-plugins u
 
 .PHONY: update-brew
 update-brew:
-	brew update && brew upgrade
+	brew update && brew upgrade -y
 
 .PHONY: update-base16-shell
 update-base16-shell:
