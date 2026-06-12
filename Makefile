@@ -50,7 +50,7 @@ update-nvim-plugins:
 
 .PHONY: update-zimfw
 update-zimfw:
-	zsh -i -c "zimfw upgrade; zimfw update"
+	@zsh -i -c '(( $${+functions[zimfw]} )) || exit 0; zimfw upgrade && zimfw update'
 
 .PHONY: cleanup
 cleanup:
