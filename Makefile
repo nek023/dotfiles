@@ -42,11 +42,11 @@ update-vim-plugins:
 
 .PHONY: update-nvim-plugins
 update-nvim-plugins:
-	./scripts/update-nvim-plugins.sh
+	@command -v nvim >/dev/null 2>&1 && nvim --headless "+Lazy! sync" +qa || true
 
 .PHONY: update-zimfw
 update-zimfw:
-	./scripts/update-zimfw.sh
+	zsh -i -c "zimfw upgrade; zimfw update"
 
 .PHONY: cleanup
 cleanup:
