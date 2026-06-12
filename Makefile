@@ -4,7 +4,7 @@ STOW_FLAGS  := --target=$(STOW_TARGET) --dir=. --no-folding
 
 .PHONY: list
 list:
-	@ls -AlF $(STOW_DIR)/
+	@STOW_DIR=$(STOW_DIR) STOW_TARGET=$(STOW_TARGET) ./scripts/list.sh
 
 .PHONY: link
 link:
