@@ -26,7 +26,7 @@ relink:
 update:
 	$(MAKE) update-brew
 	$(MAKE) update-vim-plugins
-	$(MAKE) -j update-base16-shell update-nvim-plugins update-zimfw
+	$(MAKE) -j update-base16-shell update-mise update-nvim-plugins update-zimfw
 
 .PHONY: update-brew
 update-brew:
@@ -39,6 +39,10 @@ update-base16-shell:
 .PHONY: update-vim-plugins
 update-vim-plugins:
 	./scripts/update-vim-plugins.sh
+
+.PHONY: update-mise
+update-mise:
+	@command -v mise >/dev/null 2>&1 && mise upgrade || true
 
 .PHONY: update-nvim-plugins
 update-nvim-plugins:
