@@ -2,7 +2,7 @@
 
 set -eu
 
-BASE16_DIR="${XDG_CONFIG_HOME}/base16-shell"
+BASE16_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/base16-shell"
 BASE16_REPO="https://github.com/chriskempson/base16-shell.git"
 
 if git -C "$BASE16_DIR" rev-parse --git-dir >/dev/null 2>&1; then
