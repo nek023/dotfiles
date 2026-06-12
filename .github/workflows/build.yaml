@@ -32,5 +32,7 @@ jobs:
       - name: Test stow link/unlink against a clean HOME
         run: |
           export HOME=$(mktemp -d)
+          make list
           make link
+          make list
           make unlink
