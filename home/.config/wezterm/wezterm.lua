@@ -39,12 +39,18 @@ return function(config)
 end
 ]]
 local local_config_path = wezterm.home_dir .. "/.config/wezterm/local.lua"
-local local_config, ok = loadfile(local_config_path)
-if local_config ~= nil then
-  config = local_config()(config)
-
-  -- ローカルの設定が変更されたら自動で再読み込みする
+if #wezterm.glob(local_config_path) > 0 then
+  -- ローカルの設定が変更されたら自動で再読み込みする (構文エラーを直したときも反映する)
   wezterm.add_to_config_reload_watch_list(local_config_path)
+
+  -- loadfile はファイル不在でも構文エラーでも nil を返す。ここに来るのは
+  -- ファイルが存在する場合のみなので、nil は構文エラー等の読み込み失敗を意味する。
+  local local_config, err = loadfile(local_config_path)
+  if local_config ~= nil then
+    config = local_config()(config)
+  else
+    wezterm.log_warn("failed to load " .. local_config_path .. ": " .. tostring(err))
+  end
 end
 
 return config
