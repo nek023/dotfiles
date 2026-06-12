@@ -3,4 +3,20 @@
 local -A opts
 zparseopts -A opts -D -M -- q: -query:=q
 
-git status --porcelain | fzf -m -q "${opts[-q]}" | cut -c4- | sed -e 's/^.* -> //g'
+# Read NUL-delimited entries so paths with spaces or non-ASCII characters are
+# preserved verbatim (git quotes such paths in the default porcelain output).
+local -a entries
+local rec xy fname
+while IFS= read -r -d '' rec; do
+  xy="${rec[1,2]}"
+  fname="${rec[4,-1]}"
+  entries+=("${fname}")
+  # Rename/copy entries are followed by an extra NUL field (the source path).
+  if [[ "${xy[1]}" == [RC] ]]; then
+    read -r -d '' _
+  fi
+done < <(git status --porcelain -z)
+
+(( ${#entries} )) || return
+
+print -rNC1 -- "${entries[@]}" | fzf --read0 --print0 -m -q "${opts[-q]}"
