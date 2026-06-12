@@ -5,6 +5,12 @@ set -eu
 STOW_DIR="${STOW_DIR:-home}"
 STOW_TARGET="${STOW_TARGET:-$HOME}"
 
+if [ -t 1 ]; then
+  c_linked='\033[32m'; c_foreign='\033[33m'; c_conflict='\033[31m'; c_unlinked='\033[90m'; c_reset='\033[0m'
+else
+  c_linked=''; c_foreign=''; c_conflict=''; c_unlinked=''; c_reset=''
+fi
+
 ignore=$(grep -v '^[[:space:]]*$' "$STOW_DIR/.stow-local-ignore" 2>/dev/null | paste -sd '|' -)
 
 find -L "$STOW_DIR" \( -type f -o -type l \) | sort | while read -r src; do
@@ -20,13 +26,13 @@ find -L "$STOW_DIR" \( -type f -o -type l \) | sort | while read -r src; do
   if [ -L "$tgt" ]; then
     dest=$(readlink "$tgt")
     if [ "$(readlink -f "$tgt")" = "$(readlink -f "$src")" ]; then
-      printf '\033[32m  linked\033[0m %s\n' "$tgt"
+      printf '%s  linked%s %s\n' "$c_linked" "$c_reset" "$tgt"
     else
-      printf '\033[33m foreign\033[0m %s -> %s (points outside this repo)\n' "$tgt" "$dest"
+      printf '%s foreign%s %s -> %s (points outside this repo)\n' "$c_foreign" "$c_reset" "$tgt" "$dest"
     fi
   elif [ -e "$tgt" ]; then
-    printf '\033[31mconflict\033[0m %s (a non-symlink file exists)\n' "$tgt"
+    printf '%sconflict%s %s (a non-symlink file exists)\n' "$c_conflict" "$c_reset" "$tgt"
   else
-    printf '\033[90munlinked\033[0m %s\n' "$tgt"
+    printf '%sunlinked%s %s\n' "$c_unlinked" "$c_reset" "$tgt"
   fi
 done
