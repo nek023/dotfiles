@@ -6,7 +6,7 @@ STOW_DIR="${STOW_DIR:-home}"
 STOW_TARGET="${STOW_TARGET:-$HOME}"
 
 if [ -t 1 ]; then
-  c_linked='\033[32m'; c_foreign='\033[33m'; c_conflict='\033[31m'; c_unlinked='\033[90m'; c_reset='\033[0m'
+  c_linked=$'\033[32m'; c_foreign=$'\033[33m'; c_conflict=$'\033[31m'; c_unlinked=$'\033[90m'; c_reset=$'\033[0m'
 else
   c_linked=''; c_foreign=''; c_conflict=''; c_unlinked=''; c_reset=''
 fi
