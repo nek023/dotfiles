@@ -13,7 +13,7 @@ fi
 
 ignore=$(grep -v '^[[:space:]]*$' "$STOW_DIR/.stow-local-ignore" 2>/dev/null | paste -sd '|' -)
 
-find -L "$STOW_DIR" \( -type f -o -type l \) | sort | while read -r src; do
+find "$STOW_DIR" \( -type f -o -type l \) | sort | while read -r src; do
   rel="${src#"$STOW_DIR"/}"
   base="${rel##*/}"
 
