@@ -26,19 +26,15 @@ adopt:
 update:
 	$(MAKE) update-brew
 	$(MAKE) update-vim-plugins
-	$(MAKE) -j update-base16-shell update-mise update-nvim-plugins update-zimfw
-
-.PHONY: update-brew
-update-brew:
-	brew update && brew upgrade -y
+	$(MAKE) -j update-base16-shell update-nvim-plugins update-zimfw
 
 .PHONY: update-base16-shell
 update-base16-shell:
 	./scripts/update-base16-shell.sh
 
-.PHONY: update-vim-plugins
-update-vim-plugins:
-	./scripts/update-vim-plugins.sh
+.PHONY: update-brew
+update-brew:
+	brew update && brew upgrade -y
 
 .PHONY: update-mise
 update-mise:
@@ -47,6 +43,10 @@ update-mise:
 .PHONY: update-nvim-plugins
 update-nvim-plugins:
 	@command -v nvim >/dev/null 2>&1 && nvim --headless "+Lazy! sync" +qa || true
+
+.PHONY: update-vim-plugins
+update-vim-plugins:
+	./scripts/update-vim-plugins.sh
 
 .PHONY: update-zimfw
 update-zimfw:
