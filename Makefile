@@ -8,10 +8,6 @@ list:
 
 .PHONY: link
 link:
-	@command -v stow >/dev/null 2>&1 || { \
-		echo "stow not found, installing via Homebrew..."; \
-		brew install stow; \
-	}
 	stow $(STOW_FLAGS) $(STOW_DIR)
 
 .PHONY: unlink
@@ -21,6 +17,10 @@ unlink:
 .PHONY: relink
 relink:
 	stow $(STOW_FLAGS) -R $(STOW_DIR)
+
+.PHONY: adopt
+adopt:
+	stow $(STOW_FLAGS) -R --adopt $(STOW_DIR)
 
 .PHONY: update
 update:
