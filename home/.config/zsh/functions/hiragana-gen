@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+# ランダムなひらがな文字列を生成する
+if [[ ! "$1" =~ ^[0-9]+$ ]]; then
+  echo "usage: hiragana-gen <length>" >&2
+  return 1
+fi
+
+local a_code=$((0x3042))  # あ
+local range=46            # あ (0x3042) から 0x3070 までの範囲
+
+local result=""
+for ((i = 0; i < $1; i++)); do
+  local cp=$((a_code + RANDOM % (range + 1)))
+  result+=$(printf "\U$(printf '%08x' "${cp}")")
+done
+
+echo "${result}"
