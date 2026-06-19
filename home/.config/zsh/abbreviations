@@ -38,9 +38,8 @@ abbr cop="rubocop"
 abbr copa="rubocop -a"
 
 abbr n="npm"
+abbr ni="npm install"
 abbr nr="npm run"
-abbr y="yarn"
-abbr yr="yarn run"
 
 abbr m="mise"
 abbr mi="mise install"
