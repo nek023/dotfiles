@@ -334,7 +334,15 @@ if (( ${+functions[duration-info-preexec]} && ${+functions[duration-info-precmd]
   add-zsh-hook precmd duration-info-precmd
 fi
 
-# tmux ウィンドウの自動リネーム (git root の parent/basename 形式)
+# Launching code from inside tmux makes VS Code hold on to the dead socket info
+# (TMUX / TMUX_PANE) and pass it down to children in the integrated terminal.
+# Leave a live tmux (a real session) alone and only clean up the inherited dead
+# socket (has-session keeps this working outside VS Code too).
+if [[ -n "${TMUX}" ]] && ! tmux has-session 2>/dev/null; then
+  unset TMUX TMUX_PANE
+fi
+
+# Auto-rename the tmux window (git root's parent/basename form)
 if [[ -n "${TMUX}" ]]; then
   add-zsh-hook precmd tmux-rename-window
 fi
