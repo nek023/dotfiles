@@ -22,6 +22,7 @@ WORDCHARS=${WORDCHARS//[\/]}
 # ------------------------------------------------------------------------------
 # Shell
 export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 if (( ${+commands[nvim]} )); then
   export EDITOR=nvim
