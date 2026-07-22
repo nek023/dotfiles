@@ -24,6 +24,6 @@ fi
 # ------------------------------------------------------------------------------
 # tmux
 # ------------------------------------------------------------------------------
-if (( ${+commands[tmux]} )) && [[ -z "${TMUX}" && -z "${SSH_CONNECTION}" && -z "${CMUX_BUNDLE_ID}" && "${TERM_PROGRAM}" != "vscode" ]]; then
+if (( ${+commands[tmux]} )) && [[ -z "${TMUX}" && -z "${SSH_CONNECTION}" && -z "${CMUX_BUNDLE_ID}" && "${TERM_PROGRAM}" != "vscode" && "${HERDR_ENV}" != "1" ]]; then
   tmux
 fi
