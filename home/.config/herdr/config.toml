@@ -6,33 +6,30 @@ name = "catppuccin"
 [keys]
 prefix = "ctrl+t"
 
-reload_config = "r"
-resize_mode = "ctrl+r"
+reload_config = "prefix+r"
 
-new_workspace = "t"
-close_workspace = "ctrl+shift+c"
-next_workspace = "alt+shift+n"
-previous_workspace = "alt+shift+p"
-rename_workspace = "shift+r"
+new_workspace = "prefix+t"
+close_workspace = "prefix+shift+c"
+next_workspace = "prefix+n"
+previous_workspace = "prefix+p"
+rename_workspace = "prefix+comma"
+switch_workspace = "prefix+1..9"
 
-new_tab = "shift+t"
-next_tab = "alt+n"
-previous_tab = "alt+p"
+new_tab = "prefix+shift+t"
+next_tab = "prefix+shift+n"
+previous_tab = "prefix+shift+p"
 
-focus_pane_left = "alt+h"
-focus_pane_down = "alt+j"
-focus_pane_up = "alt+k"
-focus_pane_right = "alt+l"
-close_pane = "c"
-split_vertical = "|"
-split_horizontal = "-"
-zoom = "z"
-
-[keys.indexed]
-tabs = "ctrl"
+close_pane = "prefix+c"
+split_vertical = "prefix+|"
+split_horizontal = "prefix+minus"
+zoom = "prefix+z"
 
 [ui.toast]
 delivery = "terminal"
+delay_seconds = 0
+
+[ui.toast.clipboard]
+enabled = true
 
 [ui.sound]
 enabled = false
