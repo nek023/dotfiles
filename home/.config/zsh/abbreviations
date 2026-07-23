@@ -2,9 +2,6 @@
 # Abbreviations
 # https://github.com/olets/zsh-abbr
 # ------------------------------------------------------------------------------
-abbr o="open"
-abbr rf="rm -rf"
-
 abbr g="git"
 abbr ga="git add"
 abbr gaa="git add -A"
@@ -34,6 +31,7 @@ abbr gsw="git switch"
 
 abbr be="bundle exec"
 abbr bi="bundle install"
+
 abbr cop="rubocop"
 abbr copa="rubocop -a"
 
@@ -48,21 +46,25 @@ abbr mr="mise run"
 abbr mt="mise tasks"
 abbr mx="mise exec"
 
-abbr co="code"
-abbr d="docker"
-abbr dc="docker compose"
-abbr gg="ghq get"
-abbr h="herdr"
-abbr hr="herdr --remote"
-abbr hss="herdr server stop"
-abbr t="tmux a 2>/dev/null || tmux"
-abbr tf="terraform"
-abbr tfd="terraform-docs"
-abbr cc="claude"
-abbr ccc="claude --continue"
-abbr ccr="claude --resume"
-
 abbr k="kubectl"
 abbr kk="k9s --readonly"
 abbr kn="kubens"
 abbr kx="kubectx"
+
+abbr cc="claude"
+abbr ccc="claude --continue"
+abbr ccr="claude --resume"
+
+abbr h="herdr"
+abbr hr="herdr --remote"
+abbr hstop="herdr server stop"
+
+abbr co="code"
+abbr d="docker"
+abbr dc="docker compose"
+abbr gg="ghq get"
+abbr o="open"
+abbr rf="rm -rf"
+abbr t="tmux a 2>/dev/null || tmux"
+abbr tf="terraform"
+abbr tfd="terraform-docs"
