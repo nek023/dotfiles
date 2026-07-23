@@ -28,6 +28,9 @@ zoom = "prefix+z"
 next_agent = "prefix+]"
 previous_agent = "prefix+["
 
+[ui]
+prompt_new_tab_name = false
+
 [ui.toast]
 delivery = "terminal"
 delay_seconds = 0
