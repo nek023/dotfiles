@@ -29,6 +29,7 @@ next_agent = ["prefix+]", "alt+shift+down"]
 previous_agent = ["prefix+[", "alt+shift+up"]
 
 [ui]
+hide_tab_bar_when_single_tab = true
 prompt_new_tab_name = false
 
 [ui.toast]
@@ -37,6 +38,10 @@ delay_seconds = 0
 
 [ui.toast.clipboard]
 enabled = true
+position = "top-right"
+
+[ui.toast.herdr]
+position = "top-right"
 
 [ui.sound]
 enabled = false
