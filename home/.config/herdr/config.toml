@@ -11,8 +11,8 @@ reload_config = "prefix+r"
 
 new_workspace = "prefix+t"
 close_workspace = "prefix+shift+c"
-next_workspace = "prefix+n"
-previous_workspace = "prefix+p"
+next_workspace = ["prefix+n", "alt+down"]
+previous_workspace = ["prefix+p", "alt+up"]
 rename_workspace = "prefix+comma"
 switch_workspace = "prefix+1..9"
 
@@ -25,8 +25,8 @@ split_vertical = "prefix+|"
 split_horizontal = "prefix+minus"
 zoom = "prefix+z"
 
-next_agent = "prefix+]"
-previous_agent = "prefix+["
+next_agent = ["prefix+]", "alt+shift+down"]
+previous_agent = ["prefix+[", "alt+shift+up"]
 
 [ui]
 prompt_new_tab_name = false
