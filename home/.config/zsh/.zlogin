@@ -2,12 +2,8 @@
 # ssh-agent
 # ------------------------------------------------------------------------------
 if [[ "$(uname)" == 'Linux' ]]; then
-  if [[ -z $SSH_AUTH_SOCK && -n $XDG_RUNTIME_DIR ]]; then
-    export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-  fi
-
-  # ssh-add -l exits 2 only when no agent is reachable; 0/1 means a live
-  # agent (systemd socket-activated or SSH-forwarded) is already available.
+  # SSH_AUTH_SOCK is set in .zshenv; start an agent as a login-time fallback
+  # only when none is reachable (ssh-add -l exits 2 = no agent).
   ssh-add -l >/dev/null 2>&1
   if (( $? == 2 )); then
     if [[ -n $SSH_AUTH_SOCK ]]; then
