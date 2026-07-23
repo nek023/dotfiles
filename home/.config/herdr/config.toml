@@ -6,6 +6,7 @@ name = "catppuccin"
 [keys]
 prefix = "ctrl+t"
 
+detach = "prefix+d"
 reload_config = "prefix+r"
 
 new_workspace = "prefix+t"
@@ -23,6 +24,9 @@ close_pane = "prefix+c"
 split_vertical = "prefix+|"
 split_horizontal = "prefix+minus"
 zoom = "prefix+z"
+
+next_agent = "prefix+]"
+previous_agent = "prefix+["
 
 [ui.toast]
 delivery = "terminal"
