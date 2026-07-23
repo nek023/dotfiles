@@ -59,6 +59,10 @@ abbr h="herdr"
 abbr hr="herdr --remote"
 abbr hstop="herdr server stop"
 
+abbr hd="hunk diff"
+abbr hds="hunk diff --staged"
+abbr hs="hunk show"
+
 abbr co="code"
 abbr d="docker"
 abbr dc="docker compose"

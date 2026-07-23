@@ -1,0 +1,4 @@
+agent_notes = true
+exclude_untracked = true
+watch = true
+wrap_lines = true
