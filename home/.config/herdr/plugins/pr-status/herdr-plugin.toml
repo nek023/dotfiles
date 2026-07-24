@@ -1,0 +1,31 @@
+id = "pr-status"
+name = "PR Status"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Show the GitHub PR number and CI status of each workspace's branch in the sidebar"
+platforms = ["linux", "macos"]
+
+[[events]]
+on = "workspace.created"
+command = ["node", "refresh.js"]
+
+[[events]]
+on = "worktree.created"
+command = ["node", "refresh.js"]
+
+[[events]]
+on = "worktree.opened"
+command = ["node", "refresh.js"]
+
+[[events]]
+on = "workspace.focused"
+command = ["node", "refresh.js"]
+
+[[actions]]
+id = "refresh"
+title = "Refresh PR/CI status"
+contexts = ["workspace"]
+command = ["node", "refresh.js"]
+
+[[startup]]
+command = ["node", "refresh-all.js"]

@@ -9,6 +9,11 @@ list:
 .PHONY: link
 link:
 	stow $(STOW_FLAGS) $(STOW_DIR)
+	@$(MAKE) link-herdr-plugins
+
+.PHONY: link-herdr-plugins
+link-herdr-plugins:
+	@STOW_DIR=$(STOW_DIR) ./scripts/herdr-plugins.sh
 
 .PHONY: unlink
 unlink:
