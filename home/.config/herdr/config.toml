@@ -28,6 +28,22 @@ zoom = "prefix+z"
 next_agent = ["prefix+]", "alt+shift+down"]
 previous_agent = ["prefix+[", "alt+shift+up"]
 
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "lazygit"
+description = "lazygit"
+width = "100%"
+height = "100%"
+
+[[keys.command]]
+key = "prefix+h"
+type = "popup"
+command = "hunk diff"
+description = "hunk diff (working tree)"
+width = "100%"
+height = "100%"
+
 [ui]
 hide_tab_bar_when_single_tab = true
 prompt_new_tab_name = false
