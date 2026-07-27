@@ -1,3 +1,3 @@
 export ZDOTDIR="${HOME}/.config/zsh"
 
-skip_global_compinit=1
+[[ -r ${ZDOTDIR}/.zshenv ]] && source "${ZDOTDIR}/.zshenv"
