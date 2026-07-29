@@ -2,6 +2,10 @@ STOW_DIR    := home
 STOW_TARGET := $(HOME)
 STOW_FLAGS  := --target=$(STOW_TARGET) --dir=. --no-folding
 
+.PHONY: bootstrap
+bootstrap:
+	./scripts/bootstrap.sh
+
 .PHONY: list
 list:
 	@STOW_DIR=$(STOW_DIR) STOW_TARGET=$(STOW_TARGET) ./scripts/list.sh
