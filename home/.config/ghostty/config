@@ -23,4 +23,6 @@ macos-titlebar-style = transparent
 
 quit-after-last-window-closed = true
 
+shell-integration-features = ssh-env,ssh-terminfo
+
 config-file = ?~/.config/ghostty/config.local
