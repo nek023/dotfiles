@@ -66,6 +66,9 @@ fi
 # ------------------------------------------------------------------------------
 # History
 # ------------------------------------------------------------------------------
+# Set explicitly so it does not depend on the system startup files.
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+
 # Save command start time and duration to the history file.
 setopt EXTENDED_HISTORY
 
