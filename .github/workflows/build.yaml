@@ -2,14 +2,12 @@ name: Build
 
 on:
   push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
 
 jobs:
-  build:
+  stow:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -31,8 +29,31 @@ jobs:
 
       - name: Test stow link/unlink against a clean HOME
         run: |
-          export HOME=$(mktemp -d)
+          HOME=$(mktemp -d)
+          export HOME
           make list
           make link
           make list
           make unlink
+
+  nix:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+
+    env:
+      # The flake reads this to name the user, and runners do not always set it.
+      USER: runner
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v22
+
+      - name: Resolve the configuration
+        run: make check
