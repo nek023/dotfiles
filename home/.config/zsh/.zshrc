@@ -84,12 +84,8 @@ PROMPT='
 # ------------------------------------------------------------------------------
 # Git
 # ------------------------------------------------------------------------------
-if [ -f "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh" ]; then
-  # macOS
-  source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
-elif [ -f /etc/bash_completion.d/git-prompt ]; then
-  # Linux
-  source /etc/bash_completion.d/git-prompt
+if [[ -r "${XDG_DATA_HOME}/zsh/git-prompt.sh" ]]; then
+  source "${XDG_DATA_HOME}/zsh/git-prompt.sh"
 fi
 
 # ------------------------------------------------------------------------------
@@ -108,6 +104,10 @@ typeset -U path PATH
 path=(
   "${HOME}/.local/bin"(N-/)
   "${GOPATH}/bin"(N-/)
+  "${HOME}/.nix-profile/bin"(N-/)
+  "/etc/profiles/per-user/${USER}/bin"(N-/)
+  /run/current-system/sw/bin(N-/)
+  /nix/var/nix/profiles/default/bin(N-/)
   $path
 )
 
@@ -146,7 +146,7 @@ export ZIM_HOME="${ZDOTDIR:-${HOME}}/.zim"
 
 # Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
-  source "${HOMEBREW_PREFIX}/opt/zimfw/share/zimfw.zsh" init
+  source "${ZIM_HOME}/zimfw.zsh" init
 fi
 
 # Initialize modules.

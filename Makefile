@@ -6,6 +6,66 @@ STOW_FLAGS  := --target=$(STOW_TARGET) --dir=. --no-folding
 bootstrap:
 	./scripts/bootstrap.sh
 
+.PHONY: nix-install
+nix-install:
+	./scripts/nix-install.sh
+
+DOTFILES_PRIVATE_DIR ?= $(HOME)/dotfiles-private
+
+PROXY_ENV := $(if $(http_proxy),http_proxy=$(http_proxy) https_proxy=$(https_proxy),)
+NIX_ENV   := $(PROXY_ENV) DOTFILES_PRIVATE_DIR=$(DOTFILES_PRIVATE_DIR)
+NIX_FLAGS := --flake .\#default --impure
+
+ifeq ($(shell uname -s),Darwin)
+SWITCH     := sudo $(NIX_ENV) darwin-rebuild switch $(NIX_FLAGS)
+BUILD      := $(NIX_ENV) darwin-rebuild build $(NIX_FLAGS)
+CHECK_ATTR := darwinConfigurations.default.system
+else
+# nix run keeps the pinned home-manager, and works before it is on PATH.
+HOME_MANAGER := nix run --impure .\#home-manager --
+SWITCH     := $(NIX_ENV) $(HOME_MANAGER) switch $(NIX_FLAGS)
+BUILD      := $(NIX_ENV) $(HOME_MANAGER) build $(NIX_FLAGS)
+CHECK_ATTR := homeConfigurations.default.activationPackage
+endif
+
+.PHONY: switch
+switch:
+	$(SWITCH)
+
+.PHONY: build
+build:
+	$(BUILD)
+
+# Resolves the whole derivation graph without fetching or building it.
+.PHONY: check
+check:
+	$(NIX_ENV) nix build --impure --dry-run .\#$(CHECK_ATTR)
+
+.PHONY: brew-diff
+brew-diff:
+	@DOTFILES_PRIVATE_DIR=$(DOTFILES_PRIVATE_DIR) ./scripts/brew-diff.sh
+
+MIN_RELEASE_DAYS ?= 7
+
+.PHONY: brew-update
+brew-update:
+	brew update && brew upgrade -y
+
+.PHONY: nix-update
+nix-update:
+	@MIN_RELEASE_DAYS=$(MIN_RELEASE_DAYS) ./scripts/nix-update.sh
+
+GC_OLDER_THAN_DAYS ?= 14
+
+.PHONY: nix-gc
+nix-gc:
+	nix-collect-garbage --delete-older-than $(GC_OLDER_THAN_DAYS)d
+	sudo nix-collect-garbage --delete-older-than $(GC_OLDER_THAN_DAYS)d
+	nix store optimise
+.PHONY: mise-update
+mise-update:
+	@command -v mise >/dev/null 2>&1 && mise upgrade || true
+
 .PHONY: list
 list:
 	@STOW_DIR=$(STOW_DIR) STOW_TARGET=$(STOW_TARGET) ./scripts/list.sh
@@ -33,21 +93,13 @@ adopt:
 
 .PHONY: update
 update:
-	$(MAKE) update-brew
+	$(MAKE) brew-update
 	$(MAKE) update-vim-plugins
 	$(MAKE) -j update-base16-shell update-nvim-plugins update-zimfw
 
 .PHONY: update-base16-shell
 update-base16-shell:
 	./scripts/update-base16-shell.sh
-
-.PHONY: update-brew
-update-brew:
-	brew update && brew upgrade -y
-
-.PHONY: update-mise
-update-mise:
-	@command -v mise >/dev/null 2>&1 && mise upgrade || true
 
 .PHONY: update-nvim-plugins
 update-nvim-plugins:

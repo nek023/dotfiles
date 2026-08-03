@@ -1,4 +1,4 @@
-skip_global_compinit=1
+setopt no_global_rcs
 
 # Point at the ssh-agent.service socket (provisioned via systemd --user) so both
 # login and non-login shells reach the always-on agent. Skip if SSH_AUTH_SOCK is
