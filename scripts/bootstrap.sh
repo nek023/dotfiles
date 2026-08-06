@@ -8,8 +8,9 @@ set -eu
 # On a machine without the repositories:
 #   bash -c "$(curl -fsSL https://raw.githubusercontent.com/nek023/dotfiles/main/scripts/bootstrap.sh)"
 #
-# stow and the packages arrive with nix, so neither is installed here.
-# The order is bootstrap -> nix-install -> switch -> link.
+# Homebrew only carries what has to exist before nix does. stow and the
+# packages arrive with the first switch, so the order is
+# brew -> clone -> nix-install -> switch -> link.
 
 BREW_INSTALLER="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 
@@ -24,6 +25,16 @@ PRIVATE_DIR="$HOME/dotfiles-private"
 # Upper bound for waiting on the CLT installer (5s x 360 = 30 min)
 CLT_WAIT_INTERVAL=5
 CLT_WAIT_RETRIES=360
+
+# Neither is on the PATH this script starts with: nix-install puts the first
+# one there, and the first switch the second. They are added as those steps
+# finish, so the ones after them can run in the same shell.
+NIX_BIN="/nix/var/nix/profiles/default/bin"
+if [ "$(uname -s)" = "Darwin" ]; then
+  HM_BIN="/etc/profiles/per-user/${USER:-$(id -un)}/bin"
+else
+  HM_BIN="$HOME/.nix-profile/bin"
+fi
 
 log() {
   printf '==> %s\n' "$*"
@@ -275,6 +286,16 @@ setup_private() {
   fi
 }
 
+# Runs after the first switch, which is what puts stow on the PATH.
+link_private() {
+  if [ ! -d "$PRIVATE_DIR" ]; then
+    return
+  fi
+
+  log "Linking dotfiles-private"
+  make -C "$PRIVATE_DIR" relink
+}
+
 install_mise_tools() {
   local config="$HOME/.config/mise/config.toml"
 
@@ -324,16 +345,28 @@ main() {
 
   ensure_dotfiles
   setup_private
+
+  log "Installing nix"
+  make -C "$REPO_ROOT" nix-install
+  export PATH="$NIX_BIN:$PATH"
+
+  log "Applying the nix configuration"
+  make -C "$REPO_ROOT" switch
+  export PATH="$HM_BIN:$PATH"
+
+  # relink (stow -R) also prunes links left behind by renamed or
+  # removed files.
+  log "Linking dotfiles"
+  make -C "$REPO_ROOT" relink
+  link_private
+
   install_mise_tools
 
   log "Done"
   echo
   echo "Next steps:"
-  echo "  make nix-install"
-  echo "  make switch      # installs stow, among everything else"
-  echo "  make link"
+  echo "  - Start a new shell to pick up the linked configuration"
   if [ -d "$PRIVATE_DIR" ]; then
-    echo "  make -C $PRIVATE_DIR relink"
     echo "  - Set up MCP servers: make -C $PRIVATE_DIR mcp"
   fi
 }
