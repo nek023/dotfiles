@@ -1,67 +1,10 @@
 { pkgs, ... }:
 
 {
+  # Everything else lives in the private repository. Only what this repository
+  # needs to run belongs here: make link drives stow, and macOS carries the
+  # rest (jq, git, curl, make).
   home.packages = with pkgs; [
-    ansible
-    awscli2
-    bash
-    bat
-    buf
-    ccusage
-    ctop
-    delta
-    doggo
-    exiftool
-    eza
-    fd
-    fence
-    ffmpeg
-    firebase-tools
-    fvm
-    fzf
-    gh
-    ghq
-    git
-    github-mcp-server
-    gnupg
-    graphviz
-    grpcurl
-    herdr
-    htop
-    httpie
-    hunk
-    jq
-    jre
-    k9s
-    kubectx
-    lazygit
-    llama-cpp
-    mise
-    mo
-    mosh
-    neovim
-    nixfmt
-    opencode
-    openssl
-    pack
-    prettier
-    protobuf
-    pwgen
-    qemu
-    qmk
-    ripgrep
-    rsync
-    safe-rm
     stow
-    time
-    tmux
-    tmux-xpanes
-    tree
-    tree-sitter
-    typescript
-    vim
-    watch
-    wget
-    zimfw
   ];
 }

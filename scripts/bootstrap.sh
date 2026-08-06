@@ -7,6 +7,9 @@ set -eu
 #
 # On a machine without the repositories:
 #   bash -c "$(curl -fsSL https://raw.githubusercontent.com/nek023/dotfiles/main/scripts/bootstrap.sh)"
+#
+# stow and the packages arrive with nix, so neither is installed here.
+# The order is bootstrap -> nix-install -> switch -> link.
 
 BREW_INSTALLER="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 
@@ -270,20 +273,16 @@ setup_private() {
     log "dotfiles-private: cloning ($host/$owner_repo)"
     GH_HOST="$host" gh repo clone "$owner_repo" "$PRIVATE_DIR"
   fi
-
-  log "Linking dotfiles-private"
-  make -C "$PRIVATE_DIR" relink
-
-  # mas requires an App Store sign-in, so keep going on failure.
-  if [ "$(uname -s)" = "Darwin" ] && [ -f "$PRIVATE_DIR/Brewfile" ]; then
-    log "Installing Brewfile bundle"
-    make -C "$PRIVATE_DIR" brew-install \
-      || warn "brew bundle failed; rerun 'make -C $PRIVATE_DIR brew-install' later"
-  fi
 }
 
 install_mise_tools() {
   local config="$HOME/.config/mise/config.toml"
+
+  # mise comes from nix, so it is absent until the first switch.
+  if ! command -v mise >/dev/null 2>&1; then
+    log "mise: not installed yet; skipping tool installation"
+    return
+  fi
 
   if [ ! -e "$config" ]; then
     log "mise: no global config; skipping tool installation"
@@ -318,25 +317,23 @@ main() {
   fi
 
   ensure_homebrew
-  ensure_brew_formula stow
+
+  # gh clones dotfiles-private, and nix does not exist yet at that point.
+  # Everything else this machine carries arrives with the first switch.
   ensure_brew_formula gh
-  ensure_brew_formula mise
 
   ensure_dotfiles
-
-  # relink (stow -R) also prunes links left behind by renamed or
-  # removed files.
-  log "Linking dotfiles"
-  make -C "$REPO_ROOT" relink
-
   setup_private
   install_mise_tools
 
   log "Done"
   echo
   echo "Next steps:"
-  echo "  - Start a new shell to pick up the linked configuration"
+  echo "  make nix-install"
+  echo "  make switch      # installs stow, among everything else"
+  echo "  make link"
   if [ -d "$PRIVATE_DIR" ]; then
+    echo "  make -C $PRIVATE_DIR relink"
     echo "  - Set up MCP servers: make -C $PRIVATE_DIR mcp"
   fi
 }
