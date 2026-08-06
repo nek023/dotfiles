@@ -2,9 +2,17 @@ STOW_DIR    := home
 STOW_TARGET := $(HOME)
 STOW_FLAGS  := --target=$(STOW_TARGET) --dir=. --no-folding
 
+# A bare machine has neither on PATH yet: nix arrives with nix-install, and
+# stow with the first switch. Neither reaches the PATH make started with.
+NIX_BIN := /nix/var/nix/profiles/default/bin
+
+# Calls make rather than listing prerequisites, which -j would reorder.
 .PHONY: bootstrap
 bootstrap:
 	./scripts/bootstrap.sh
+	@$(MAKE) nix-install
+	@PATH="$(NIX_BIN):$$PATH" $(MAKE) switch
+	@PATH="$(HM_BIN):$(NIX_BIN):$$PATH" $(MAKE) link
 
 .PHONY: nix-install
 nix-install:
@@ -24,12 +32,14 @@ DARWIN_REBUILD := $(NIX_RUN)darwin-rebuild --
 SWITCH     := sudo $(NIX_ENV) $(DARWIN_REBUILD) switch $(NIX_FLAGS)
 BUILD      := $(NIX_ENV) $(DARWIN_REBUILD) build $(NIX_FLAGS)
 CHECK_ATTR := darwinConfigurations.default.system
+HM_BIN     := /etc/profiles/per-user/$(USER)/bin
 else
 # Linux has no system layer, so home-manager runs standalone there.
 HOME_MANAGER := $(NIX_RUN)home-manager --
 SWITCH     := $(NIX_ENV) $(HOME_MANAGER) switch $(NIX_FLAGS)
 BUILD      := $(NIX_ENV) $(HOME_MANAGER) build $(NIX_FLAGS)
 CHECK_ATTR := homeConfigurations.default.activationPackage
+HM_BIN     := $(HOME)/.nix-profile/bin
 endif
 
 .PHONY: switch

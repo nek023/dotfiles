@@ -2,11 +2,11 @@
 
 set -eu
 
-# 素の環境から make nix-install を実行できる状態までを整える。
+# nix より前に要るものだけを揃える。
 # Xcode Command Line Tools (macOS のみ) -> Homebrew の順に、
 # 不足しているものだけを導入する。何度実行しても安全。
 #
-# stow は nix が入れるため、ここでは扱わない。make link は make switch の後。
+# ここから先 (nix、パッケージ、シンボリックリンク) は make bootstrap が続ける。
 
 BREW_INSTALLER="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 
@@ -133,11 +133,6 @@ main() {
   ensure_homebrew
 
   log "Done"
-  echo
-  echo "Next steps:"
-  echo "  make nix-install"
-  echo "  make switch      # installs stow, among everything else"
-  echo "  make link"
 }
 
 main "$@"
