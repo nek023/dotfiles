@@ -2,17 +2,17 @@
 
 set -eu
 
-# 素の環境から make link を実行できる状態までを整える。
-# Xcode Command Line Tools (macOS のみ) -> Homebrew -> stow の順に、
+# 素の環境から make nix-install を実行できる状態までを整える。
+# Xcode Command Line Tools (macOS のみ) -> Homebrew の順に、
 # 不足しているものだけを導入する。何度実行しても安全。
+#
+# stow は nix が入れるため、ここでは扱わない。make link は make switch の後。
 
 BREW_INSTALLER="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 
 # Xcode Command Line Tools のインストール完了を待つ上限 (5 秒 x 360 = 30 分)
 CLT_WAIT_INTERVAL=5
 CLT_WAIT_RETRIES=360
-
-REPO_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
 log() {
   printf '==> %s\n' "$*"
@@ -117,16 +117,6 @@ ensure_homebrew() {
   eval "$("$brew" shellenv)"
 }
 
-ensure_stow() {
-  if command -v stow >/dev/null 2>&1; then
-    log "stow: already installed ($(command -v stow))"
-    return
-  fi
-
-  log "stow: installing"
-  brew install stow
-}
-
 main() {
   local os
   os=$(uname -s)
@@ -141,15 +131,13 @@ main() {
   fi
 
   ensure_homebrew
-  ensure_stow
-
-  log "Linking dotfiles"
-  make -C "$REPO_ROOT" link
 
   log "Done"
   echo
   echo "Next steps:"
-  echo "  - Start a new shell to pick up the linked configuration"
+  echo "  make nix-install"
+  echo "  make switch      # installs stow, among everything else"
+  echo "  make link"
 }
 
 main "$@"
