@@ -16,13 +16,17 @@ PROXY_ENV := $(if $(http_proxy),http_proxy=$(http_proxy) https_proxy=$(https_pro
 NIX_ENV   := $(PROXY_ENV) DOTFILES_PRIVATE_DIR=$(DOTFILES_PRIVATE_DIR)
 NIX_FLAGS := --flake .\#default --impure
 
+# nix run keeps the pinned tool, and works before it is on PATH.
+NIX_RUN := nix run --impure .\#
+
 ifeq ($(shell uname -s),Darwin)
-SWITCH     := sudo $(NIX_ENV) darwin-rebuild switch $(NIX_FLAGS)
-BUILD      := $(NIX_ENV) darwin-rebuild build $(NIX_FLAGS)
+DARWIN_REBUILD := $(NIX_RUN)darwin-rebuild --
+SWITCH     := sudo $(NIX_ENV) $(DARWIN_REBUILD) switch $(NIX_FLAGS)
+BUILD      := $(NIX_ENV) $(DARWIN_REBUILD) build $(NIX_FLAGS)
 CHECK_ATTR := darwinConfigurations.default.system
 else
-# nix run keeps the pinned home-manager, and works before it is on PATH.
-HOME_MANAGER := nix run --impure .\#home-manager --
+# Linux has no system layer, so home-manager runs standalone there.
+HOME_MANAGER := $(NIX_RUN)home-manager --
 SWITCH     := $(NIX_ENV) $(HOME_MANAGER) switch $(NIX_FLAGS)
 BUILD      := $(NIX_ENV) $(HOME_MANAGER) build $(NIX_FLAGS)
 CHECK_ATTR := homeConfigurations.default.activationPackage

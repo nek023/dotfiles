@@ -40,8 +40,12 @@
       darwinModules.default = ./modules/darwin;
       homeModules.default = ./modules/home;
 
-      # Lets `make switch` run before home-manager is on PATH.
-      packages.${system}.home-manager = home-manager.packages.${system}.home-manager;
+      # Lets `make switch` run before these are on PATH.
+      packages.${system} = {
+        home-manager = home-manager.packages.${system}.home-manager;
+      } // nixpkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
+        darwin-rebuild = nix-darwin.packages.${system}.darwin-rebuild;
+      };
 
       darwinConfigurations.default = nix-darwin.lib.darwinSystem {
         inherit system;
