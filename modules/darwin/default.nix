@@ -6,7 +6,6 @@ let
 in
 {
   imports = [
-    ./ollama.nix
     ./system-defaults.nix
   ] ++ lib.optionals hasPrivate [
     "${privateDir}/modules/darwin.nix"
