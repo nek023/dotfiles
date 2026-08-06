@@ -24,12 +24,14 @@
     git
     github-mcp-server
     gnupg
+    graphviz
     grpcurl
     herdr
     htop
     httpie
     hunk
     jq
+    jre
     k9s
     kubectx
     lazygit
