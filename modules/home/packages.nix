@@ -41,7 +41,6 @@
     mosh
     neovim
     nixfmt
-    ollama
     opencode
     openssl
     pack

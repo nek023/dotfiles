@@ -8,6 +8,7 @@ in
   imports = [
     ./homebrew.nix
     ./packages.nix
+    ./services.nix
     ./zsh.nix
   ] ++ lib.optionals hasPrivate [
     "${privateDir}/modules/home.nix"
