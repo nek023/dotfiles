@@ -8,7 +8,6 @@
     bat
     buf
     ccusage
-    cmake
     ctop
     delta
     doggo
@@ -25,8 +24,6 @@
     git
     github-mcp-server
     gnupg
-    golangci-lint
-    graphviz
     grpcurl
     herdr
     htop
@@ -41,14 +38,11 @@
     mo
     mosh
     neovim
-    netlify-cli
-    ni
     nixfmt
     ollama
     opencode
     openssl
     pack
-    pkgconf
     prettier
     protobuf
     pwgen
