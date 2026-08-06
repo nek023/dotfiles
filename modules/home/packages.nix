@@ -53,6 +53,7 @@
     protobuf
     pwgen
     qemu
+    qmk
     ripgrep
     rsync
     safe-rm
