@@ -37,12 +37,10 @@ vim.opt.swapfile = false
 -- システムのクリップボードと連携する
 vim.opt.clipboard:append({"unnamedplus"})
 
--- VSCode NeoVim 拡張は独自のクリップボードプロバイダを使うため、ここでは上書きしない
-if not vim.g.vscode then
-  -- コピーは OSC 52 でターミナル (Ghostty) に委ね、ローカル/リモート (mosh) を
-  -- 問わず同じ仕組みで pasteboard へ転送する (tmux 側で set-clipboard on が前提)。
-  -- ペーストは OSC 52 read が Ghostty のセキュリティ制約で動かないため、
-  -- pbpaste が使える環境ではそれを優先し、無ければ OSC 52 にフォールバックする。
+-- VSCode NeoVim 拡張は独自のクリップボードプロバイダを使うため、そちらに委ねる
+if vim.g.vscode then
+  vim.g.clipboard = vim.g.vscode_clipboard
+else
   local osc52 = require("vim.ui.clipboard.osc52")
   local has_pbpaste = vim.fn.executable("pbpaste") == 1
   vim.g.clipboard = {
