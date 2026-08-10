@@ -29,14 +29,6 @@ next_agent = "alt+shift+down"
 previous_agent = "alt+shift+up"
 
 [[keys.command]]
-key = "prefix+g"
-type = "popup"
-command = "lazygit"
-description = "lazygit"
-width = "100%"
-height = "100%"
-
-[[keys.command]]
 key = "prefix+h"
 type = "popup"
 command = "hunk diff"
