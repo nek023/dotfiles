@@ -25,8 +25,8 @@ split_vertical = "prefix+|"
 split_horizontal = "prefix+minus"
 zoom = "prefix+z"
 
-next_agent = ["prefix+]", "alt+shift+down"]
-previous_agent = ["prefix+[", "alt+shift+up"]
+next_agent = "alt+shift+down"
+previous_agent = "alt+shift+up"
 
 [[keys.command]]
 key = "prefix+g"
