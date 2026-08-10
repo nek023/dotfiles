@@ -26,6 +26,7 @@ unlink:
 .PHONY: relink
 relink:
 	stow $(STOW_FLAGS) -R $(STOW_DIR)
+	@$(MAKE) link-herdr-plugins
 
 .PHONY: adopt
 adopt:

@@ -2,25 +2,54 @@
 
 set -eu
 
-# 素の環境から make link を実行できる状態までを整える。
-# Xcode Command Line Tools (macOS のみ) -> Homebrew -> stow の順に、
-# 不足しているものだけを導入する。何度実行しても安全。
+# Set up a machine from scratch, or re-apply the latest dotfiles.
+# Every step is idempotent; anything already satisfied is skipped.
+#
+# On a machine without the repositories:
+#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/nek023/dotfiles/main/scripts/bootstrap.sh)"
 
 BREW_INSTALLER="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 
-# Xcode Command Line Tools のインストール完了を待つ上限 (5 秒 x 360 = 30 分)
+DOTFILES_REPO_URL="https://github.com/nek023/dotfiles.git"
+DOTFILES_DIR="$HOME/dotfiles"
+
+# host/owner/repo; on a work machine, point at the GHES repository via
+# DOTFILES_PRIVATE_REPO or the interactive prompt.
+DEFAULT_PRIVATE_REPO="github.com/nek023/dotfiles-private"
+PRIVATE_DIR="$HOME/dotfiles-private"
+
+# Upper bound for waiting on the CLT installer (5s x 360 = 30 min)
 CLT_WAIT_INTERVAL=5
 CLT_WAIT_RETRIES=360
-
-REPO_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
 log() {
   printf '==> %s\n' "$*"
 }
 
+warn() {
+  printf '    warning: %s\n' "$*" >&2
+}
+
 abort() {
   printf 'error: %s\n' "$*" >&2
   exit 1
+}
+
+# Use the enclosing checkout when run from one; fall back to
+# $DOTFILES_DIR when run via curl.
+resolve_repo_root() {
+  local source=${BASH_SOURCE[0]:-}
+  local root
+
+  if [ -n "$source" ] && [ -f "$source" ]; then
+    root=$(cd "$(dirname "$source")/.." && pwd)
+    if [ -f "$root/Makefile" ]; then
+      printf '%s\n' "$root"
+      return
+    fi
+  fi
+
+  printf '%s\n' "$DOTFILES_DIR"
 }
 
 ensure_xcode_clt() {
@@ -31,7 +60,7 @@ ensure_xcode_clt() {
 
   log "Xcode Command Line Tools: installing"
 
-  # 既にインストール要求が出ている場合は非ゼロで終了するため、失敗は無視する。
+  # Exits non-zero if an install was already requested.
   xcode-select --install >/dev/null 2>&1 || true
 
   echo "    waiting for the installer to finish (a dialog may be shown)"
@@ -66,8 +95,8 @@ find_brew() {
   return 1
 }
 
-# Linux 版 Homebrew はビルド用の依存を自前で用意しないため、
-# ディストリビューションのパッケージマネージャから先に導入する。
+# Homebrew on Linux does not provide its own build dependencies,
+# so install them with the distribution's package manager first.
 install_homebrew_deps_linux() {
   local sudo_cmd=""
 
@@ -76,13 +105,13 @@ install_homebrew_deps_linux() {
     sudo_cmd="sudo"
   fi
 
-  # sudo_cmd は root では空文字になるため、意図的にクォートしない。
+  # sudo_cmd is intentionally unquoted; it expands to nothing for root.
   # shellcheck disable=SC2086
   if command -v apt-get >/dev/null 2>&1; then
     $sudo_cmd apt-get update
     $sudo_cmd apt-get install -y build-essential procps curl file git
   elif command -v dnf >/dev/null 2>&1; then
-    # dnf5 で groupinstall が group install に変わったため、両方の書式を試す。
+    # dnf5 renamed groupinstall to "group install"; try both.
     $sudo_cmd dnf group install -y development-tools \
       || $sudo_cmd dnf groupinstall -y "Development Tools"
     $sudo_cmd dnf install -y procps-ng curl file git
@@ -92,7 +121,7 @@ install_homebrew_deps_linux() {
     $sudo_cmd zypper install -y -t pattern devel_basis
     $sudo_cmd zypper install -y procps curl file git
   else
-    echo "    warning: unknown package manager; assuming build dependencies are present"
+    warn "unknown package manager; assuming build dependencies are present"
   fi
 }
 
@@ -113,18 +142,166 @@ ensure_homebrew() {
     brew=$(find_brew) || abort "Homebrew installation did not produce a usable brew"
   fi
 
-  # インストール直後は PATH に載っていないため、このシェルに読み込む。
+  # brew may not be on PATH right after installation.
   eval "$("$brew" shellenv)"
 }
 
-ensure_stow() {
-  if command -v stow >/dev/null 2>&1; then
-    log "stow: already installed ($(command -v stow))"
+ensure_brew_formula() {
+  local formula=$1
+
+  if command -v "$formula" >/dev/null 2>&1; then
+    log "$formula: already installed ($(command -v "$formula"))"
     return
   fi
 
-  log "stow: installing"
-  brew install stow
+  log "$formula: installing"
+  brew install "$formula"
+}
+
+# gh auth login is interactive, so give up without a terminal.
+ensure_gh_auth() {
+  local host=$1
+
+  if gh auth status --hostname "$host" >/dev/null 2>&1; then
+    log "gh auth ($host): already logged in"
+    return 0
+  fi
+
+  if [ ! -t 0 ]; then
+    warn "stdin is not a terminal; cannot run gh auth login for $host"
+    return 1
+  fi
+
+  log "gh auth ($host): logging in"
+  gh auth login --hostname "$host"
+}
+
+# Fast-forward an existing clone; skip with a warning rather than
+# touch local changes.
+update_repo() {
+  local dir=$1
+
+  if [ ! -d "$dir/.git" ]; then
+    return
+  fi
+
+  if [ -n "$(git -C "$dir" status --porcelain --untracked-files=no)" ]; then
+    warn "$dir has local changes; skipping pull"
+    return
+  fi
+
+  log "Updating $(basename "$dir")"
+  git -C "$dir" pull --ff-only \
+    || warn "failed to pull $dir; continuing with the current checkout"
+}
+
+ensure_dotfiles() {
+  if [ -f "$REPO_ROOT/Makefile" ]; then
+    log "dotfiles: already cloned ($REPO_ROOT)"
+    # Pulling may rewrite this very script; safe because the whole
+    # file is parsed before main runs.
+    update_repo "$REPO_ROOT"
+    return
+  fi
+
+  log "dotfiles: cloning"
+  git clone "$DOTFILES_REPO_URL" "$REPO_ROOT"
+}
+
+# Print the repository to clone, or return 1 to skip.
+select_private_repo() {
+  local input
+
+  if [ -n "${DOTFILES_PRIVATE_REPO:-}" ]; then
+    printf '%s\n' "$DOTFILES_PRIVATE_REPO"
+    return 0
+  fi
+
+  if [ ! -t 0 ]; then
+    return 1
+  fi
+
+  printf 'dotfiles-private repository (host/owner/repo) [%s] (type "skip" to skip): ' \
+    "$DEFAULT_PRIVATE_REPO" >&2
+  read -r input || true
+  input=${input:-$DEFAULT_PRIVATE_REPO}
+
+  if [ "$input" = "skip" ]; then
+    return 1
+  fi
+
+  printf '%s\n' "$input"
+}
+
+setup_private() {
+  local repo host owner_repo
+
+  if [ -d "$PRIVATE_DIR" ]; then
+    log "dotfiles-private: already cloned ($PRIVATE_DIR)"
+    update_repo "$PRIVATE_DIR"
+  else
+    if ! repo=$(select_private_repo); then
+      log "dotfiles-private: skipped"
+      return
+    fi
+
+    repo=${repo#https://}
+    repo=${repo%.git}
+
+    case "$repo" in
+      */*/*)
+        host=${repo%%/*}
+        owner_repo=${repo#*/}
+        ;;
+      */*)
+        host="github.com"
+        owner_repo=$repo
+        ;;
+      *)
+        abort "invalid repository: $repo (expected host/owner/repo)"
+        ;;
+    esac
+
+    if ! ensure_gh_auth "$host"; then
+      log "dotfiles-private: skipped (gh auth required)"
+      return
+    fi
+
+    log "dotfiles-private: cloning ($host/$owner_repo)"
+    GH_HOST="$host" gh repo clone "$owner_repo" "$PRIVATE_DIR"
+  fi
+
+  log "Linking dotfiles-private"
+  make -C "$PRIVATE_DIR" relink
+
+  # mas requires an App Store sign-in, so keep going on failure.
+  if [ "$(uname -s)" = "Darwin" ] && [ -f "$PRIVATE_DIR/Brewfile" ]; then
+    log "Installing Brewfile bundle"
+    make -C "$PRIVATE_DIR" brew-install \
+      || warn "brew bundle failed; rerun 'make -C $PRIVATE_DIR brew-install' later"
+  fi
+}
+
+install_mise_tools() {
+  local config="$HOME/.config/mise/config.toml"
+
+  if [ ! -e "$config" ]; then
+    log "mise: no global config; skipping tool installation"
+    return
+  fi
+
+  # mise resolves GitHub credentials via "gh auth token".
+  if ! ensure_gh_auth "github.com"; then
+    log "mise: skipped (run 'gh auth login' and 'mise install' later)"
+    return
+  fi
+
+  log "mise: installing tools"
+
+  # paranoid = true requires trusting the config before installing.
+  mise trust "$config"
+  (cd "$HOME" && mise install --yes) \
+    || warn "mise install failed; rerun 'mise install' later"
 }
 
 main() {
@@ -141,15 +318,29 @@ main() {
   fi
 
   ensure_homebrew
-  ensure_stow
+  ensure_brew_formula stow
+  ensure_brew_formula gh
+  ensure_brew_formula mise
 
+  ensure_dotfiles
+
+  # relink (stow -R) also prunes links left behind by renamed or
+  # removed files.
   log "Linking dotfiles"
-  make -C "$REPO_ROOT" link
+  make -C "$REPO_ROOT" relink
+
+  setup_private
+  install_mise_tools
 
   log "Done"
   echo
   echo "Next steps:"
   echo "  - Start a new shell to pick up the linked configuration"
+  if [ -d "$PRIVATE_DIR" ]; then
+    echo "  - Set up MCP servers: make -C $PRIVATE_DIR mcp"
+  fi
 }
+
+REPO_ROOT=$(resolve_repo_root)
 
 main "$@"
