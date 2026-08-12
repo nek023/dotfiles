@@ -7,3 +7,17 @@ skip_global_compinit=1
 if [[ -z $SSH_AUTH_SOCK && -n $XDG_RUNTIME_DIR ]]; then
   export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 fi
+
+# .zshrc is interactive-only, so shells like `ssh host -- cmd` would see just the
+# system PATH. Repeat the static entries here; .zshrc lays them down again in its
+# own order and `typeset -U` drops the duplicates. The hooks that would otherwise
+# provide these (mise activate, brew shellenv) are interactive-only too.
+typeset -U path PATH
+path=(
+  "${HOME}/.local/bin"(N-/)
+  "${HOME}/.go/bin"(N-/)
+  "${HOME}/.local/share/mise/shims"(N-/)
+  /opt/homebrew/{bin,sbin}(N-/)
+  /home/linuxbrew/.linuxbrew/{bin,sbin}(N-/)
+  $path
+)

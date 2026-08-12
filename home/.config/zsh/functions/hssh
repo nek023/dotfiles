@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+if [[ -z "$1" ]]; then
+  echo "usage: hssh <ssh-target>" >&2
+  return 1
+fi
+
+ssh -t "$1" -- herdr
+
+# An ssh drop kills herdr before its cleanup sequences reach the terminal, which
+# is then stuck in herdr's modes and echoes an escape for every keypress. Send
+# what xterm-ghostty's rs1 does: close a dangling OSC, then RIS to clear them all.
+printf '\e]\e\\\ec'
+stty sane
