@@ -38,6 +38,7 @@ height = "100%"
 
 [ui]
 hide_tab_bar_when_single_tab = true
+pane_gaps = false
 prompt_new_tab_name = false
 
 [ui.toast]
