@@ -8,6 +8,7 @@ prefix = "ctrl+t"
 
 detach = "prefix+d"
 reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
 
 new_workspace = "prefix+t"
 close_workspace = "prefix+shift+c"
