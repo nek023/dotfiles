@@ -1,0 +1,26 @@
+[
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "shift-h": "vim::FirstNonWhitespace",
+      "shift-j": "vim::EndOfParagraph",
+      "shift-k": "vim::StartOfParagraph",
+      "shift-l": "vim::EndOfLine",
+      "j": ["vim::Down", { "display_lines": true }],
+      "k": ["vim::Up", { "display_lines": true }]
+    }
+  },
+  {
+    "context": "VimControl && !VimCount && !menu",
+    "bindings": {
+      "9": "vim::FirstNonWhitespace",
+      "0": "vim::EndOfLine"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-~": "workspace::NewCenterTerminal"
+    }
+  }
+]

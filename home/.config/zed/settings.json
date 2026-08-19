@@ -1,0 +1,28 @@
+{
+  "vim_mode": true,
+  "buffer_font_family": "Monaspace Neon",
+  "buffer_font_fallbacks": ["Noto Sans Mono CJK JP"],
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "base_keymap": "VSCode",
+  "project_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "terminal_init_command": "claude"
+  },
+  "confirm_quit": true,
+  "when_closing_with_no_tabs": "keep_window_open",
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "terminal": {
+    "option_as_meta": true,
+    "font_size": 14
+  },
+  "vim": {
+    "use_smartcase_find": true
+  }
+}
