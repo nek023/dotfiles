@@ -13,7 +13,6 @@ list:
 .PHONY: link
 link:
 	stow $(STOW_FLAGS) $(STOW_DIR)
-	@$(MAKE) link-herdr-plugins
 
 .PHONY: link-herdr-plugins
 link-herdr-plugins:
@@ -26,7 +25,6 @@ unlink:
 .PHONY: relink
 relink:
 	stow $(STOW_FLAGS) -R $(STOW_DIR)
-	@$(MAKE) link-herdr-plugins
 
 .PHONY: adopt
 adopt:
