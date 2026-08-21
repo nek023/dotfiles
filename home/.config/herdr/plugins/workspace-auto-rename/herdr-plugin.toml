@@ -1,0 +1,40 @@
+id = "workspace-auto-rename"
+name = "Workspace Auto Rename"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Keep workspace labels in sync with cwd: org/repo under the ghq root, directory name elsewhere"
+platforms = ["linux", "macos"]
+
+[[events]]
+on = "workspace.created"
+command = ["node", "rename.js"]
+
+[[events]]
+on = "worktree.created"
+command = ["node", "rename.js"]
+
+[[events]]
+on = "worktree.opened"
+command = ["node", "rename.js"]
+
+# herdr は cd に追従して label を付け直すがイベントを出さないので、フォーカスが動いたときに拾う。
+[[events]]
+on = "workspace.focused"
+command = ["node", "rename.js"]
+
+[[events]]
+on = "tab.focused"
+command = ["node", "rename.js"]
+
+[[events]]
+on = "pane.focused"
+command = ["node", "rename.js"]
+
+[[actions]]
+id = "rename"
+title = "Rename workspace from cwd"
+contexts = ["workspace"]
+command = ["node", "rename.js"]
+
+[[startup]]
+command = ["node", "rename-all.js"]
