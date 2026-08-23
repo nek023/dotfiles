@@ -271,16 +271,6 @@ export FZF_DEFAULT_OPTS='
 '
 
 # ------------------------------------------------------------------------------
-# base16-shell
-# https://github.com/chriskempson/base16-shell
-# ------------------------------------------------------------------------------
-export BASE16_SHELL="${XDG_CONFIG_HOME}/base16-shell"
-
-if [[ -n "${PS1}" && -s "${BASE16_SHELL}/profile_helper.sh" ]]; then
-  source "${BASE16_SHELL}/profile_helper.sh"
-fi
-
-# ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
 # Keep entries unique even when FPATH is inherited from a parent shell.

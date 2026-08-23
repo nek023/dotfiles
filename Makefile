@@ -34,11 +34,7 @@ adopt:
 update:
 	$(MAKE) update-brew
 	$(MAKE) update-vim-plugins
-	$(MAKE) -j update-base16-shell update-nvim-plugins update-zimfw
-
-.PHONY: update-base16-shell
-update-base16-shell:
-	./scripts/update-base16-shell.sh
+	$(MAKE) -j update-nvim-plugins update-zimfw
 
 .PHONY: update-brew
 update-brew:
