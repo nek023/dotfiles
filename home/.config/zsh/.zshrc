@@ -283,7 +283,9 @@ fi
 # ------------------------------------------------------------------------------
 # Functions
 # ------------------------------------------------------------------------------
-export FPATH="${ZDOTDIR}/functions:${FPATH}"
+# Keep entries unique even when FPATH is inherited from a parent shell.
+typeset -U fpath FPATH
+fpath=("${ZDOTDIR}/functions" $fpath)
 
 for file in "${ZDOTDIR}"/functions/*(N-.); do
   autoload -Uz "${file:t}"
