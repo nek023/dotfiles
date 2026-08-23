@@ -286,7 +286,7 @@ fi
 export FPATH="${ZDOTDIR}/functions:${FPATH}"
 
 for file in "${ZDOTDIR}"/functions/*(N-.); do
-  autoload "${file:t}"
+  autoload -Uz "${file:t}"
 done
 
 # ------------------------------------------------------------------------------
