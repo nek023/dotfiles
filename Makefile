@@ -58,7 +58,7 @@ update-vim-plugins:
 
 .PHONY: update-zimfw
 update-zimfw:
-	@zsh -i -c '(( $${+functions[zimfw]} )) || exit 0; zimfw upgrade && zimfw update'
+	@zsh -i -c '(( $${+functions[zimfw]} )) || exit 0; zimfw update'
 
 .PHONY: cleanup
 cleanup:
