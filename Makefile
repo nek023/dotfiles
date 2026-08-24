@@ -34,10 +34,13 @@ adopt:
 restore-nvim-plugins:
 	@command -v nvim >/dev/null 2>&1 && nvim --headless "+Lazy! restore" +qa || true
 
+.PHONY: restore-vim-plugins
+restore-vim-plugins:
+	@command -v vim >/dev/null 2>&1 && vim -S ~/.vim/plug-snapshot.vim +qa || true
+
 .PHONY: update
 update:
 	$(MAKE) update-brew
-	$(MAKE) update-vim-plugins
 	$(MAKE) update-zimfw
 
 .PHONY: update-brew
