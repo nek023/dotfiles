@@ -30,11 +30,15 @@ relink:
 adopt:
 	stow $(STOW_FLAGS) -R --adopt $(STOW_DIR)
 
+.PHONY: restore-nvim-plugins
+restore-nvim-plugins:
+	@command -v nvim >/dev/null 2>&1 && nvim --headless "+Lazy! restore" +qa || true
+
 .PHONY: update
 update:
 	$(MAKE) update-brew
 	$(MAKE) update-vim-plugins
-	$(MAKE) -j update-nvim-plugins update-zimfw
+	$(MAKE) update-zimfw
 
 .PHONY: update-brew
 update-brew:
