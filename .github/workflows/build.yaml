@@ -49,3 +49,14 @@ jobs:
           make link
           make list
           make unlink
+
+      - name: Boot zsh against a clean HOME
+        env:
+          TERM: xterm-256color
+        run: |
+          export HOME=$(mktemp -d)
+          make link
+          output=$(zsh -ilc 'echo ZSH_BOOT_OK' 2>&1)
+          printf '%s\n' "${output}"
+          grep -q ZSH_BOOT_OK <<< "${output}"
+          ! grep -iE 'error|failed|no such file|not found' <<< "${output}"
