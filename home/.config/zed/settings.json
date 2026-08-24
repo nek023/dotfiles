@@ -1,48 +1,48 @@
 {
-  "ui_font_size": 15.0,
-  "buffer_font_size": 12.0,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Ayu Dark"
+  "agent": {
+    "terminal_init_command": "claude"
   },
-  "vim_mode": true,
-  "buffer_font_family": "Monaspace Neon",
+  "base_keymap": "VSCode",
   "buffer_font_fallbacks": [
     "Noto Sans Mono CJK JP"
   ],
+  "buffer_font_family": "Monaspace Neon",
+  "buffer_font_size": 12.0,
+  "confirm_quit": true,
+  "project_panel": {
+    "auto_fold_dirs": false,
+    "dock": "left"
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "show_whitespaces": "none",
+  "soft_wrap": "editor_width",
+  "tab_size": 2,
+  "tabs": {
+    "activate_on_close": "neighbour"
+  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
   },
-  "base_keymap": "VSCode",
-  "project_panel": {
-    "dock": "left",
-    "auto_fold_dirs": false
-  },
-  "agent": {
-    "terminal_init_command": "claude"
-  },
-  "confirm_quit": true,
-  "when_closing_with_no_tabs": "keep_window_open",
-  "session": {
-    "trust_all_worktrees": true
-  },
   "terminal": {
-    "option_as_meta": true,
-    "font_size": 12
+    "font_size": 12,
+    "option_as_meta": true
   },
+  "theme": {
+    "dark": "Ayu Dark",
+    "light": "One Light",
+    "mode": "system"
+  },
+  "ui_font_size": 15.0,
+  "use_smartcase_search": true,
   "vim": {
     "use_smartcase_find": true
   },
-  "use_smartcase_search": true,
-  "tab_size": 2,
-  "soft_wrap": "editor_width",
+  "vim_mode": true,
+  "when_closing_with_no_tabs": "keep_window_open",
   "wrap_guides": [
     100
-  ],
-  "show_whitespaces": "none",
-  "tabs": {
-    "activate_on_close": "neighbour"
-  }
+  ]
 }
