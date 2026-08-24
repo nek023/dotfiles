@@ -13,12 +13,6 @@
 [diff]
   algorithm = histogram
   colorMoved = default
-[gtr "ai"]
-  default = claude
-[gtr "editor"]
-  default = vscode
-[gtr "copy"]
-  includedirs = .claude
 [include]
   path = ~/.config/git/config.local
 [init]
