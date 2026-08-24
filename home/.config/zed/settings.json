@@ -17,7 +17,8 @@
   },
   "base_keymap": "VSCode",
   "project_panel": {
-    "dock": "left"
+    "dock": "left",
+    "auto_fold_dirs": false
   },
   "agent": {
     "terminal_init_command": "claude"
@@ -29,9 +30,19 @@
   },
   "terminal": {
     "option_as_meta": true,
-    "font_size": 14
+    "font_size": 12
   },
   "vim": {
     "use_smartcase_find": true
+  },
+  "use_smartcase_search": true,
+  "tab_size": 2,
+  "soft_wrap": "editor_width",
+  "wrap_guides": [
+    100
+  ],
+  "show_whitespaces": "none",
+  "tabs": {
+    "activate_on_close": "neighbour"
   }
 }
