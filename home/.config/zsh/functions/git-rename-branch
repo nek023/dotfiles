@@ -5,7 +5,7 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
   return 1
 fi
 
-local current_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+local current_branch=$(git-current-branch 2>/dev/null)
 local tmp_file=$(mktemp)
 echo "${current_branch}" > "${tmp_file}"
 
