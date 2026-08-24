@@ -1,11 +1,21 @@
 #!/bin/zsh
 
-if (( ! ${+commands[rep]} )); then
-  echo "rep must be installed: https://github.com/nek023/rep"
-  return
-fi
+# コマンドラインを $EDITOR (vim / nvim を想定) で開き、置換コマンド `:%s/` を
+# 入力した状態から始める。nvim の inccommand により置換結果はリアルタイムに
+# プレビューされる。一時ファイルは =(...) が作り、抜けるときに自動で消える。
 
-BUFFER=$(echo -n "${BUFFER}" | rep)
-CURSOR=$#BUFFER
+emulate -L zsh
+
+() {
+  exec </dev/tty
+
+  local -a editor
+  editor=( "${(@Q)${(z)${VISUAL:-${EDITOR:-nvim}}}}" )
+
+  "${(@)editor}" -c 'call feedkeys(":%s/")' -- "$1"
+
+  BUFFER="$(<$1)"
+  CURSOR=$#BUFFER
+} =(<<<"${BUFFER}")
 
 zle redisplay
