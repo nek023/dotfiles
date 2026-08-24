@@ -32,11 +32,11 @@ adopt:
 
 .PHONY: restore-nvim-plugins
 restore-nvim-plugins:
-	@command -v nvim >/dev/null 2>&1 && nvim --headless "+Lazy! restore" +qa || true
+	@command -v nvim >/dev/null 2>&1 || exit 0; nvim --headless "+Lazy! restore" +qa
 
 .PHONY: restore-vim-plugins
 restore-vim-plugins:
-	@command -v vim >/dev/null 2>&1 && vim -S ~/.vim/plug-snapshot.vim +qa || true
+	vim -S ~/.vim/plug-snapshot.vim +qa
 
 .PHONY: update
 update:
@@ -49,11 +49,11 @@ update-brew:
 
 .PHONY: update-mise
 update-mise:
-	@command -v mise >/dev/null 2>&1 && mise upgrade || true
+	@command -v mise >/dev/null 2>&1 || exit 0; mise upgrade
 
 .PHONY: update-nvim-plugins
 update-nvim-plugins:
-	@command -v nvim >/dev/null 2>&1 && nvim --headless "+Lazy! sync" +qa || true
+	@command -v nvim >/dev/null 2>&1 || exit 0; nvim --headless "+Lazy! sync" +qa
 
 .PHONY: update-vim-plugins
 update-vim-plugins:
