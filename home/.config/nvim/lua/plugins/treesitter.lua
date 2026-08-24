@@ -1,6 +1,6 @@
--- nvim-treesitter was archived in 2026-04. Pin to the final commit on `main`
--- so the plugin's new API (require("nvim-treesitter").install) keeps working
--- on Neovim 0.12+ without depending on the upstream repo staying live.
+-- The `main` branch is the ongoing rewrite and has no tagged releases, so pin a
+-- known-good commit rather than tracking a moving target. Unpinning means the new
+-- API (require("nvim-treesitter").install) can change under us at any update.
 local filetypes = {
     "bash", "go", "javascript", "json", "json5", "lua", "make", "markdown",
     "ruby", "terraform", "typescript"
