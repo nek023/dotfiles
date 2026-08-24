@@ -8,11 +8,47 @@
   ],
   "buffer_font_family": "Monaspace Neon",
   "buffer_font_size": 12.0,
+  "buffer_font_weight": 500,
   "confirm_quit": true,
+  "languages": {
+    "JSON": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "Terraform": {
+      "format_on_save": "on"
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "YAML": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    }
+  },
   "project_panel": {
     "auto_fold_dirs": false,
     "dock": "left"
   },
+  "restore_on_startup": "none",
   "session": {
     "trust_all_worktrees": true
   },
