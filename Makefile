@@ -10,6 +10,10 @@ bootstrap:
 list:
 	@STOW_DIR=$(STOW_DIR) STOW_TARGET=$(STOW_TARGET) ./scripts/list.sh
 
+.PHONY: lint
+lint:
+	./scripts/lint.sh
+
 .PHONY: link
 link:
 	stow $(STOW_FLAGS) $(STOW_DIR)
