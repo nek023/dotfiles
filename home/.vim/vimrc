@@ -122,8 +122,8 @@ set termguicolors
 " <leader> の設定
 let mapleader = '\'
 
-" .vimrcを再読み込みする
-nnoremap <leader>s :source ~/.vimrc<CR>
+" 設定ファイルを再読み込みする
+nnoremap <silent> <leader>r :source $MYVIMRC<CR>:echo "config reloaded"<CR>
 
 " 高速移動
 noremap H ^

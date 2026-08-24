@@ -1,3 +1,9 @@
+-- 設定ファイルを再読み込みする
+vim.keymap.set("n", "<leader>r", function()
+  vim.cmd.source(vim.env.MYVIMRC)
+  vim.notify("config reloaded")
+end, { silent = true })
+
 -- 高速移動
 vim.keymap.set("", "H", "^")
 vim.keymap.set("", "J", "}")
