@@ -8,8 +8,13 @@
   ],
   "buffer_font_family": "Monaspace Neon",
   "buffer_font_size": 12.0,
-  "buffer_font_weight": 500,
+  "buffer_font_weight": 400,
   "confirm_quit": true,
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
   "languages": {
     "JSON": {
       "format_on_save": "on",
@@ -21,6 +26,9 @@
       },
       "format_on_save": "on",
       "formatter": "prettier"
+    },
+    "Markdown": {
+      "remove_trailing_whitespace_on_save": false
     },
     "TSX": {
       "code_actions_on_format": {
@@ -48,7 +56,7 @@
     "auto_fold_dirs": false,
     "dock": "left"
   },
-  "restore_on_startup": "none",
+  "restore_on_startup": "empty_tab",
   "session": {
     "trust_all_worktrees": true
   },
@@ -56,7 +64,9 @@
   "soft_wrap": "editor_width",
   "tab_size": 2,
   "tabs": {
-    "activate_on_close": "neighbour"
+    "activate_on_close": "neighbour",
+    "file_icons": true,
+    "git_status": true
   },
   "telemetry": {
     "diagnostics": false,
