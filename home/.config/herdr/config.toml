@@ -57,7 +57,10 @@ position = "top-right"
 enabled = false
 
 [ui.sidebar.agents.rows_by_agent]
-claude = [["state_icon", "workspace", "tab"], ["terminal_title_stripped"]]
+claude = [
+  ["state_icon", "workspace", "tab"],
+  [{ token = "terminal_title_stripped", fg = "#6c7086", dim = false }],
+]
 
 [ui.sidebar.spaces]
 rows = [
