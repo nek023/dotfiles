@@ -1,6 +1,6 @@
 # dotfiles
 
-[![Build](https://github.com/nek023/dotfiles/actions/workflows/build.yaml/badge.svg)](https://github.com/nek023/dotfiles/actions/workflows/build.yaml)
+[![CI](https://github.com/nek023/dotfiles/actions/workflows/ci.yaml/badge.svg)](https://github.com/nek023/dotfiles/actions/workflows/ci.yaml)
 
 Set up a brand-new machine (installs Homebrew, clones this repository and dotfiles-private, links everything, and runs `mise install`):
 
