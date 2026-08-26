@@ -8,7 +8,7 @@
   ],
   "buffer_font_family": "Monaspace Neon",
   "buffer_font_size": 12.0,
-  "buffer_font_weight": 400,
+  "buffer_font_weight": 300,
   "confirm_quit": true,
   "git": {
     "inline_blame": {
@@ -80,6 +80,9 @@
     "dark": "Ayu Dark",
     "light": "One Light",
     "mode": "system"
+  },
+  "title_bar": {
+    "show_sign_in": false
   },
   "ui_font_size": 15.0,
   "use_smartcase_search": true,
