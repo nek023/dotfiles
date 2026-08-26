@@ -74,6 +74,7 @@
   },
   "terminal": {
     "font_size": 12,
+    "font_weight": 300,
     "option_as_meta": true
   },
   "theme": {
