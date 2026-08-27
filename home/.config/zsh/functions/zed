@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+local -a args=("$@")
+(( $# == 0 )) && args=("$PWD")
+
+if [[ "${ZED_TERM}" == true ]] && (( ! ${args[(I)-n|-a|-e|--new|--add|--existing]} )); then
+  args=(-a "${args[@]}")
+fi
+
+command zed "${args[@]}"

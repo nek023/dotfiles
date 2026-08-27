@@ -1,7 +1,10 @@
 #!/bin/zsh
 
-if [[ "${VSCODE_INJECTION}" = 1 && ! "$*" =~ (^| )-n( |$) && ! "$*" =~ (^| )-r( |$) ]]; then
-  command code -r ${@:-$PWD}
-else
-  command code ${@:-$PWD}
+local -a args=("$@")
+(( $# == 0 )) && args=("$PWD")
+
+if [[ "${VSCODE_INJECTION}" == 1 ]] && (( ! ${args[(I)-n|-r|--new-window|--reuse-window]} )); then
+  args=(-r "${args[@]}")
 fi
+
+command code "${args[@]}"
