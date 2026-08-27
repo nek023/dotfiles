@@ -37,6 +37,18 @@ description = "hunk diff (working tree)"
 width = "100%"
 height = "100%"
 
+[[keys.command]]
+key = "prefix+y"
+type = "plugin_action"
+command = "choplin.quickselect.copy"
+description = "Copy visible item"
+
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "choplin.quickselect.open-url"
+description = "Open visible URL"
+
 [ui]
 hide_tab_bar_when_single_tab = true
 pane_gaps = false
