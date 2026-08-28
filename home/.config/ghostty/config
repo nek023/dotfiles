@@ -18,7 +18,7 @@ keybind = cmd+shift+r=reset
 keybind = shift+enter=text:\n
 
 macos-non-native-fullscreen = true
-macos-option-as-alt = true
+macos-option-as-alt = right
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = transparent
 
