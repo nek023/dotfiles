@@ -331,6 +331,9 @@ bindkey '^g^g^b' git-switch-remote
 zle -N git-insert-commit
 bindkey '^g^h' git-insert-commit
 
+zle -N git-insert-files
+bindkey '^g^f' git-insert-files
+
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^[e' edit-command-line

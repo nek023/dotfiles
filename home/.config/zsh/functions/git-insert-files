@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+local -a files
+files=("${(@0)$(git-select-files)}")
+files=(${files:#})
+
+if (( ${#files} > 0 )); then
+  local prefix="$(git rev-parse --show-prefix)"
+  local -a components=(${(s:/:)prefix})
+  local parents=""
+  repeat ${#components}; do parents+="../"; done
+
+  local -a paths
+  local file
+  for file in "${files[@]}"; do
+    if [[ "${file}" == "${prefix}"* ]]; then
+      paths+=("${file#"${prefix}"}")
+    else
+      paths+=("${parents}${file}")
+    fi
+  done
+
+  LBUFFER="${LBUFFER}${(j: :)${(@q-)paths}}"
+fi
+
+zle redisplay
