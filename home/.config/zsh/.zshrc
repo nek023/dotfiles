@@ -108,6 +108,7 @@ typeset -U path PATH
 path=(
   "${HOME}/.local/bin"(N-/)
   "${GOPATH}/bin"(N-/)
+  "${XDG_DATA_HOME}/mise/shims"(N-/)
   $path
 )
 
