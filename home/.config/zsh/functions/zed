@@ -4,7 +4,14 @@ local -a args=("$@")
 (( $# == 0 )) && args=("$PWD")
 
 if [[ "${ZED_TERM}" == true ]] && (( ! ${args[(I)-n|-a|-e|-r|--new|--add|--existing|--reuse|--classic]} )); then
-  args=(-a "${args[@]}")
+  local arg behavior=-a
+  for arg in "${args[@]}"; do
+    if [[ -d "$arg" ]]; then
+      behavior=-r
+      break
+    fi
+  done
+  args=("$behavior" "${args[@]}")
 fi
 
 command zed "${args[@]}"
