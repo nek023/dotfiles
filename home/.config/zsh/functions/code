@@ -3,7 +3,7 @@
 local -a args=("$@")
 (( $# == 0 )) && args=("$PWD")
 
-if [[ "${VSCODE_INJECTION}" == 1 ]] && (( ! ${args[(I)-n|-r|--new-window|--reuse-window]} )); then
+if [[ "${VSCODE_INJECTION}" == 1 ]] && (( ! ${args[(I)-n|-r|-a|--new-window|--reuse-window|--add]} )); then
   args=(-r "${args[@]}")
 fi
 

@@ -3,7 +3,7 @@
 local -a args=("$@")
 (( $# == 0 )) && args=("$PWD")
 
-if [[ "${ZED_TERM}" == true ]] && (( ! ${args[(I)-n|-a|-e|--new|--add|--existing]} )); then
+if [[ "${ZED_TERM}" == true ]] && (( ! ${args[(I)-n|-a|-e|-r|--new|--add|--existing|--reuse|--classic]} )); then
   args=(-a "${args[@]}")
 fi
 
