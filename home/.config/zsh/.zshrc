@@ -183,7 +183,11 @@ fi
 # ------------------------------------------------------------------------------
 # Buildpacks
 if (( ${+commands[pack]} )); then
-  source "$(pack completion --shell zsh)"
+  PACK_COMPLETION_SCRIPT=$(pack completion --shell zsh 2>/dev/null)
+  if [[ -r "${PACK_COMPLETION_SCRIPT}" ]]; then
+    source "${PACK_COMPLETION_SCRIPT}"
+  fi
+  unset PACK_COMPLETION_SCRIPT
 fi
 
 # kubectl
