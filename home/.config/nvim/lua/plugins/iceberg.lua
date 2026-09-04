@@ -1,4 +1,4 @@
 return {{
-    "cocopon/iceberg.vim",
-    lazy = true
+  "cocopon/iceberg.vim",
+  lazy = true
 }}

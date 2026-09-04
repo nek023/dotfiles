@@ -11,13 +11,13 @@ vim.opt.smartindent = true
 vim.opt.expandtab = true
 
 -- タブ文字を何文字のスペースとして表示するか
-vim.opt.tabstop = 4
+vim.opt.tabstop = 2
 
 -- タブ文字をキーボードで入力した際に何文字の空白文字にするか
-vim.opt.softtabstop = 4
+vim.opt.softtabstop = 2
 
 -- インデントを変更する際に何文字分ずらすか
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth = 2
 
 -- インデント幅がshiftwidthの値の倍数になるようにスペースを挿入する
 vim.opt.shiftround = true
