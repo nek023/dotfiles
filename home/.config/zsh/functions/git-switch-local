@@ -3,7 +3,7 @@
 local branch="$(git-select-branch -q "${BUFFER}")"
 
 if [[ -n "${branch}" ]]; then
-  BUFFER="git switch ${branch}"
+  BUFFER="git switch ${(q-)branch}"
   zle accept-line
 fi
 

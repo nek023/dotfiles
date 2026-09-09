@@ -3,7 +3,7 @@
 local dir="$(ghq-select -q "${BUFFER}")"
 
 if [[ -n "${dir}" ]]; then
-  BUFFER="cd ${dir}"
+  BUFFER="cd ${(q-)dir}"
   zle accept-line
 fi
 
