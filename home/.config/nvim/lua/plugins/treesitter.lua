@@ -1,9 +1,14 @@
 -- The `main` branch is the ongoing rewrite and has no tagged releases, so pin a
 -- known-good commit rather than tracking a moving target. Unpinning means the new
 -- API (require("nvim-treesitter").install) can change under us at any update.
-local filetypes = {
+local parsers = {
   "bash", "go", "javascript", "json", "json5", "lua", "make", "markdown",
   "ruby", "terraform", "typescript"
+}
+
+local filetypes = {
+  "sh", "bash", "go", "javascript", "json", "json5", "lua", "make", "markdown",
+  "ruby", "tf", "terraform", "typescript"
 }
 
 return {{
@@ -16,7 +21,7 @@ return {{
     require("nvim-treesitter").setup({
       install_dir = vim.fn.stdpath("data") .. "/site"
     })
-    require("nvim-treesitter").install(filetypes)
+    require("nvim-treesitter").install(parsers)
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = filetypes,
