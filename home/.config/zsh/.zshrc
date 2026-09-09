@@ -312,6 +312,13 @@ if [[ -n "${TMUX}" ]]; then
   add-zsh-hook precmd tmux-rename-window
 fi
 
+# Auto-rename the herdr workspace (ghq's org/repo form). chpwd does not fire on
+# startup, hence the initial call.
+if [[ "${HERDR_ENV:-}" == 1 ]]; then
+  add-zsh-hook chpwd herdr-rename-workspace
+  herdr-rename-workspace
+fi
+
 # ------------------------------------------------------------------------------
 # Key bindings
 # ------------------------------------------------------------------------------

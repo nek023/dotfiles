@@ -1,0 +1,54 @@
+#!/bin/zsh
+
+# Rename the workspace after the cwd: "org/repo" under the ghq root, otherwise
+# the directory name herdr picks itself (home is "~").
+
+emulate -L zsh
+
+[[ "${HERDR_ENV:-}" == 1 && -n "${HERDR_WORKSPACE_ID:-}" ]] || return 0
+
+local herdr_bin="${HERDR_BIN_PATH:-herdr}"
+[[ -x "${herdr_bin}" ]] || (( ${+commands[${herdr_bin}]} )) || return 0
+
+if [[ -z "${_herdr_ghq_root+x}" ]]; then
+  typeset -g _herdr_ghq_root
+  (( ${+commands[ghq]} )) && _herdr_ghq_root="$(ghq root 2>/dev/null)"
+  _herdr_ghq_root="${${${_herdr_ghq_root%%$'\n'*}:-${HOME}/ghq}:A}"
+fi
+
+# A worktree's common git dir is the main repository's .git, so both end up with
+# the same label. In a submodule it is .git/modules/<name>, where the toplevel is
+# the one to use.
+local repo_root common_dir
+common_dir="$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null)"
+if [[ -n "${common_dir}" ]]; then
+  if [[ "${common_dir:t}" == ".git" ]]; then
+    repo_root="${common_dir:h}"
+  else
+    repo_root="$(git rev-parse --show-toplevel 2>/dev/null)"
+  fi
+fi
+repo_root="${${repo_root:-$PWD}:A}"
+
+local label
+if [[ "${repo_root}" == "${_herdr_ghq_root}"/* ]]; then
+  # <host>/<org>/<repo>
+  local parts=("${(@s:/:)${repo_root#${_herdr_ghq_root}/}}")
+  (( ${#parts} >= 3 )) && label="${parts[2]}/${parts[3]}"
+fi
+
+if [[ -z "${label}" ]]; then
+  local cwd="${PWD:A}"
+  if [[ "${cwd}" == "${HOME:A}" ]]; then
+    label='~'
+  else
+    label="${cwd:t}"
+  fi
+fi
+
+# Skip the socket round trip while cd-ing within the same label.
+[[ "${label}" == "${_herdr_last_label-}" ]] && return 0
+
+if "${herdr_bin}" workspace rename "${HERDR_WORKSPACE_ID}" "${label}" > /dev/null 2>&1; then
+  typeset -g _herdr_last_label="${label}"
+fi
