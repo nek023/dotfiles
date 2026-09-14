@@ -7,6 +7,10 @@ emulate -L zsh
 
 [[ "${HERDR_ENV:-}" == 1 && -n "${HERDR_WORKSPACE_ID:-}" ]] || return 0
 
+# Only the pane's own shell has a terminal: editors (Zed, VS Code) capture their
+# environment with a piped login shell that would rename the pane to "~".
+[[ -t 1 ]] || return 0
+
 local herdr_bin="${HERDR_BIN_PATH:-herdr}"
 [[ -x "${herdr_bin}" ]] || (( ${+commands[${herdr_bin}]} )) || return 0
 
