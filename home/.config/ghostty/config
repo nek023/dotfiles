@@ -9,7 +9,7 @@ font-family = Noto Sans Mono CJK JP
 cursor-style = block
 cursor-style-blink = true
 
-background-opacity = 0.0
+background-opacity = 0.4
 background-blur = macos-glass-regular
 
 keybind = cmd+enter=toggle_fullscreen
