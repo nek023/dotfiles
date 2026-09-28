@@ -7,11 +7,15 @@ if [[ -z "${pane_path}" || -z "${window_id}" ]]; then
   return 0
 fi
 
-local dir
-if git -C "${pane_path}" rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-  dir="$(git -C "${pane_path}" rev-parse --show-toplevel)"
-else
-  dir="${pane_path}"
+local dir common_dir
+common_dir="$(git -C "${pane_path}" rev-parse --path-format=absolute --git-common-dir 2>/dev/null)"
+if [[ -n "${common_dir}" ]]; then
+  if [[ "${common_dir:t}" == ".git" ]]; then
+    dir="${common_dir:h}"
+  else
+    dir="$(git -C "${pane_path}" rev-parse --show-toplevel 2>/dev/null)"
+  fi
 fi
+dir="${dir:-${pane_path}}"
 
 tmux rename-window -t "${window_id}" "$(basename "$(dirname "${dir}")")/$(basename "${dir}")"
