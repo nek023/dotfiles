@@ -4,4 +4,4 @@ local -A opts
 zparseopts -A opts -D -M -- q: -query:=q
 
 git log --color --format='%C(auto)%h%d %s %C(black)%C(bold)%cr' \
-  | fzf +m +s -q "${opts[-q]}" | grep -o '[a-f0-9]\{7\}' | head -1
+  | fzf +m +s --ansi -q "${opts[-q]}" | awk '{ print $1 }'
