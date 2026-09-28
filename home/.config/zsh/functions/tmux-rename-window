@@ -1,7 +1,20 @@
 #!/bin/zsh
 
-local pane_path="$(tmux display-message -p '#{pane_current_path}')"
-local window_id="$(tmux display-message -p '#{window_id}')"
+# Runs as a precmd hook in the pane's shell, and as a script from the tmux hooks
+# in tmux.conf when the active pane changes.
+local pane_path window_id
+if (( ${#funcstack} )); then
+  [[ "${PWD}" == "${_tmux_rename_window_pwd-}" ]] && return 0
+  typeset -g _tmux_rename_window_pwd="${PWD}"
+
+  # :A resolves symlinks to match pane_current_path.
+  pane_path="${PWD:A}"
+  window_id="${TMUX_PANE}"
+else
+  local info="$(tmux display-message -p '#{window_id}:#{pane_current_path}')"
+  window_id="${info%%:*}"
+  pane_path="${info#*:}"
+fi
 
 if [[ -z "${pane_path}" || -z "${window_id}" ]]; then
   return 0
