@@ -52,13 +52,6 @@ vim.keymap.set("n", "tc", "<cmd>tabclose<CR>", { silent = true })
 vim.keymap.set("n", "tn", "<cmd>tabnext<CR>", { silent = true })
 vim.keymap.set("n", "tp", "<cmd>tabprevious<CR>", { silent = true })
 
--- nvim-telescope
-local telescope = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", telescope.find_files)
-vim.keymap.set("n", "<leader>fg", telescope.live_grep)
-vim.keymap.set("n", "<leader>fb", telescope.buffers)
-vim.keymap.set("n", "<leader>fh", telescope.help_tags)
-
 -- nvim-tree
 vim.keymap.set("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { silent = true })
 
