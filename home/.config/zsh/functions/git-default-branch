@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+local ref
+if ref="$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)"; then
+  echo "${ref#origin/}"
+  return
+fi
+
 if git show-ref --verify --quiet refs/heads/main; then
   echo main
 else
