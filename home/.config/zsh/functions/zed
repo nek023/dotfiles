@@ -3,15 +3,19 @@
 local -a args=("$@")
 (( $# == 0 )) && args=("$PWD")
 
-if [[ "${ZED_TERM}" == true ]] && (( ! ${args[(I)-n|-a|-e|-r|--new|--add|--existing|--reuse|--classic]} )); then
-  local arg behavior=-a
-  for arg in "${args[@]}"; do
-    if [[ -d "$arg" ]]; then
-      behavior=-r
-      break
-    fi
-  done
-  args=("$behavior" "${args[@]}")
+if (( ! ${args[(I)-n|-a|-e|-r|--new|--add|--existing|--reuse|--classic]} )); then
+  if [[ "${ZED_TERM}" == true ]]; then
+    local arg behavior=-a
+    for arg in "${args[@]}"; do
+      if [[ -d "$arg" ]]; then
+        behavior=-r
+        break
+      fi
+    done
+    args=("$behavior" "${args[@]}")
+  else
+    args=(--classic "${args[@]}")
+  fi
 fi
 
 command zed "${args[@]}"
