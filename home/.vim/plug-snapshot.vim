@@ -2,15 +2,15 @@
 " :source this file in vim to restore the snapshot
 " or execute: vim -S snapshot.vim
 
-silent! let g:plugs['fzf'].commit = 'd46bfd005a8bb55b6e440da98470c23906982437'
-silent! let g:plugs['fzf.vim'].commit = 'd2a59a992a2455f609c0fde2ebd84427ea8f919a'
+silent! let g:plugs['fzf'].commit = 'b1be3a8be1b833ce5b92fbbac11637643d60a046'
+silent! let g:plugs['fzf.vim'].commit = '023de3c0e158ff9c2b0992175af10be97c2f2158'
 silent! let g:plugs['iceberg.vim'].commit = '23835d5ed696436f716cbfdb56a93a7850fe3b18'
 silent! let g:plugs['nerdtree'].commit = '690d061b591525890f1471c6675bcb5bdc8cdff9'
 silent! let g:plugs['vim-commentary'].commit = '64a654ef4a20db1727938338310209b6a63f60c9'
 silent! let g:plugs['vim-gitgutter'].commit = '90b75207bd9b55d8ac4af15f72b4e935462014d0'
 silent! let g:plugs['vim-indent-guides'].commit = 'a1e1390c0136e63e813d051de2003bf0ee18ae30'
-silent! let g:plugs['vim-lsp'].commit = 'e10d186452743beb7b43d2b3427020832f930c2b'
-silent! let g:plugs['vim-lsp-settings'].commit = 'b0c9bacfe98ff6bc4c5f6b0fffdc085d252387e0'
+silent! let g:plugs['vim-lsp'].commit = 'bbffa60cb08a6a2d67e2086a89699ab00a084fe9'
+silent! let g:plugs['vim-lsp-settings'].commit = 'adbd9698b7cd417d76038487fc9158208c1e8566'
 
 PlugUpdate!
 
