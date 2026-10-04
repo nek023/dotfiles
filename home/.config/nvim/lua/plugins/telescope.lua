@@ -6,7 +6,7 @@ end
 
 return {{
   "nvim-telescope/telescope.nvim",
-  tag = "v0.2.2",
+  version = "*",
   dependencies = {"nvim-lua/plenary.nvim"},
   cmd = "Telescope",
   keys = {
