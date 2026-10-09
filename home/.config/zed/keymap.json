@@ -22,5 +22,11 @@
     "bindings": {
       "ctrl-~": "workspace::NewCenterTerminal"
     }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "cmd-backspace": ["project_panel::Trash", { "skip_prompt": false }]
+    }
   }
 ]
