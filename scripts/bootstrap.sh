@@ -148,14 +148,32 @@ ensure_homebrew() {
 
 ensure_brew_formula() {
   local formula=$1
+  local executable=${2:-$formula}
 
-  if command -v "$formula" >/dev/null 2>&1; then
-    log "$formula: already installed ($(command -v "$formula"))"
+  if command -v "$executable" >/dev/null 2>&1; then
+    log "$formula: already installed ($(command -v "$executable"))"
     return
   fi
 
   log "$formula: installing"
   brew install "$formula"
+}
+
+install_linux_cli_tools() {
+  local formula
+
+  for formula in fzf ghq jq tmux zsh; do
+    ensure_brew_formula "$formula"
+  done
+  ensure_brew_formula gnupg gpg
+  ensure_brew_formula neovim nvim
+  ensure_brew_formula ripgrep rg
+
+  # zimfw is sourced by zsh, so looking for an executable cannot detect it.
+  if ! brew list --formula zimfw >/dev/null 2>&1; then
+    log "zimfw: installing"
+    brew install zimfw
+  fi
 }
 
 # gh auth login is interactive, so give up without a terminal.
@@ -323,6 +341,10 @@ main() {
   ensure_brew_formula mise
 
   ensure_dotfiles
+
+  if [ "$os" = "Linux" ]; then
+    install_linux_cli_tools
+  fi
 
   # relink (stow -R) also prunes links left behind by renamed or
   # removed files.
