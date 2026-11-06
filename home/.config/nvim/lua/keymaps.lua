@@ -104,18 +104,14 @@ if vim.env.TERM_PROGRAM == "vscode" then
   -- r (置換) は getcharstr 経由のため別途変換する
   vim.keymap.set("n", "r", function()
     local char = getchar_translated()
-    if char then
-      vim.cmd("normal! r" .. char)
-    end
-  end, { noremap = true })
+    return char and ("r" .. char) or "\x1b"
+  end, { expr = true, noremap = true, replace_keycodes = false })
 
   -- f/F/t/T (文字検索移動) も getcharstr 経由のため別途変換する
   for _, cmd in ipairs({ "f", "F", "t", "T" }) do
     vim.keymap.set({ "n", "x", "o" }, cmd, function()
       local char = getchar_translated()
-      if char then
-        vim.cmd("normal! " .. cmd .. char)
-      end
-    end, { noremap = true })
+      return char and (cmd .. char) or "\x1b"
+    end, { expr = true, noremap = true, replace_keycodes = false })
   end
 end
