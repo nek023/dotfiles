@@ -4,10 +4,21 @@ local prs=$(gh pr list \
   --limit 100 \
   --json number,title,headRefName,updatedAt,statusCheckRollup \
   --template '{{range .}}
-    {{- $concl := (join "" (pluck "conclusion" .statusCheckRollup)) -}}
-    {{- $status := "🟡" -}}
-    {{- if regexMatch "^(SUCCESS|SKIPPED)+$" $concl -}}{{ $status = "✅" }}
-    {{- else if contains "FAILURE" $concl -}}{{ $status = "❌" }}{{- end -}}
+    {{- $pending := not .statusCheckRollup -}}
+    {{- $failed := false -}}
+    {{- range .statusCheckRollup -}}
+      {{- if .state -}}
+        {{- if or (eq .state "FAILURE") (eq .state "ERROR") -}}{{ $failed = true }}
+        {{- else if ne .state "SUCCESS" -}}{{ $pending = true }}{{- end -}}
+      {{- else if ne .status "COMPLETED" -}}{{ $pending = true }}
+      {{- else if not .conclusion -}}{{ $pending = true }}
+      {{- else if not (or (eq .conclusion "SUCCESS") (eq .conclusion "SKIPPED") (eq .conclusion "NEUTRAL")) -}}
+        {{- $failed = true -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $status := "✅" -}}
+    {{- if $failed -}}{{ $status = "❌" }}
+    {{- else if $pending -}}{{ $status = "🟡" }}{{- end -}}
     {{- tablerow (printf "#%v" .number) .title $status .headRefName (timeago .updatedAt) -}}{{end}}')
 
 if [[ -z "${prs}" ]]; then
