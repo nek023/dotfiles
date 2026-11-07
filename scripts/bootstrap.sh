@@ -168,6 +168,7 @@ install_linux_cli_tools() {
   ensure_brew_formula gnupg gpg
   ensure_brew_formula neovim nvim
   ensure_brew_formula ripgrep rg
+  ensure_brew_formula tree-sitter-cli tree-sitter
 
   # zimfw is sourced by zsh, so looking for an executable cannot detect it.
   if ! brew list --formula zimfw >/dev/null 2>&1; then
