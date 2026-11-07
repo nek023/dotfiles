@@ -1,6 +1,9 @@
 #!/bin/zsh
 
-BUFFER="$(history -n -r 1 | fzf +m +s -q "${BUFFER}")"
-CURSOR=$#BUFFER
+local selected
+if selected="$(history -n -r 1 | fzf +m +s -q "${BUFFER}")"; then
+  BUFFER="$selected"
+  CURSOR=$#BUFFER
+fi
 
 zle redisplay
