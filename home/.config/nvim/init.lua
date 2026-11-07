@@ -1,6 +1,7 @@
 require("config.lazy")
-require("options")
-require("keymaps")
-require("lsp")
+for _, module in ipairs({ "options", "keymaps", "lsp" }) do
+  package.loaded[module] = nil
+  require(module)
+end
 
 pcall(vim.cmd, [[colorscheme iceberg]])
