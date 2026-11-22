@@ -1,6 +1,6 @@
 STOW_DIR    := home
 STOW_TARGET := $(HOME)
-STOW_FLAGS  := --target=$(STOW_TARGET) --dir=. --no-folding
+STOW_FLAGS  := --target="$(STOW_TARGET)" --dir=. --no-folding
 
 .PHONY: bootstrap
 bootstrap:
@@ -12,7 +12,7 @@ list:
 
 .PHONY: link
 link:
-	stow $(STOW_FLAGS) $(STOW_DIR)
+	./scripts/stow-link.sh "$(STOW_DIR)" "$(STOW_TARGET)" $(STOW_FLAGS) "$(STOW_DIR)"
 
 .PHONY: link-herdr-plugins
 link-herdr-plugins:
@@ -24,7 +24,7 @@ unlink:
 
 .PHONY: relink
 relink:
-	stow $(STOW_FLAGS) -R $(STOW_DIR)
+	./scripts/stow-link.sh "$(STOW_DIR)" "$(STOW_TARGET)" $(STOW_FLAGS) -R "$(STOW_DIR)"
 
 .PHONY: adopt
 adopt:

@@ -41,6 +41,17 @@ jobs:
           make list
           make unlink
 
+      - name: Test stow link over Ubuntu defaults
+        if: runner.os == 'Linux'
+        run: |
+          stow_target=$(mktemp -d)
+          cp /etc/skel/.bashrc "$stow_target/.bashrc"
+          make link STOW_TARGET="$stow_target"
+          test -L "$stow_target/.bashrc"
+          cmp /etc/skel/.bashrc "$stow_target/.bashrc.bak"
+          make link STOW_TARGET="$stow_target"
+          cmp /etc/skel/.bashrc "$stow_target/.bashrc.bak"
+
       - name: Boot zsh against a clean HOME
         env:
           TERM: xterm-256color

@@ -15,3 +15,7 @@ git clone git@github.com:nek023/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 make bootstrap
 ```
+
+On systems with `/etc/skel`, linking backs up overlapping files that still match
+the system defaults to `*.bak`. Stow reports conflicts with edited files or
+existing backups.
